@@ -65,7 +65,8 @@ Als Fehler bezeichnet man eine Abweichung vom ungestörten Betriebszustand eines
 
 Eine Besonderheit in Netzen der Mittel- und Hochspannung bis 110kV ist, dass diese oftmals gelöscht betrieben werden. Das heißt, dass einige Transformatorsternpunkte mit einer Erdschlusslöschspule geerdet sind, die parallel zur Leitungskapazität wirkt. Der Fehlerstrom eines einpoligen Fehlers wird durch die Kompensation wesentlich geringer, sodass die Chance steigt, dass sich der dazugehörige Lichtbogen von selbst löscht. Der Erdkurzschluss wird zu einem Erdschluss.
 
-Das zweite Unterscheidungsmerkmal ist, ob der Fehler \glqq generatornah \grqq{} oder \glqq generatorfern\grqq{} auftritt. Dazu werden die Teilkurzschlussströme der einzelnen Zweige betrachtet, zu denen die Generatoren beitragen. Übersteigt mindestens einer dieser Teilkurzschlussströme, die durch einen Generatoren fließen, den doppelt Wert des Nennstromes des Generators, so gilt der Kurzschluss als generatornah. Das Kriterium \glqq generatornah oder generatorfern\grqq{} ist also ein Merkmal für die Größe der Netzimpedanz zwischen Generatoren und Fehlerstelle.
+Das zweite Unterscheidungsmerkmal ist, ob der Fehler \glqq generatornah \grqq{} oder \glqq generatorfern\grqq{} auftritt. Dazu werden die Teilkurzschlussströme der einzelnen Zweige betrachtet, zu denen die Generatoren beitragen. Übersteigt mindestens einer dieser Teilkurzschlussströme, die durch einen Generatoren fließen, den doppelt Wert des Nennstromes des Generators, so gilt der Kurzschluss als generatornah. Das Kriterium \glqq generatornah oder generatorfern\grqq{} ist also ein Merkmal für die Größe der Netzimpedanz zwischen Generatoren und Fehlerstelle. \\
+Die nachfolgenden Abschnitte beziehen sich auf symmetrische dreipolige Kurzschlüsse. Auf den einpoligen Fehler wird später eingegangen.
 
 \subsection{Kurzschlussströme}
 Bei der Berechnung der Kurzschlussströme unterscheidet man zwischen verschiedenen Kurzschlussgrößen. Gemeinsam haben sie alle, dass sie aus dem Anfangskurzschlusswechselstrom $I_k''$ abgeleitet werden. Der Anfangskurzschlusswechselstrom ist laut VDE 0102 der \glqq Effektivwert zum Zeitpunkt des Kurzschlussbeginns\grqq.
@@ -98,7 +99,7 @@ Ik' \\
 Ik'' \\
 Ith \\
 
-\subsection{Dynamischer Verlauf des Kurzschlussstroms}
+\subsubsection{Dynamischer Verlauf des Kurzschlussstroms}
 Der Verlauf eines Kurzschlussstromes kann aufgeteilt werden in einen Daueranteil, einen transienten Anteil und einen subtransienten Anteil. Diese ergeben überlagert den in Abbildung \ref{kss-verlauf} dargestellten Verlauf.
 
 	\begin{figure}[H]
@@ -111,33 +112,45 @@ Der Verlauf eines Kurzschlussstromes kann aufgeteilt werden in einen Daueranteil
 Beim Eintritt des Kurzschlusses wird als erstes der subtransiente Anteil sichtbar. Er klingt bereits nach ein einigen Halbwellen exponentiell mit der Zeitkonstanten $T_g''$ ab und geht in den transienten Kurzschlussstrom über, welcher wesentlich langsamer abklingt. Überlagert wird der Kurzschlussstrom noch durch einen Gleichstromanteil. Dieser kommt dadurch zustande, dass durch die überwiegend induktive Kurzschlussreaktanz der Strom nicht \glqq springen\grqq{} kann. Aus diesem Grund wird ein Ausgleichsstrom $i_g$ erzwungen, welcher mit der Gleichstromzeitkonstanten $T_g$ abklingt. Die Höhe des Gleichstromgliedes ist abhängig vom Einschaltwinkel, also vom Einschaltzeitpunkt des Kurzschlusses, $\psi$ und ist bei $\psi = 0$ am größten.
 \\- Gleichstromglied
 
-\subsection{Einpolige Fehler}
-Einpolige Fehler mit Erdberührung sind die am häufigsten auftretenden Fehler in elektrischen Netzen (Quelle?). Sie entstehen beispielsweise durch herabfallende Äste oder durchhängende Vogelnester. Üblicherweise werden Netze bis 110kV kompensiert betrieben. Dabei wird der kapazitive Anteil des Stromes an der Fehlerstelle durch eine Petersenspule kompensiert. Kleinere Mittelspannungsnetze, beispielsweise in Industrieanlagen, werden auch mit isoliertem Sternpunkt betrieben. Netze mit höheren Spannungen werden starr geerdet. Man nennt dies \glqq Niederohmige Sternpunkterdung\grqq{} (NOSPE). Der Erdschluss wird dann zu einem Erdkurzschluss. Der Erdfehlerfaktor $\delta$ gibt dabei an, wie wirksam die Erdung ist. Bei einpoligen Fehlern erhöht sich die Leiter-Erdspannung. Der Erdfehlerfaktor beschreibt dabei das Verhältnis zwischen der maximal auftretenden Leiter-Erdspannung $U_{LEmax}$ und der vor Fehlereintritt vorherrschenden Betriebsfrequenten Spannung $U^b$ geteilt durch $\sqrt{3}$. Bis zu einem Erdfehlerfaktor von 1,4 spricht man von einer \glqq starren Erdung\grqq{}. Das heißt, dass die Spannungsanhebung der fehlerfreien Leiter auf maximal das 1,4fache der vor Fehlereintritt auftretenden Spannung ansteigen darf. Dies wird vor allem bei Höchstspannungsnetzen angestrebt. Dadurch, dass der Fehlerstrom nicht kompensiert wird, löst der Schutz aus und der fehlerbehaftete Netzabschnitt wird sofort abgeschaltet.
-\\ Verlauf einpoliger Fehler?
+\subsection{Dreipoliger Kurzschluss}
+
+\subsection{Einpoliger Kurzschluss}
+Einpolige Fehler mit Erdberührung sind die am häufigsten auftretenden Fehler in elektrischen Netzen (Quelle?). Sie entstehen beispielsweise durch herabfallende Äste oder durchhängende Vogelnester. Üblicherweise werden Netze bis 110kV kompensiert betrieben. Dabei wird der kapazitive Anteil des Stromes an der Fehlerstelle durch eine Petersenspule kompensiert, die zwischen dem Sternpunkt des Transformators und dem Erdreich angeschlossen wird. Kleinere Mittelspannungsnetze, beispielsweise in Industrieanlagen, werden auch mit isoliertem Sternpunkt betrieben. Netze mit höheren Spannungen werden starr geerdet. Man nennt dies \glqq Niederohmige Sternpunkterdung\grqq{} (NOSPE). Der Erdschlussstrom wird dann zu einem Erdkurzschlussstrom. Grundsätzlich wird unter folgenden Sternpunktbehandlungen unterschieden:
+
+\begin{itemize}
+\item Niederohmige Sternpunkterdung (NOSPE): Abbildung \ref{sternpunktbehandlung}a
+\item Resonanzsternpunkterdung (RESPE): Abbildung \ref{sternpunktbehandlung}c
+\item Isolierter Sternpunkt: Abbildung \ref{sternpunktbehandlung}b
+\item Strombegrenzende Erdung: Abbildung \ref{sternpunktbehandlung}d
+\end{itemize}
+% Dadurch, dass der Fehlerstrom nicht kompensiert wird, löst der Schutz aus und der fehlerbehaftete Netzabschnitt wird sofort abgeschaltet.
+%\\ Verlauf einpoliger Fehler?
 
 	\begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{img/nospe.png}
-	\caption{Niederohmige Sternpunkterdung}
-	\label{nospe}
-	\end{figure}
-	
-	\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.3]{img/respe.png}
-	\caption{Resonanzsternpunkterdung}
-	\label{respe}
-	\end{figure}
-	
-	\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.3]{img/isolierter-sp.png}
-	\caption{Isolierter Sternpunkt}
-	\label{isolierter-sp}
+	\includegraphics[scale=0.3]{img/sternpunktbehandlung.png}
+	\caption{Sternpunktbehandlungen}
+	\label{sternpunktbehandlung}
 	\end{figure}
 
-\newpage
-\subsection{Dynamische Größen der Synchronmaschine}
+\subsubsection{Darstellung in symmetrischen Komponenten}
+Da einpolige Fehler unsymmetrisch sind, müssen zur Berechnung symmetrische Komponenten hergezogen werden. In symmetrischen Komponenten sind einpolige Fehler eine Reihenschaltung aus Mit-, Gegen- und Nullsystem: \\
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{img/einpol-fehler.png}
+	\caption{Einpoliger Fehler in symmetrischen Komponenten}
+	\label{einpol-fehler}
+	\end{figure}
+	
+\subsubsection{Spannungserhöhung und Erdfehlerfaktor}
+Zur Charakterisierung der Sternpunktbehandlung von elektrischen Netzen wird der Erdfehlerfaktor verwendet. Der Erdfehlerfaktor $\delta$ gibt dabei an, wie wirksam die Erdung ist. Eine Folge von einpoligen Fehlern ist die Erhöhung der Leiter-Erdspannung in den nicht fehlerbehafteten Leitern. Der Erdfehlerfaktor beschreibt dabei das Verhältnis zwischen der maximal auftretenden Leiter-Erdspannung $U_{LEmax}$ und der vor Fehlereintritt vorherrschenden Betriebsfrequenten Spannung $U^b$ geteilt durch $\sqrt{3}$. Ein Netz gilt dann als \glqq starr geerdet\grqq, wenn der Erdfehlerfaktor unter 1,4 bleibt. Gleichzeitig muss das Verhältnis von $X_0$ zu $X_1$ zwischen zwei und vier liegen (Sterpunktbehandlung S. 39). Bei der strombegrenzenden Sternpunkterdung ist die Nullimpedanz wesentlich größer, der Erdfehlerfaktor liegt zwischen 1,4 und $\sqrt{3}$.
+% Das heißt, dass die Spannungsanhebung der fehlerfreien Leiter auf maximal das 1,4fache der vor Fehlereintritt auftretenden Spannung ansteigen darf. Dies wird vor allem bei Höchstspannungsnetzen angestrebt. Daraus lässt sich folgern, dass der Fehlerstrom umso höher ist, desto kleiner der Erdungswiderstand ist. Erhöht sich nun der Widerstand des Nullsystems, so lässt sich der Fehlerstrom verkleinern.
+
+\subsection{Weitere Fehlerarten}
+Neben dem dreipoligen und einpoligen Kurzschluss gibt es, wie bereits erwähnt, weitere Kurzschlussarten. Diese Fehler sind sogenannte \glqq Querfehler\grqq{}. Analog dazu werden Fehler, die durch Unterbrechung eines oder mehrerer Leiter entstehen, als \glqq Längsfehler\grqq{} bezeichnet. (Quelle?)
+
+\subsection{Größen der Synchronmaschine}
 Bei der dynamischen Betrachtung von Kurzschlüssen kommt der Synchronmaschine eine Besonderheit zu. Da in konventionellen Kraftwerken ausschließlich Synchrongeneratoren zum Einsatz kommen, bestimmen diese maßgeblich den Verlauf des Kurzschlussstromes. Des weiteren ist die wirksame Reaktanz der Synchronmaschine während der Dauer eines Kurzschlusses nicht konstant, das heißt, die gesamte Kurzschlussimpedanz ändert sich ständig.
 
 \subsubsection{Aufbau der Synchronmaschine}
@@ -154,11 +167,11 @@ Die Reaktanz einer Synchronmaschine setzt sich aus einem Anteil der Längsachse 
 	\caption{Querschnitt Schenkelpol- und Vollpolläufer (Quelle: el. Kraftw. und Netze)}
 	\end{figure}
 
-	\begin{figure}[H]
-	\centering
+%	\begin{figure}[H]
+%	\centering
 
-	\caption{test}
-	\end{figure}
+%	\caption{test}
+%	\end{figure}
 %Ersetzt man nach der Zweiachsentheorie die drei Ständerwicklungen der Synchronmaschine durch zwei Ersatzwicklungen, so sind diese 90\degree elektrisch zueinander verschoben. Diese Komponenten auch als d-Achse (Längsachse) und q-Achse (Querachse) bezeichnet. Betrachtet man unsymmetrische Vorgänge, kommt noch eine 0-Komponente hinzu. Die Umrechnung der Drehstromkomponenten in dq0-Komponenten geschieht mit der Park-Transformation. Warum nur xd und kein xq bei KS-Berechnung?
 
 
@@ -170,6 +183,11 @@ Die synchronen Reaktanz $X_d$ gibt die wirksame Reaktanz während des stationär
 
 \subsubsection{Transiente Reaktanz}
 Während des transienten Vorgangs, der wesentlich langsamer Abklingt als der subtransiente Vorgang, ist die transiente Reaktanz $X_d'$ wirksam.
+
+\subsubsection{Gegensystem}
+
+
+\subsubsection{Nullsystem}
 
 
 d-q \\
