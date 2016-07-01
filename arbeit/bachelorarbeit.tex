@@ -69,19 +69,26 @@ Das zweite Unterscheidungsmerkmal ist, ob der Fehler \glqq generatornah \grqq{} 
 Die nachfolgenden Abschnitte beziehen sich auf symmetrische dreipolige Kurzschlüsse. Auf den einpoligen Fehler wird später eingegangen.
 
 \subsection{Kurzschlussströme}
-Bei der Berechnung der Kurzschlussströme unterscheidet man zwischen verschiedenen Kurzschlussgrößen. Gemeinsam haben sie alle, dass sie aus dem Anfangskurzschlusswechselstrom $I_k''$ abgeleitet werden. Die folgenden Abschnitte beziehen sich auf den generatornahen symmetrischen dreipoligen Kurzschluss.
+Bei der Berechnung der Kurzschlussströme unterscheidet man zwischen verschiedenen Kurzschlussgrößen. Gemeinsam haben sie alle, dass sie aus dem Anfangskurzschlusswechselstrom $I_k''$ abgeleitet werden. Die folgenden Abschnitte beziehen sich auf den generatornahen symmetrischen dreipoligen Kurzschluss. Die Berechnung der Kurzschlussströme ist in VDE 0102 beschrieben.
 
 \subsubsection{Anfangskurzschlusswechselstrom}
-Der Anfangskurzschlusswechselstrom ist laut VDE 0102 der \glqq Effektivwert zum Zeitpunkt des Kurzschlussbeginns\grqq. \\
-$I_k'' = \frac{U_n}{\sqrt{3} \cdot X_d''} $
+Der Anfangskurzschlusswechselstrom ist laut VDE 0102 der \glqq Effektivwert zum Zeitpunkt des Kurzschlussbeginns\grqq{} und wird wie folgt berechnet: \\
+$I_k'' = \frac{U_n}{\sqrt{3} \cdot X_d''} $ \\
+Dieser steht für den subtransienten Anteil des Kurzschlussstromes, der während der ersten Halbwellen auftritt.
 
 \subsubsection{Transienter Kurzschlusswechselstrom}
+Nach dem Abklingen des subtransienten Anteils fließt der transiente Anteil des Kurzschlussstromes. Seinen Effektivwert berechnet sich wie folgt: \\
+$I_k' = \frac{U_n}{\sqrt{3} \cdot X_d'}$
 
 \subsubsection{Stoßkurzschlussstrom}
-Der Stoßkurzschlussstrom $I_s$ ist der Strom mit der höchsten Amplitude, der bei einem Kurzschluss auftritt. Er berechnet sich aus dem Spitzenwert des Anfangskurzschlusswechselstromes multipliziert mit einem Stoßfaktor $\kappa$. Dieser liegt zwischen 1,0 und 2,0 und hängt vom R/X-Verhältnis des Netzes ab (der Kurzschluss... S. 246). Die Höhe des Stoßkurzschlussstromes hängt aber auch vom \\ mit Einschaltzeit = 0 => am größten
+Der Stoßkurzschlussstrom $I_p$ ist der Strom mit der höchsten Amplitude, der bei einem Kurzschluss auftritt. Dieser setzt sich aus einem Gleichstromglied und einem Wechselstromglied zusammen. Die Höhe des Stoßkurzschlussstromes vom Einschaltwinkel $\psi$ und dem Netzimpedanzwinkel $\varphi_k$ ab.
+
+In der Praxis wird ein Stroßfaktor $\kappa$ verwendet, was hinreichend genau ist und die Rechnung vereinfacht. \\
+Der Stoßkurzschlussstrom berechnet sich dann aus dem Spitzenwert des Anfangskurzschlusswechselstromes multipliziert mit dem Stoßfaktor. Dieser liegt zwischen 1,0 und 2,0 und hängt vom R/X-Verhältnis des Netzes ab (der Kurzschluss... S. 246).
+ % und ist beim Einschaltwinkel $\psi = 0$, also im Spannungsnulldurchgang, am größten (Der Kurz. S. 245).
 
 \subsubsection{Dauerkurzschlussstrom}
-Der Dauerkurzschlussstrom $I_k$ beschreibt den Effektivwert des Stromes, der nach dem Abklingen aller Ausgleichsvorgänge fließt. Beim generatornahen Kurzschluss ist dieser größer als der Anfangskurzschlusswechselstrom $I_k''$. Er berechnet sich wie folgt: \\
+Der Dauerkurzschlussstrom $I_k$ beschreibt den Effektivwert des Stromes, der nach dem Abklingen aller Ausgleichsvorgänge fließt. Beim generatornahen Kurzschluss ist dieser kleiner als der Anfangskurzschlusswechselstrom $I_k''$. Er berechnet sich wie folgt: \\
 
 $I_k = \frac{U_n}{\sqrt{3} \cdot X_d}$ \\
 
@@ -113,7 +120,7 @@ Der Verlauf eines Kurzschlussstromes kann aufgeteilt werden in einen Daueranteil
 	\label{kss-verlauf}
 	\end{figure}
 
-Beim Eintritt des Kurzschlusses wird als erstes der subtransiente Anteil sichtbar. Er klingt bereits nach ein einigen Halbwellen exponentiell mit der Zeitkonstanten $T_g''$ ab und geht in den transienten Kurzschlussstrom über, welcher wesentlich langsamer abklingt. Überlagert wird der Kurzschlussstrom noch durch einen Gleichstromanteil. Dieser kommt dadurch zustande, dass durch die überwiegend induktive Kurzschlussreaktanz der Strom nicht \glqq springen\grqq{} kann. Aus diesem Grund wird ein Ausgleichsstrom $i_g$ erzwungen, welcher mit der Gleichstromzeitkonstanten $T_g$ abklingt. Die Höhe des Gleichstromgliedes ist abhängig vom Einschaltwinkel, also vom Einschaltzeitpunkt des Kurzschlusses, $\psi$ und ist bei $\psi = 0$ am größten.
+Beim Eintritt des Kurzschlusses wird als erstes der subtransiente Anteil sichtbar. Er klingt bereits nach ein einigen Halbwellen exponentiell mit der Zeitkonstanten $T_d''$ ab und geht in den transienten Kurzschlussstrom über, welcher wesentlich langsamer abklingt. Überlagert wird der Kurzschlussstrom noch durch einen Gleichstromanteil. Dieser kommt dadurch zustande, dass durch die überwiegend induktive Kurzschlussreaktanz der Strom nicht \glqq springen\grqq{} kann. Aus diesem Grund wird ein Ausgleichsstrom $i_g$ erzwungen, welcher mit der Gleichstromzeitkonstanten $T_g$ abklingt. Die Höhe des Gleichstromgliedes ist abhängig vom Einschaltwinkel, also vom Einschaltzeitpunkt des Kurzschlusses, $\psi$ und ist bei $\psi = 0$ am größten.
 \\- Gleichstromglied \\
 
 $i_k = \sqrt{2} [(I_k'' - I_k') e^{-t/T_d''} + (I_k' - I_k) e^{-t/T_d'} + I_k]sin(\omega t - \varphi_k) + \sqrt{2} I_k'' e^{-t/T_g} sin \varphi_k $ \\
@@ -158,7 +165,7 @@ Zur Charakterisierung der Sternpunktbehandlung von elektrischen Netzen wird der 
 Neben dem dreipoligen und einpoligen Kurzschluss gibt es, wie bereits erwähnt, weitere Kurzschlussarten. Diese Fehler sind sogenannte \glqq Querfehler\grqq{}. Analog dazu werden Fehler, die durch Unterbrechung eines oder mehrerer Leiter entstehen, als \glqq Längsfehler\grqq{} bezeichnet. (Quelle?)
 
 \subsection{Größen der Synchronmaschine}
-Bei der dynamischen Betrachtung von Kurzschlüssen kommt der Synchronmaschine eine Besonderheit zu. Da in konventionellen Kraftwerken ausschließlich Synchrongeneratoren zum Einsatz kommen, bestimmen diese maßgeblich den Verlauf des Kurzschlussstromes. Des weiteren ist die wirksame Reaktanz der Synchronmaschine während der Dauer eines Kurzschlusses nicht konstant, das heißt, die gesamte Kurzschlussimpedanz ändert sich ständig.
+Wie bereits dargestellt, ist die Kurzschlussimpedanz nicht konstant. Die Ursache dafür ist vor allem das Verhalten der Synchronmaschine. Da in konventionellen Kraftwerken ausschließlich Synchrongeneratoren zum Einsatz kommen, bestimmen diese maßgeblich den Verlauf des Kurzschlussstromes. Daher wird im folgenden Abschnitt näher auf die Synchronmaschine und ihre Größen eingegangen.
 
 \subsubsection{Aufbau der Synchronmaschine}
 Eine Synchronmaschine besteht, wie eine Asynchronmaschine, aus einem Ständer und einem Läufer. Der Aufbau des Ständers ist analog zur Asynchronmaschine. Bei einer Polpaarzahl von Eins sind in einem räumlichen Abstand von 120\degree{} um den Läufer drei Wicklungen angeordnet. Bei höheren Polpaarzahlen entsprechend sechs, neun, usw. Beim Aufbau des Läufers wird zwischen Schenkelpol- und Vollpolläufern unterschieden. Kleine und langsam laufende Generatoren (Laufwasserkraftwerke) bis ca. 300MVA besitzen meist einen Schenkelpolläufer. In großen schnell drehenden Kraftwerksgeneratoren sind Vollpolläufer verbaut, da Schenkelpolläufer nicht die enormen Fliehkräfte aushalten können. 
