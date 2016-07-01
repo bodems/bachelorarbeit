@@ -69,15 +69,16 @@ Das zweite Unterscheidungsmerkmal ist, ob der Fehler \glqq generatornah \grqq{} 
 Die nachfolgenden Abschnitte beziehen sich auf symmetrische dreipolige Kurzschlüsse. Auf den einpoligen Fehler wird später eingegangen.
 
 \subsection{Kurzschlussströme}
-Bei der Berechnung der Kurzschlussströme unterscheidet man zwischen verschiedenen Kurzschlussgrößen. Gemeinsam haben sie alle, dass sie aus dem Anfangskurzschlusswechselstrom $I_k''$ abgeleitet werden. Der Anfangskurzschlusswechselstrom ist laut VDE 0102 der \glqq Effektivwert zum Zeitpunkt des Kurzschlussbeginns\grqq.
+Bei der Berechnung der Kurzschlussströme unterscheidet man zwischen verschiedenen Kurzschlussgrößen. Gemeinsam haben sie alle, dass sie aus dem Anfangskurzschlusswechselstrom $I_k''$ abgeleitet werden. Die folgenden Abschnitte beziehen sich auf den generatornahen symmetrischen dreipoligen Kurzschluss.
 
 \subsubsection{Anfangskurzschlusswechselstrom}
-
+Der Anfangskurzschlusswechselstrom ist laut VDE 0102 der \glqq Effektivwert zum Zeitpunkt des Kurzschlussbeginns\grqq. \\
+$I_k'' = \frac{U_n}{\sqrt{3} \cdot X_d''} $
 
 \subsubsection{Transienter Kurzschlusswechselstrom}
 
 \subsubsection{Stoßkurzschlussstrom}
-Der Stoßkurzschlussstrom $I_s$ ist der Strom mit der höchsten Amplitude, der bei einem Kurzschluss auftritt. Er berechnet sich aus dem Spitzenwert des Anfangskurzschlusswechselstromes multipliziert mit einem Stoßfaktor $\kappa$. Dieser liegt zwischen 1,0 und 2,0 und hängt vom R/X-Verhältnis des Netzes ab (der Kurzschluss... S. 246). Die Höhe des Stoßkurzschlussstromes hängt aber auch vom 
+Der Stoßkurzschlussstrom $I_s$ ist der Strom mit der höchsten Amplitude, der bei einem Kurzschluss auftritt. Er berechnet sich aus dem Spitzenwert des Anfangskurzschlusswechselstromes multipliziert mit einem Stoßfaktor $\kappa$. Dieser liegt zwischen 1,0 und 2,0 und hängt vom R/X-Verhältnis des Netzes ab (der Kurzschluss... S. 246). Die Höhe des Stoßkurzschlussstromes hängt aber auch vom \\ mit Einschaltzeit = 0 => am größten
 
 \subsubsection{Dauerkurzschlussstrom}
 Der Dauerkurzschlussstrom $I_k$ beschreibt den Effektivwert des Stromes, der nach dem Abklingen aller Ausgleichsvorgänge fließt. Beim generatornahen Kurzschluss ist dieser größer als der Anfangskurzschlusswechselstrom $I_k''$. Er berechnet sich wie folgt: \\
@@ -87,7 +88,7 @@ $I_k = \frac{U_n}{\sqrt{3} \cdot X_d}$ \\
  Beim generatorfernen Kurzschluss ist $I_k = I_k''$. Die Ausgleichsvorgänge haben nur einen geringen Einfluss und werden vernachlässigt.
 
 \subsubsection{Ausschaltwechselstrom}
-Beim Ausschaltwechselstrom wird zwischen dem unsymmetrischen und symmetrischen Ausschaltwechselstrom unterschieden. Dieser beschreibt den Strom, der beim Ausschaltvorgang über einen Schalter fließt. Da in der Regel die Ausgleichsvorgänge noch nicht abgeschlossen sind, fließen in die Berechnung von $I_b$ die Zeit und die  subtransiente und transiente Zeitkonstante mit ein: \\
+Beim Ausschaltwechselstrom $I_b$ wird zwischen dem unsymmetrischen und symmetrischen Ausschaltwechselstrom unterschieden. Dieser beschreibt den Strom, der beim Ausschaltvorgang über einen Schalter fließt. Da in der Regel die Ausgleichsvorgänge noch nicht abgeschlossen sind, fließen in die Berechnung von $I_b$ die Zeit und die  subtransiente und transiente Zeitkonstante mit ein: \\
 
 $I_b = (I_k'' - I_k') \cdot e ^{-t/T_d''} +  (I_k' - I_k) \cdot e ^{-t/T_d'} + I_k$ \\
 
@@ -98,6 +99,9 @@ Ik \\
 Ik' \\
 Ik'' \\
 Ith \\
+
+\subsubsection{Spannungsfaktor c}
+Da bei der händischen Berechnung der Kurzschlussströme Leitungskapazitäten vernachlässigt werden und die Betriebsspannung in der Regel über der Nennspannung liegt, wird dort mit einem Spannungsfaktor c dies kompensiert. Bei Hoch- und Mittelspannungsnetzen beträgt er 1,1, in Niederspannungsnetzen 1,0.
 
 \subsubsection{Dynamischer Verlauf des Kurzschlussstroms}
 Der Verlauf eines Kurzschlussstromes kann aufgeteilt werden in einen Daueranteil, einen transienten Anteil und einen subtransienten Anteil. Diese ergeben überlagert den in Abbildung \ref{kss-verlauf} dargestellten Verlauf.
@@ -110,9 +114,12 @@ Der Verlauf eines Kurzschlussstromes kann aufgeteilt werden in einen Daueranteil
 	\end{figure}
 
 Beim Eintritt des Kurzschlusses wird als erstes der subtransiente Anteil sichtbar. Er klingt bereits nach ein einigen Halbwellen exponentiell mit der Zeitkonstanten $T_g''$ ab und geht in den transienten Kurzschlussstrom über, welcher wesentlich langsamer abklingt. Überlagert wird der Kurzschlussstrom noch durch einen Gleichstromanteil. Dieser kommt dadurch zustande, dass durch die überwiegend induktive Kurzschlussreaktanz der Strom nicht \glqq springen\grqq{} kann. Aus diesem Grund wird ein Ausgleichsstrom $i_g$ erzwungen, welcher mit der Gleichstromzeitkonstanten $T_g$ abklingt. Die Höhe des Gleichstromgliedes ist abhängig vom Einschaltwinkel, also vom Einschaltzeitpunkt des Kurzschlusses, $\psi$ und ist bei $\psi = 0$ am größten.
-\\- Gleichstromglied
+\\- Gleichstromglied \\
 
-\subsection{Dreipoliger Kurzschluss}
+$i_k = \sqrt{2} [(I_k'' - I_k') e^{-t/T_d''} + (I_k' - I_k) e^{-t/T_d'} + I_k]sin(\omega t - \varphi_k) + \sqrt{2} I_k'' e^{-t/T_g} sin \varphi_k $ \\
+
+Vernachlässigt man die Resistanzen und ersetzt die Ströme, so gelangt man zu folgender Formel für den zeitlichen Verlauf: \\ \\
+$i_k = \sqrt{2} \frac{U_n}{\sqrt{3}} [(\frac{1}{X_d''} - \frac{1}{X_d'}) e^{-t/T_d''} + (\frac{1}{X_d'} - \frac{1}{X_d}) e^{-t/T_d'} + \frac{1}{X_d}] \cdot cos\omega t + \sqrt{2} \frac{U_n}{\sqrt{3} X_d''} e^{-t/T_g}$
 
 \subsection{Einpoliger Kurzschluss}
 Einpolige Fehler mit Erdberührung sind die am häufigsten auftretenden Fehler in elektrischen Netzen (Quelle?). Sie entstehen beispielsweise durch herabfallende Äste oder durchhängende Vogelnester. Üblicherweise werden Netze bis 110kV kompensiert betrieben. Dabei wird der kapazitive Anteil des Stromes an der Fehlerstelle durch eine Petersenspule kompensiert, die zwischen dem Sternpunkt des Transformators und dem Erdreich angeschlossen wird. Kleinere Mittelspannungsnetze, beispielsweise in Industrieanlagen, werden auch mit isoliertem Sternpunkt betrieben. Netze mit höheren Spannungen werden starr geerdet. Man nennt dies \glqq Niederohmige Sternpunkterdung\grqq{} (NOSPE). Der Erdschlussstrom wird dann zu einem Erdkurzschlussstrom. Grundsätzlich wird unter folgenden Sternpunktbehandlungen unterschieden:
@@ -185,9 +192,12 @@ Die synchronen Reaktanz $X_d$ gibt die wirksame Reaktanz während des stationär
 Während des transienten Vorgangs, der wesentlich langsamer Abklingt als der subtransiente Vorgang, ist die transiente Reaktanz $X_d'$ wirksam.
 
 \subsubsection{Gegensystem}
-
+Die Gegenreaktanz der Synchronmaschine kann ungefähr aus dem Mittelwert von $x_d''$ und $x_q''$ bestimmt werden: \\ \\
+$x_i = \frac{x_d'' + x_q''}{2}$
 
 \subsubsection{Nullsystem}
+Da Synchronmaschinen symmetrisch aufgebaut sind, ist das Nullsystem theoretisch nicht wirksam. In der Praxis tritt die Nullreaktanz allerdings mit einer Größe von \\
+$x_0 = \frac{1}{3} … \frac{1}{6} \cdot x_d'$ auf. Diese ist nur wirksam, wenn der Sternpunkt des Generators geerdet ist.
 
 
 d-q \\
@@ -211,7 +221,7 @@ Tg \\
 \subsection{Eingabedaten}
 \subsection{Festlegen der Störkriterien}
 \subsection{CTL-Datei}
-\subsection{Grafische Darstellung}
+\subsection{Grafische Auswertung}
 
 \section{Prüfgerät Kocos Artes}
 
