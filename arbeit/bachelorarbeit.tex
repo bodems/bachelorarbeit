@@ -50,10 +50,33 @@
 \begin{onehalfspace}
 
 \section{Einleitung}
-\section{aktueller Stand}
+\subsection{Problemstellung}
+Der Bereich der elektrischen Energietechnik wurde in der Lehre an der Fachhochschule Bielefeld in den letzten Jahren vernachlässigt. So gibt es derzeit zu den meisten Modulen in diesem Bereich keine Laborpraktika, was die gesamte Thematik zur reinen Theorie ohne jeden Praxisbezug macht. Gerade eine Fachhochschule, die sich selbst praxisorientiert nennt, sollte hier mehr bieten. Im Modul \glqq Elektrische Netze\grqq{} im Studiengang Regenerative Energien wurden bereits erste Praktika eingeführt. So müssen die Studierenden im ersten Praktikum ein Netz mit Hilfe der Software PSS Sincal aufbauen, im zweiten an diesem Lastflussberechnungen durchführen und im dritten Kurzschlüsse in diesem berechnen. Sincal bietet allerdings keine Möglichkeiten zur Darstellung der dynamischen Vorgänge von Kurzschlüssen, was zum Verständnis der Vorgänge bei Kurzschlüssen allerdings unerlässlich ist. Daher wird derzeit die Betrachtung des dynamischen Verlaufs der Kurzschlussströme komplett weggelassen, was sich in Zukunft aber ändern soll.
+
+\subsection{aktueller Stand}
+Vor dem breiten Einzug von Computern in die Lehre wurden Drehstromnetzmodelle eingesetzt, an denen das Verhalten von Netzen anschaulich dargestellt werden konnte. In diesen waren angetriebene Synchronmaschinen als Generator, Transformatoren, Leitungen und Lasten enthalten. Das Verhalten des Netzes konnte direkt mit einem Oszilloskop oder Leistungsmessern gemessen werden. Auch die FH Bielefeld besaß ein solches Modell, welches allerdings nicht mehr existiert.
+
+Mit dem Einzug von modernen Computern in die Hochschulen kamen auch Netzberechnungsprogramme in die Lehre.
+
+Im Laborpraktikum der Universität Magdeburg wird als Software Netdraw, Laku und Netomac eingesetzt. Dies wird so seit den 1990er Jahren praktiziert. Mit Netdraw lassen sich elektrische Netze modellieren und direkt aus der Benutzeroberfläche Berechnungen mit Laku oder Netomac durchführen.
+Heutzutage ist Netdraw nicht mehr zeitgemäß und da an der FH Bielefeld schon länger die Netzplanungssoftware Sincal eingesetzt wird, soll mit dieser das Netz modelliert werden. Aus Sincal heraus lassen sich direkt Lastfluss- und Kurzschlussberechnungen durchführen, allerdings lässt sich nicht deren dynamischer Verlauf darstellen. Zur Berechnung von dynamischen Vorgängen existiert eine Exportfunktion nach Netomac, welche dazu genutzt werden soll. Netomac und Sincal werden von Siemens vertrieben und sind in Deutschland zum Quasistandard von Netzplanungen und Netzanalysen geworden. Sie werden von vielen Netzbetreibern, aber auch von Anlagenbetreibern, verwendet. Mit Netomac lassen sich nicht nur dynamische Vorgänge bei Kurzschlüssen darstellen, sondern auch Flicker und stationäre Lastflüsse, sowie elektromechanische Phänomene berechnen.
+ 
+\subsection{Zielsetzung}
+Auf Basis des Praktikumversuches \glqq Praktikum Elektrische Netze - Teil 2 Kurzschlußberechnungen\grqq{} der Otto-von-Guerike-Universität Magdeburg, auf dem auch die Laborpraktika der FH Bielefeld basieren, soll der dritte Laborversuch nun überarbeitet werden. Die Studierenden sollen dabei insbesondere die dynamischen Kurzschlussstromverläufe analysieren. Unterschiedliche Fehlerarten und unterschiedliche Fehlerorte sollen anhand des Verlaufs erkannt werden können. Dazu soll die Software Netomac genutzt werden, um die dynamischen Verläufe darzustellen.
+
+Dementsprechend müssen die Praktikumsunterlagen überarbeitet werden. Am Ende soll eine Praktikumsanleitung für Studierende, eine Anleitung für Mitarbeiter und eine Musterlösung ausgearbeitet werden.
+
+Netomac bietet sich in diesem Fall an, weil das Programm bereits auf allen Rechnern installiert ist, auf denen auch Sincal installiert ist. Lizenzen sind daher bereits vorhanden. Desweiteren bietet Sincal eine Exportfunktion für das Netomac-Dateiformat an.
+
+Die möglichst komfortable Verbindung dieser beiden Programme wird das Hauptziel dieser Bachelorarbeit sein.
+
+Eine weitere interessante Möglichkeit zur Visualisierung von Kurzschlüssen stellt der Export der Berechnungsergebnisse von Netomac in das COMTRADE-Format da. Liegt das Ergebnis als Comtrade-Datei vor, kann der Kurzschlussstromverlauf über das vorhandene Prüfgerät der Firma Kocos ausgegeben werden, sodass z.B. das Auslösen eines Schutzgerätes beobachtet werden kann.
+
 \section{Grundlagen}
+
+
 \subsection{Fehlerarten in elektrischen Netzen}
-Als Fehler bezeichnet man eine Abweichung vom ungestörten Betriebszustand eines Netzes (Qualle?). Der bekannteste Fehler ist der Kurzschluss, bei dem mindestens zwei Potentialpunkte niederohmig miteinander verbunden sind und ein wesentlich größerer Strom als der Nennstrom fließt (KS bei PV?). Diese hohen Ströme verusachen einen Spannungseinbruch an der Fehlerstelle und, bei entsprechender Zeit, Beschädigungen an Betriebsmitteln. In Energieversorgungsnetzen entstehen Fehler meistens durch Bäume, bei Kabeln meistens durch Bauarbeiten (Quelle?). Gespeißt werden diese Kurzschlussströme vor allem durch Synchrongeneratoren, in kleinerem Umfang auch durch Asynchrongeneratoren. Synchronmotoren können im ersten Moment wie Synchrongeneratoren betrachtet werden, das selbe gilt für Asynchrongeneratoren und Asynchronmaschinen. Kategorisiert werden können Kurzschlüsse einmal durch die Anzahl und die Verbindungen der am Kurzschluss beteiligten Pole und durch die elektrische Entfernung zu Generatoren. Bei ersteren unterscheidet man zwischen:
+Als Fehler bezeichnet man eine Abweichung vom ungestörten Betriebszustand eines Netzes (Qualle?). Der bekannteste Fehler ist der Kurzschluss, bei dem mindestens zwei Potentialpunkte niederohmig miteinander verbunden sind und ein wesentlich größerer Strom als der Nennstrom fließt (KS bei PV?). Diese hohen Ströme verusachen einen Spannungseinbruch an der Fehlerstelle und, bei entsprechender Zeit, Beschädigungen an Betriebsmitteln. In Energieversorgungsnetzen entstehen Fehler meistens durch Bäume, bei Kabeln meistens durch Bauarbeiten (Quelle?). Gespeist werden diese Kurzschlussströme vor allem durch Synchrongeneratoren, in kleinerem Umfang auch durch Asynchrongeneratoren. Synchronmotoren können im ersten Moment wie Synchrongeneratoren betrachtet werden, das selbe gilt für Asynchrongeneratoren und Asynchronmaschinen. Kategorisiert werden können Kurzschlüsse einmal durch die Anzahl und die Verbindungen der am Kurzschluss beteiligten Pole und durch die elektrische Entfernung zu Generatoren. Bei ersteren unterscheidet man zwischen:
 
 \begin{itemize}
 \item Dreipoliger Kurzschluss
@@ -65,10 +88,10 @@ Als Fehler bezeichnet man eine Abweichung vom ungestörten Betriebszustand eines
 
 Eine Besonderheit in Netzen der Mittel- und Hochspannung bis 110kV ist, dass diese oftmals gelöscht betrieben werden. Das heißt, dass einige Transformatorsternpunkte mit einer Erdschlusslöschspule geerdet sind, die parallel zur Leitungskapazität wirkt. Der Fehlerstrom eines einpoligen Fehlers wird durch die Kompensation wesentlich geringer, sodass die Chance steigt, dass sich der dazugehörige Lichtbogen von selbst löscht. Der Erdkurzschluss wird zu einem Erdschluss.
 
-Das zweite Unterscheidungsmerkmal ist, ob der Fehler \glqq generatornah \grqq{} oder \glqq generatorfern\grqq{} auftritt. Dazu werden die Teilkurzschlussströme der einzelnen Zweige betrachtet, zu denen die Generatoren beitragen. Übersteigt mindestens einer dieser Teilkurzschlussströme, die durch einen Generatoren fließen, den doppelt Wert des Nennstromes des Generators, so gilt der Kurzschluss als generatornah. Das Kriterium \glqq generatornah oder generatorfern\grqq{} ist also ein Merkmal für die Größe der Netzimpedanz zwischen Generatoren und Fehlerstelle. \\
+Das zweite Unterscheidungsmerkmal ist, ob der Fehler \glqq generatornah\grqq{} oder \glqq generatorfern\grqq{} auftritt. Dazu werden die Teilkurzschlussströme der einzelnen Zweige betrachtet, zu denen die Generatoren beitragen. Übersteigt mindestens einer dieser Teilkurzschlussströme, die durch einen Generatoren fließen, den doppelt Wert des Nennstromes des Generators, so gilt der Kurzschluss als generatornah. Das Kriterium \glqq generatornah oder generatorfern\grqq{} ist also ein Merkmal für die Größe der Netzimpedanz zwischen Generatoren und Fehlerstelle. \\
 Die nachfolgenden Abschnitte beziehen sich auf symmetrische dreipolige Kurzschlüsse. Auf den einpoligen Fehler wird später eingegangen.
 
-\subsection{Kurzschlussströme}
+\subsection{Dreipoliger Kurzschluss}
 Bei der Berechnung der Kurzschlussströme unterscheidet man zwischen verschiedenen Kurzschlussgrößen. Gemeinsam haben sie alle, dass sie aus dem Anfangskurzschlusswechselstrom $I_k''$ abgeleitet werden. Die folgenden Abschnitte beziehen sich auf den generatornahen symmetrischen dreipoligen Kurzschluss. Die Berechnung der Kurzschlussströme ist in VDE 0102 beschrieben.
 
 \subsubsection{Anfangskurzschlusswechselstrom}
@@ -81,11 +104,19 @@ Nach dem Abklingen des subtransienten Anteils fließt der transiente Anteil des 
 $I_k' = \frac{U_n}{\sqrt{3} \cdot X_d'}$
 
 \subsubsection{Stoßkurzschlussstrom}
-Der Stoßkurzschlussstrom $I_p$ ist der Strom mit der höchsten Amplitude, der bei einem Kurzschluss auftritt. Dieser setzt sich aus einem Gleichstromglied und einem Wechselstromglied zusammen. Die Höhe des Stoßkurzschlussstromes vom Einschaltwinkel $\psi$ und dem Netzimpedanzwinkel $\varphi_k$ ab.
+Der Stoßkurzschlussstrom $I_p$ ist der Strom mit der höchsten Amplitude, der bei einem Kurzschluss auftritt. Dieser setzt sich aus einem Gleichstromglied und einem Wechselstromglied zusammen. Die Höhe des Stoßkurzschlussstromes hängt vom Einschaltwinkel $\psi$ und dem Netzimpedanzwinkel $\varphi_k$ ab. \\
+Mathematisch lässt sich der Stoßkurzschlussstrom aus folgender Gleichung herleiten: \\
 
-In der Praxis wird ein Stroßfaktor $\kappa$ verwendet, was hinreichend genau ist und die Rechnung vereinfacht. \\
-Der Stoßkurzschlussstrom berechnet sich dann aus dem Spitzenwert des Anfangskurzschlusswechselstromes multipliziert mit dem Stoßfaktor. Dieser liegt zwischen 1,0 und 2,0 und hängt vom R/X-Verhältnis des Netzes ab (der Kurzschluss... S. 246).
+$i_{(t)} = \frac{\sqrt{2} \cdot E}{Z} \cdot sin(\omega \cdot t + \psi - \varphi) + I_g \cdot e^{-t/\tau}$ 
+mit $I_g = \frac{\sqrt{2} \cdot E}{Z} \cdot sin( \psi -  \varphi)$ und $\tau = \frac{L}{R}$ \\ \\
+(S.20 Kurzschlussstr. in Dreh…)\\
+Daraus wird ersichtlich, dass der zeitliche Verlauf aus einem Wechselstromanteil und einem abklingenden Gleichstromanteil besteht. Um jetzt den Spitzenwert zu finden, muss diese Gleichung nach der Zeit t abgeleitet werden. Danach wird $i = 0$ gesetzt und nach t umgestellt. Daraus erhält man den Zeitpunkt des Spitzenwertes, welcher bei einem Einschaltwinkel von $\psi = 0$ am größten ist. Der Zeitpunkt ist nicht exakt $\omega t = \pi/2 + \varphi$, der Unterschied ist aber so gering, dass er vernachlässigt werden kann. Mit diesen Angaben läst sich nun der Strom zum Zeitpunkt $\omega t = 2/\pi + \varphi$ berechnen, welcher dem Stoßkurzschlussstrom entspricht.\\
+In der Praxis wird ein Stroßfaktor $\kappa$ verwendet, was hinreichend genau ist und die Rechnung vereinfacht.
+Der Stoßkurzschlussstrom berechnet sich dann aus dem Spitzenwert des Anfangskurzschlusswechselstromes multipliziert mit dem Stoßfaktor. Dieser liegt zwischen 1,0 und 2,0 und hängt vom R/X-Verhältnis des Netzes ab. (der Kurzschluss... S. 246).
  % und ist beim Einschaltwinkel $\psi = 0$, also im Spannungsnulldurchgang, am größten (Der Kurz. S. 245).
+ Da der Einschaltwinkel zufällig ist, muss bei der Planung immer der größte Stoßkurzschlussstrom berechnet werden, also $\psi = 0$. Dies ist in der Formel mit dem Stoßfaktor $\kappa$ bereits berücksichtigt: \\
+ 
+ $I_p = \kappa \cdot \sqrt{2} \cdot I_k''$ mit $\kappa = 1,02 + 0,98 \cdot e^{-3 \frac{R}{X}}$
 
 \subsubsection{Dauerkurzschlussstrom}
 Der Dauerkurzschlussstrom $I_k$ beschreibt den Effektivwert des Stromes, der nach dem Abklingen aller Ausgleichsvorgänge fließt. Beim generatornahen Kurzschluss ist dieser kleiner als der Anfangskurzschlusswechselstrom $I_k''$. Er berechnet sich wie folgt: \\
@@ -95,39 +126,60 @@ $I_k = \frac{U_n}{\sqrt{3} \cdot X_d}$ \\
  Beim generatorfernen Kurzschluss ist $I_k = I_k''$. Die Ausgleichsvorgänge haben nur einen geringen Einfluss und werden vernachlässigt.
 
 \subsubsection{Ausschaltwechselstrom}
-Beim Ausschaltwechselstrom $I_b$ wird zwischen dem unsymmetrischen und symmetrischen Ausschaltwechselstrom unterschieden. Dieser beschreibt den Strom, der beim Ausschaltvorgang über einen Schalter fließt. Da in der Regel die Ausgleichsvorgänge noch nicht abgeschlossen sind, fließen in die Berechnung von $I_b$ die Zeit und die  subtransiente und transiente Zeitkonstante mit ein: \\
+Der Ausschaltwechselstrom $I_b$ beschreibt den Strom, der beim Ausschaltvorgang über einen Schalter fließt und bestimmt das Schaltvermögen. Da in der Regel die Ausgleichsvorgänge noch nicht abgeschlossen sind, fließen in die Berechnung von $I_b$ die Zeit und die  subtransiente und transiente Zeitkonstante mit ein: \\
 
 $I_b = (I_k'' - I_k') \cdot e ^{-t/T_d''} +  (I_k' - I_k) \cdot e ^{-t/T_d'} + I_k$ \\
 
-Ia == alt Ib == neu
+In der Praxis wird auch hier vereinfacht. Statt aufwendig zu rechnen, wird der Anfangskurzschlusswechselstrom $I_k''$ mit einem Faktor $\mu$ multipliziert, der abhängig von der Zeit und vom Strom durch den Generator ist. Damit reduziert sich die Formel auf: \\
 
-Ip Bedeutung?\\
-Ik \\
-Ik' \\
-Ik'' \\
-Ith \\
+$I_b =  \mu \cdot I_k''$ \\
+
+Sind die benötigten Daten laut VDE 0102 Abs. 4.5.2.1 für den Faktor $\mu$ nicht bekannt, so beträgt dieser 1. Bei generatorfernen Kurzschlüssen ist $I_b = I_k''$.
+%Ia == alt Ib == neu
+
+%Ip Bedeutung?\\
+%Ik \\
+%Ik' \\
+%Ik'' \\
+%Ith \\
 
 \subsubsection{Spannungsfaktor c}
 Da bei der händischen Berechnung der Kurzschlussströme Leitungskapazitäten vernachlässigt werden und die Betriebsspannung in der Regel über der Nennspannung liegt, wird dort mit einem Spannungsfaktor c dies kompensiert. Bei Hoch- und Mittelspannungsnetzen beträgt er 1,1, in Niederspannungsnetzen 1,0.
 
 \subsubsection{Dynamischer Verlauf des Kurzschlussstroms}
-Der Verlauf eines Kurzschlussstromes kann aufgeteilt werden in einen Daueranteil, einen transienten Anteil und einen subtransienten Anteil. Diese ergeben überlagert den in Abbildung \ref{kss-verlauf} dargestellten Verlauf.
+Der Verlauf eines Kurzschlussstromes kann aufgeteilt werden in einen Daueranteil, einen transienten Anteil und einen subtransienten Anteil. Diese ergeben überlagert den in Abbildung \ref{kss-verlauf-nah} dargestellten Verlauf.
 
 	\begin{figure}[H]
 	\centering
-	\includegraphics[scale=1]{img/kurzschlussstromverlauf-nah.jpg}
+	\includegraphics[scale=1.2]{img/kurzschlussstromverlauf-nah.jpg}
 	\caption{Verlauf des generatornahen Kurzschlussstroms (Quelle: el. Kraftw. und Netze)}
-	\label{kss-verlauf}
+	\label{kss-verlauf-nah}
 	\end{figure}
 
 Beim Eintritt des Kurzschlusses wird als erstes der subtransiente Anteil sichtbar. Er klingt bereits nach ein einigen Halbwellen exponentiell mit der Zeitkonstanten $T_d''$ ab und geht in den transienten Kurzschlussstrom über, welcher wesentlich langsamer abklingt. Überlagert wird der Kurzschlussstrom noch durch einen Gleichstromanteil. Dieser kommt dadurch zustande, dass durch die überwiegend induktive Kurzschlussreaktanz der Strom nicht \glqq springen\grqq{} kann. Aus diesem Grund wird ein Ausgleichsstrom $i_g$ erzwungen, welcher mit der Gleichstromzeitkonstanten $T_g$ abklingt. Die Höhe des Gleichstromgliedes ist abhängig vom Einschaltwinkel, also vom Einschaltzeitpunkt des Kurzschlusses, $\psi$ und ist bei $\psi = 0$ am größten.
-\\- Gleichstromglied \\
+%\\- Gleichstromglied \\
 
-$i_k = \sqrt{2} [(I_k'' - I_k') e^{-t/T_d''} + (I_k' - I_k) e^{-t/T_d'} + I_k]sin(\omega t - \varphi_k) + \sqrt{2} I_k'' e^{-t/T_g} sin \varphi_k $ \\
+$i_k(t) = \sqrt{2} \cdot [(I_k'' - I_k') \cdot e^{-t/T_d''} + (I_k' - I_k) \cdot e^{-t/T_d'} + I_k] \cdot sin(\omega t + \psi - \varphi_k) + \sqrt{2} \cdot I_k'' \cdot e^{-t/T_g} \cdot sin( \varphi_k - \psi) $ \\
 
-Vernachlässigt man die Resistanzen und ersetzt die Ströme, so gelangt man zu folgender Formel für den zeitlichen Verlauf: \\ \\
-$i_k = \sqrt{2} \frac{U_n}{\sqrt{3}} [(\frac{1}{X_d''} - \frac{1}{X_d'}) e^{-t/T_d''} + (\frac{1}{X_d'} - \frac{1}{X_d}) e^{-t/T_d'} + \frac{1}{X_d}] \cdot cos\omega t + \sqrt{2} \frac{U_n}{\sqrt{3} X_d''} e^{-t/T_g}$
 
+Vernachlässigt man die Resistanzen, ersetzt die Ströme und setzt $\psi = 0$, so gelangt man zu folgender Formel für den zeitlichen Verlauf: \\ \\
+$i_k = \sqrt{2} \frac{U_n}{\sqrt{3}} [(\frac{1}{X_d''} - \frac{1}{X_d'}) e^{-t/T_d''} + (\frac{1}{X_d'} - \frac{1}{X_d}) e^{-t/T_d'} + \frac{1}{X_d}] \cdot cos(\omega t) + \sqrt{2} \frac{U_n}{\sqrt{3} X_d''} e^{-t/T_g}$ \\
+
+Aus dieser Formel werden die drei überlagerten Anteile des Kurzschlussstromes deutlich. Auf die einzelnen Reaktanzen und Zeitkonstanten wird später genauer eingegangen. \\
+
+Für den generatorfernen Kurzschluss gilt ähnliches. Da hier die Netzimpedanz allerdings einen wesentlich höheren Einfluss hat als beim generatorfernen Kurzschluss, kann noch weiter vereinfacht werden. Es wird $I_k'' = I_k' = I_k$ angenommen. Daraus ergibt sich nun folgende Formel: \\
+
+$i_k(t) = \sqrt{2} \cdot I_k'' \cdot sin(\omega t + \psi - \varphi) + \sqrt{2} \cdot I_k'' \cdot e^{-t/T_g} \cdot sin(\varphi - \psi) $ \\
+
+An dem Verlauf, der in Abbildung \ref{kss-verlauf-fern} dargestellt ist, erkennt man, dass der Kurzschlussstrom, insbesondere der Gleichanteil, wesentlich schneller abklingt als der generatornahe Kurzschluss. Die Zeitkonstanten $T_d''$ und $T_d'$ entfallen, es bleibt nur die Gleichstromzeitkonstante $T_g$.
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1]{img/kurzschlussstromverlauf-fern.jpg}
+	\caption{Verlauf des generatorfernen Kurzschlussstroms (Quelle: el. Kraftw. und Netze)}
+	\label{kss-verlauf-fern}
+	\end{figure}
+	
 \subsection{Einpoliger Kurzschluss}
 Einpolige Fehler mit Erdberührung sind die am häufigsten auftretenden Fehler in elektrischen Netzen (Quelle?). Sie entstehen beispielsweise durch herabfallende Äste oder durchhängende Vogelnester. Üblicherweise werden Netze bis 110kV kompensiert betrieben. Dabei wird der kapazitive Anteil des Stromes an der Fehlerstelle durch eine Petersenspule kompensiert, die zwischen dem Sternpunkt des Transformators und dem Erdreich angeschlossen wird. Kleinere Mittelspannungsnetze, beispielsweise in Industrieanlagen, werden auch mit isoliertem Sternpunkt betrieben. Netze mit höheren Spannungen werden starr geerdet. Man nennt dies \glqq Niederohmige Sternpunkterdung\grqq{} (NOSPE). Der Erdschlussstrom wird dann zu einem Erdkurzschlussstrom. Grundsätzlich wird unter folgenden Sternpunktbehandlungen unterschieden:
 
@@ -190,7 +242,13 @@ Die Reaktanz einer Synchronmaschine setzt sich aus einem Anteil der Längsachse 
 
 
 \subsubsection{Subtransiente Reaktanz}
-Um ersten Moment eines Kurzschlusses ist die subtransiente Reaktanz $X_d''$ wirksam. Mit ihr wird der Anfangskurzschlusswechselstrom berechnet. Ihr zugeordnet ist die subtransiente Zeitkonstante $T_d''$, welche das abklingen des Anfangskurzschlusswechselstromes beschreibt. Der Abklingvorgang wird mit einer e-Funktion beschrieben. Der gesamte subtransiente Vorgang dauert nur einige Halbwellen, danach geht der Kurzschluss in den transienten Vorgang über
+Um ersten Moment eines Kurzschlusses ist die subtransiente Reaktanz $X_d''$ wirksam. Mit ihr wird der Anfangskurzschlusswechselstrom berechnet. Ihr zugeordnet ist die subtransiente Zeitkonstante $T_d''$, welche das abklingen des Anfangskurzschlusswechselstromes beschreibt. Der Abklingvorgang wird mit einer e-Funktion beschrieben. Der gesamte subtransiente Vorgang dauert nur einige Halbwellen, danach geht der Kurzschluss in den transienten Vorgang über. Die Subtransientzeitkonstante $T_d''$ lässt sich wie folgt ermitteln: \\
+
+$T_d'' = \frac{X_d'' + X_V}{X_d' + X_V} \cdot T_{d0}''$ \\
+
+Dabei ist $T_{d0}''$ die Subtransient-Leerlaufzeitkonstante und liegt bei etwa 50ms.
+
+
 
 \subsubsection{Synchrone Reaktanz}
 Die synchronen Reaktanz $X_d$ gibt die wirksame Reaktanz während des stationären Betriebs an. Sie ist auch nach dem Abschluss aller Ausgleichvorgänge wirksam, daher kann mit ihr der Dauerkurzschlussstrom ermittelt werden. Die Reaktanz der q-Achse wird entsprechend mit $X_q$ bezeichnet.
@@ -207,20 +265,23 @@ Da Synchronmaschinen symmetrisch aufgebaut sind, ist das Nullsystem theoretisch 
 $x_0 = \frac{1}{3} … \frac{1}{6} \cdot x_d'$ auf. Diese ist nur wirksam, wenn der Sternpunkt des Generators geerdet ist.
 
 
-d-q \\
-el. netze u. kraftwerke: S. 127 \\
-xd'' \\
-xd' \\
-xd \\
-Td'' \\
-Td' \\
-Tg \\
+%d-q \\
+%el. netze u. kraftwerke: S. 127 \\
+%xd'' \\
+%xd' \\
+%xd \\
+%Td'' \\
+%Td' \\
+%Tg \\
 
-\subsection{Berechnung}
+%\subsection{Berechnung}
 
 \subsection{Stabilität}
 
 \section{PSS Sincal}
+
+\subsection{Netz}
+Das Netz, welches im Praktikum verwendet wird, ist im Anhang in Abbildung \ref{praktikum-netz} abgebildet. Es ist ein starr geerdetes 110kV-Freileitungsnetz, welches vermascht ist. Als Einspeisequellen dienen zwei räumlich unterschiedlich angeordnete Synchrongeneratoren mit Leistungen von 100MVA und 80MVA, sowie das überlagerte 380kV-Netz. Die Netzdaten wurden von den Praktikumsunterlagen \glqq ENE 3 Kurzschlussstromberechnung in elektrischen Netzen\grqq{} übernommen. Die Dynamikdaten der Generatoren wurden aus den Praktikumsunterlagen der Otto-von-Guericke-Universität Magdeburg übernommen.
 
 \section{Simulation mit Netomac}
 \subsection{Export von Sincal}
@@ -231,6 +292,7 @@ Tg \\
 \subsection{Grafische Auswertung}
 
 \section{Prüfgerät Kocos Artes}
+\subsection{COMTRADE}
 
 \section{Überarbeitung Laborunterlagen}
 \section{Zusammenfassung}
@@ -241,6 +303,182 @@ Tg \\
 \section{Literaturverzeichnis}
 \bibliography{bibtest1}
 \bibliographystyle{unsrtdin}
+
+\section{Anhang}
+\subsection{Netz Laborversuch}
+\begin{table}[H]
+\begin{tabular}{|c|c|}
+\hline 
+\textbf{Bezeichnung} & \textbf{Netz 1} \\ 
+\hline 
+Kurzschlussleistung $S_k''$ & 1000MVA \\ 
+\hline 
+Kurzschlussleistung $S_k''$ Maximum & 1000 \\ 
+\hline 
+Kurzschlussleistung $S_k''$ Minimum & 1000 \\ 
+\hline 
+Verhältnis R/X & 0.1 p.u. \\ 
+\hline
+\end{tabular} 
+\caption{Nenndaten des starren Netzes}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|c|c|c|}
+\hline 
+\textbf{Bezeichnung} & \textbf{Transformator 1} & \textbf{Transformator 2} \\ 
+\hline 
+Nennspannung Seite 1 $U_{n1}$ & 110kV & 110kV \\ 
+\hline 
+Nennspannung Seite 2 $U_{n2}$ & 10kV & 10kV \\ 
+\hline 
+Nennscheinleistung $S_n$ & 100MVA & 80MVA \\ 
+\hline 
+Dauerleistung $S_{max}$ & 100MVA & 80MVA \\ 
+\hline 
+Kurzschlussspannung $u_k$ & 12\% & 12\% \\ 
+\hline 
+Ohmsche Kurzschlussspannung $u_r$ & 0,38\% & 0,38\% \\ 
+\hline 
+Schaltgruppe & Yy0 & Yy0 \\ 
+\hline 
+\end{tabular}
+\caption{Nenndaten Transformatoren}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{ll}
+
+\begin{tabular}{|c|c|}
+\hline 
+\textbf{Bezeichnung} & \textbf{Kenndaten} \\ 
+\hline 
+Leitungstyp & Freileitung \\ 
+\hline 
+Widerstand r & 0,118 Ohm/km \\ 
+\hline 
+Reaktanz x & 0,421 Ohm/km \\ 
+\hline 
+Kapazität c & 9,17nF/km \\ 
+\hline 
+Nennspannung & 110kV \\ 
+\hline 
+Therm. Grenzstrom & 645A \\ 
+\hline 
+\end{tabular}
+
+&
+
+\begin{tabular}{|c|c|}
+\hline 
+\textbf{Leitung} & \textbf{Länge} \\ 
+\hline 
+L12 & 30km \\ 
+\hline 
+L16 & 50km \\ 
+\hline 
+L23 & 45km \\ 
+\hline 
+L25 & 30km \\ 
+\hline 
+L34 & 25km \\ 
+\hline 
+L45 & 20km \\ 
+\hline 
+L64 & 35km \\ 
+\hline 
+L67 & 20km \\ 
+\hline 
+\end{tabular}
+
+\end{tabular}
+
+\caption{Freileitungen}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|c|c|c|}
+\hline 
+\textbf{Last} & \textbf{Scheinleistung} & \textbf{Leistungsfaktor} \\ 
+\hline 
+Last 1 & 40MVA & 0,95 \\ 
+\hline 
+Last 2 & 30MVA & 0,8 \\ 
+\hline 
+Last 3 & 60MVA & 0,9 \\ 
+\hline 
+Last 5 & 40MVA & 0,9 \\ 
+\hline 
+Last 7 & 60MVA & 0,9 \\ 
+\hline 
+\end{tabular}
+\caption{Lasten}
+\end{table}
+
+\begin{table}[H]
+
+\begin{tabular}{|l|c|c|}
+\hline 
+\textbf{Bezeichnung} & \textbf{Generator 1} & \textbf{Generator 2} \\ 
+\hline 
+Maschinentyp & Turbogenerator & Turbogenerator \\ 
+\hline 
+Bemessungsscheinleistung & 100MVA & 80MVA \\ 
+\hline 
+Bemessungsspannung & 10kV & 10kV \\ 
+\hline 
+Verhältnis R/X & 0,1 p.u. & 0,1 p.u. \\ 
+\hline 
+Anlaufzeitkonstante $T_A$ & 8,2s & 8,2s \\
+\hline
+Gleichstromzeitkonstante $T_G$ & 0,36s & 0,36s \\
+\hline
+Ankerwiderstand $R_a$ & 0,01 p.u. & 0,01 p.u. \\
+\hline
+Ankerstreureaktanz $X_{1\sigma}$ & 0,13 p.u. & 0,13 p.u. \\
+\hline
+\multicolumn{3}{|l|}{Kurzschlusszeitkonstanten} \\
+\hline
+• subtransient d-Achse $T_d''$ & 0,03s & 0,03s \\
+\hline
+• subtransient q-Achse $T_q''$ & 0,03s & 0,03s \\
+\hline
+• transient d-Achse $T_d'$ & 1,0s & 1,0s \\
+\hline
+• subtransient q-Achse $T_q'$ & 1,0s & 1,0s \\
+\hline
+\multicolumn{3}{|l|}{Reaktanzen} \\
+\hline
+• subtransient d-Achse $X_{d}''$ & 20\% & 20\% \\ 
+\hline
+• subtransient q-Achse $X_q''$ & 20\% & 20\% \\
+\hline
+• transient d-Achse $X_{d}''$ & 30,1\% & 30,1\% \\ 
+\hline
+• transient q-Achse $X_q''$ & 100\% & 100\% \\
+\hline
+• stationär d-Achse $X_d$ & 227\% & 227\% \\
+\hline
+• stationär q-Achse $X_q$ & 205\% & 205\% \\
+\hline
+Bemessungsleistungsfaktor & 0,9 & 0,9 \\ 
+\hline 
+Wirkleistung P & 90MW & 72MW \\ 
+\hline 
+Generatorspannung & 10kV & 10kV \\ 
+\hline
+\end{tabular}
+
+\caption{Generatoren}
+\end{table}
+
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35, angle=90]{img/praktikum-netz}
+	\caption{Netzaufbau Laborversuch}
+	\label{praktikum-netz}
+	\end{figure}
 
 \end{onehalfspace}
 
