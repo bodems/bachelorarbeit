@@ -283,12 +283,61 @@ $x_0 = \frac{1}{3} … \frac{1}{6} \cdot x_d'$ auf. Diese ist nur wirksam, wenn 
 \subsection{Netz}
 Das Netz, welches im Praktikum verwendet wird, ist im Anhang in Abbildung \ref{praktikum-netz} abgebildet. Es ist ein starr geerdetes 110kV-Freileitungsnetz, welches vermascht ist. Als Einspeisequellen dienen zwei räumlich unterschiedlich angeordnete Synchrongeneratoren mit Leistungen von 100MVA und 80MVA, sowie das überlagerte 380kV-Netz. Die Netzdaten wurden von den Praktikumsunterlagen \glqq ENE 3 Kurzschlussstromberechnung in elektrischen Netzen\grqq{} übernommen. Die Dynamikdaten der Generatoren wurden aus den Praktikumsunterlagen der Otto-von-Guericke-Universität Magdeburg übernommen.
 
-\section{Simulation mit Netomac}
-\subsection{Export von Sincal}
-\subsection{Programmstruktur}
+\section{Simulation mit NETOMAC}
+PSS NETOMAC ist eine leistungsfähige Software zur Untersuchung von dynamischen Vorgängen in elektrischen Netzen. Es wird von der Firma Siemens entwickelt und vertrieben.
+
+\subsection{Export aus PSS Sincal}
+Über die Exportfunktion von PSS Sincal lässt sich aus einem Sincal-Projekt ein Netomac-Projekt erstellen. Sie findet sich unter $Datei \rightarrow Exportieren \rightarrow PSS$ $NETOMAC...$ .  Nach dem erfolgreichen Export erhält man unter anderem  Dateien mit folgenden Dateiendungen:
+
+\begin{itemize}
+\item .nprj: Projektdatei
+\item .ctl: Steuerungsdatei
+\item .net: Hauptdatei mit Netzaufbau
+\item .nzd: Datei mit Namen und Aliasnamen
+\item .dis: Störungsdatendatei
+\item .plo: Plotterdatendatei
+\item .res: Ergebnisdatei
+\end{itemize}
+
+
+\subsection{.ctl-Datei}
+\subsection{.net-Datei}
+In der .net-Datei sind alle Betriebsmittel, Knoten und Zweige und die Netztopologie definiert. Jedes Betriebsmittel und jeder Knoten hat eine eindeutige Bezeichnung, aus der nicht direkt ersichtlich ist, um welche Art von Betriebsmittel es sich handelt. In jeder Definition eines Betriebsmittels sind der Anfangsknoten und der Endknoten definiert. Nachfolgend ist in Tabelle \ref{leitung-netomac} die Definition einer Leitung dargestellt, an der die Funktionsweise von NETOMAC demonstriert wird.
+
+
+
+
+\begin{table}[H]
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline 
+\multicolumn{12}{|l|}{\$ Line: L12 (X00028) from SS1 (X00005) to SS2 (X00006)} \\ 
+\hline 
+LX00005 & X00006  & X00028 & 1 & 30 & 0.116 & 0.424 & 9.17 & 0 & 110 & 0 &0 \\ 
+\hline 
+M & & X00028 & & 9999 & 9999 & & & & & & \\ 
+\hline 
+\end{tabular} 
+\caption{Definition einer Leitung in PSS NETOMAC}
+\label{leitung-netomac}
+\end{table}
+
+Netomac arbeiten mit einem tabellenartigen Textformat, Spalten sind dabei durch Tabulatoren getrennt. Die Kennzeichnung von Zeilen geschieht durch Buchstaben, wobei jeder Buchstabe eine andere Funktion hat. Die Eigenschaften der Zeile wird anschließend in den Spalten festgelegt.
+
+Alle Zeilen, die mit einem \$ beginnen, sind Kommentare. Beim Export von PSS Sincal in PSS Netomac versieht Sincal automatisch alle Betriebsmittel mit Kommentaren. Knoten- und Betriebsmittelkennzeichnungen beginnen mit X und haben eine eindeutige alphanumerische Bezeichnung. In diesem Beispiel hat die Leitung L12 die Bezeichnung X00028 und verbindet die Knoten X00006 und X00028 miteinander.
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.75]{img/netomac-l12.png}
+	\caption{Definition der Leitung L12 in NETOMAC}
+	\end{figure}
+
+\subsection{.dis-Datei}
+\subsection{.plo-Datei}
+\subsection{.res-Datei}
+
+\subsection{Dateistruktur}
 \subsection{Eingabedaten}
 \subsection{Festlegen der Störkriterien}
-\subsection{CTL-Datei}
 \subsection{Grafische Auswertung}
 
 \section{Prüfgerät Kocos Artes}
@@ -304,181 +353,7 @@ Das Netz, welches im Praktikum verwendet wird, ist im Anhang in Abbildung \ref{p
 \bibliography{bibtest1}
 \bibliographystyle{unsrtdin}
 
-\section{Anhang}
-\subsection{Netz Laborversuch}
-\begin{table}[H]
-\begin{tabular}{|c|c|}
-\hline 
-\textbf{Bezeichnung} & \textbf{Netz 1} \\ 
-\hline 
-Kurzschlussleistung $S_k''$ & 1000MVA \\ 
-\hline 
-Kurzschlussleistung $S_k''$ Maximum & 1000 \\ 
-\hline 
-Kurzschlussleistung $S_k''$ Minimum & 1000 \\ 
-\hline 
-Verhältnis R/X & 0.1 p.u. \\ 
-\hline
-\end{tabular} 
-\caption{Nenndaten des starren Netzes}
-\end{table}
-
-\begin{table}[H]
-\begin{tabular}{|c|c|c|}
-\hline 
-\textbf{Bezeichnung} & \textbf{Transformator 1} & \textbf{Transformator 2} \\ 
-\hline 
-Nennspannung Seite 1 $U_{n1}$ & 110kV & 110kV \\ 
-\hline 
-Nennspannung Seite 2 $U_{n2}$ & 10kV & 10kV \\ 
-\hline 
-Nennscheinleistung $S_n$ & 100MVA & 80MVA \\ 
-\hline 
-Dauerleistung $S_{max}$ & 100MVA & 80MVA \\ 
-\hline 
-Kurzschlussspannung $u_k$ & 12\% & 12\% \\ 
-\hline 
-Ohmsche Kurzschlussspannung $u_r$ & 0,38\% & 0,38\% \\ 
-\hline 
-Schaltgruppe & Yy0 & Yy0 \\ 
-\hline 
-\end{tabular}
-\caption{Nenndaten Transformatoren}
-\end{table}
-
-\begin{table}[H]
-\begin{tabular}{ll}
-
-\begin{tabular}{|c|c|}
-\hline 
-\textbf{Bezeichnung} & \textbf{Kenndaten} \\ 
-\hline 
-Leitungstyp & Freileitung \\ 
-\hline 
-Widerstand r & 0,118 Ohm/km \\ 
-\hline 
-Reaktanz x & 0,421 Ohm/km \\ 
-\hline 
-Kapazität c & 9,17nF/km \\ 
-\hline 
-Nennspannung & 110kV \\ 
-\hline 
-Therm. Grenzstrom & 645A \\ 
-\hline 
-\end{tabular}
-
-&
-
-\begin{tabular}{|c|c|}
-\hline 
-\textbf{Leitung} & \textbf{Länge} \\ 
-\hline 
-L12 & 30km \\ 
-\hline 
-L16 & 50km \\ 
-\hline 
-L23 & 45km \\ 
-\hline 
-L25 & 30km \\ 
-\hline 
-L34 & 25km \\ 
-\hline 
-L45 & 20km \\ 
-\hline 
-L64 & 35km \\ 
-\hline 
-L67 & 20km \\ 
-\hline 
-\end{tabular}
-
-\end{tabular}
-
-\caption{Freileitungen}
-\end{table}
-
-\begin{table}[H]
-\begin{tabular}{|c|c|c|}
-\hline 
-\textbf{Last} & \textbf{Scheinleistung} & \textbf{Leistungsfaktor} \\ 
-\hline 
-Last 1 & 40MVA & 0,95 \\ 
-\hline 
-Last 2 & 30MVA & 0,8 \\ 
-\hline 
-Last 3 & 60MVA & 0,9 \\ 
-\hline 
-Last 5 & 40MVA & 0,9 \\ 
-\hline 
-Last 7 & 60MVA & 0,9 \\ 
-\hline 
-\end{tabular}
-\caption{Lasten}
-\end{table}
-
-\begin{table}[H]
-
-\begin{tabular}{|l|c|c|}
-\hline 
-\textbf{Bezeichnung} & \textbf{Generator 1} & \textbf{Generator 2} \\ 
-\hline 
-Maschinentyp & Turbogenerator & Turbogenerator \\ 
-\hline 
-Bemessungsscheinleistung & 100MVA & 80MVA \\ 
-\hline 
-Bemessungsspannung & 10kV & 10kV \\ 
-\hline 
-Verhältnis R/X & 0,1 p.u. & 0,1 p.u. \\ 
-\hline 
-Anlaufzeitkonstante $T_A$ & 8,2s & 8,2s \\
-\hline
-Gleichstromzeitkonstante $T_G$ & 0,36s & 0,36s \\
-\hline
-Ankerwiderstand $R_a$ & 0,01 p.u. & 0,01 p.u. \\
-\hline
-Ankerstreureaktanz $X_{1\sigma}$ & 0,13 p.u. & 0,13 p.u. \\
-\hline
-\multicolumn{3}{|l|}{Kurzschlusszeitkonstanten} \\
-\hline
-• subtransient d-Achse $T_d''$ & 0,03s & 0,03s \\
-\hline
-• subtransient q-Achse $T_q''$ & 0,03s & 0,03s \\
-\hline
-• transient d-Achse $T_d'$ & 1,0s & 1,0s \\
-\hline
-• subtransient q-Achse $T_q'$ & 1,0s & 1,0s \\
-\hline
-\multicolumn{3}{|l|}{Reaktanzen} \\
-\hline
-• subtransient d-Achse $X_{d}''$ & 20\% & 20\% \\ 
-\hline
-• subtransient q-Achse $X_q''$ & 20\% & 20\% \\
-\hline
-• transient d-Achse $X_{d}''$ & 30,1\% & 30,1\% \\ 
-\hline
-• transient q-Achse $X_q''$ & 100\% & 100\% \\
-\hline
-• stationär d-Achse $X_d$ & 227\% & 227\% \\
-\hline
-• stationär q-Achse $X_q$ & 205\% & 205\% \\
-\hline
-Bemessungsleistungsfaktor & 0,9 & 0,9 \\ 
-\hline 
-Wirkleistung P & 90MW & 72MW \\ 
-\hline 
-Generatorspannung & 10kV & 10kV \\ 
-\hline
-\end{tabular}
-
-\caption{Generatoren}
-\end{table}
-
-
-	\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.35, angle=90]{img/praktikum-netz}
-	\caption{Netzaufbau Laborversuch}
-	\label{praktikum-netz}
-	\end{figure}
+\include{anhang}
 
 \end{onehalfspace}
 
