@@ -265,16 +265,6 @@ Da Synchronmaschinen symmetrisch aufgebaut sind, ist das Nullsystem theoretisch 
 $x_0 = \frac{1}{3} … \frac{1}{6} \cdot x_d'$ auf. Diese ist nur wirksam, wenn der Sternpunkt des Generators geerdet ist.
 
 
-%d-q \\
-%el. netze u. kraftwerke: S. 127 \\
-%xd'' \\
-%xd' \\
-%xd \\
-%Td'' \\
-%Td' \\
-%Tg \\
-
-%\subsection{Berechnung}
 
 \subsection{Stabilität}
 
@@ -302,10 +292,7 @@ PSS NETOMAC ist eine leistungsfähige Software zur Untersuchung von dynamischen 
 
 \subsection{.ctl-Datei}
 \subsection{.net-Datei}
-In der .net-Datei sind alle Betriebsmittel, Knoten und Zweige und die Netztopologie definiert. Jedes Betriebsmittel und jeder Knoten hat eine eindeutige Bezeichnung, aus der nicht direkt ersichtlich ist, um welche Art von Betriebsmittel es sich handelt. In jeder Definition eines Betriebsmittels sind der Anfangsknoten und der Endknoten definiert. Nachfolgend ist in Tabelle \ref{leitung-netomac} die Definition einer Leitung dargestellt, an der die Funktionsweise von NETOMAC demonstriert wird.
-
-
-
+In der .net-Datei sind alle Betriebsmittel, Knoten und Zweige und die Netztopologie definiert. Jedes Betriebsmittel und jeder Knoten hat eine eindeutige Bezeichnung, aus der nicht direkt ersichtlich ist, um welche Art von Betriebsmittel es sich handelt. In jeder Definition eines Betriebsmittels sind der Anfangsknoten und der Endknoten definiert. Nachfolgend ist in Tabelle \ref{leitung-netomac-tb} die Definition einer Leitung dargestellt, an der die Funktionsweise von NETOMAC demonstriert wird.
 
 \begin{table}[H]
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}
@@ -318,20 +305,34 @@ M & & X00028 & & 9999 & 9999 & & & & & & \\
 \hline 
 \end{tabular} 
 \caption{Definition einer Leitung in PSS NETOMAC}
-\label{leitung-netomac}
+\label{leitung-netomac-tb}
 \end{table}
 
 Netomac arbeiten mit einem tabellenartigen Textformat, Spalten sind dabei durch Tabulatoren getrennt. Die Kennzeichnung von Zeilen geschieht durch Buchstaben, wobei jeder Buchstabe eine andere Funktion hat. Die Eigenschaften der Zeile wird anschließend in den Spalten festgelegt.
 
-Alle Zeilen, die mit einem \$ beginnen, sind Kommentare. Beim Export von PSS Sincal in PSS Netomac versieht Sincal automatisch alle Betriebsmittel mit Kommentaren. Knoten- und Betriebsmittelkennzeichnungen beginnen mit X und haben eine eindeutige alphanumerische Bezeichnung. In diesem Beispiel hat die Leitung L12 die Bezeichnung X00028 und verbindet die Knoten X00006 und X00028 miteinander.
+Alle Zeilen, die mit einem \$ beginnen, sind Kommentare. Beim Export von PSS Sincal in PSS Netomac versieht Sincal automatisch alle Betriebsmittel mit Kommentaren. Knoten- und Betriebsmittelkennzeichnungen beginnen mit X und haben eine eindeutige alphanumerische Bezeichnung. In diesem Beispiel hat die Leitung L12 die Bezeichnung X00028 und verbindet die Knoten X00006 und X00028 miteinander. Die Zeile mit der Bezeichnung L kennzeichnet eine Leitung, anschließend folgt ohne Leerzeichen die Bezeichnung des Anfangsknotens (X00005). In der nächsten Spalte folgt nach einem Tabulator die Bezeichnung des Endknotens (X00006), anschließend die Bezeichnung der Leitung selbst. Ab hier beginnen die eigentlichen Parameter der Leitung. Zunächst wird die Anzahl der parallelen Leitungen festgelegt, in diesem Fall 1. Die Länge ist mit 30km definiert. Anschließend werden die Resistanz R' mit 0,116 $\Omega /km$, die Reaktanz mit 0,424 $\Omega /km$ und die Kapazität $C_b'$ mit 9,17nF/km festgelegt. Da in der Versuchsbeschreibung kein Wert für $C_0'$ gegeben war, ist dieser Null. Die Nennspannung auf der Leitung beträgt 110kV. Für die Ableitwiderstände gilt dasselbe wie für $C_0'$, daher wurden $G_1'$ und $G_0'$ auch zu Null.\\
+In der Zeile mit der Bezeichnung M wird die Kopplung zwischen dem Mit- und Nullsystem definiert. Spalte zwei und drei sind leer, in der vierten Spalte wird die Bezeichnung der Leitung angegeben, für die die Kopplung definiert werden soll, in diesem Fall X00028. Da auch hier keine Werte gegeben sind, setzt Sincal die beiden folgenden Spalten, welche für das Verhältnis $R_0'/R_b'$ und $X_0'/X_b'$ stehen, auf 9999. Das bedeutet, dass die beiden Werte für $X_0'$ und $R_0'$ praktisch nicht vorhanden sind. Nachfolgend ist in Abbildung \ref{leitung-netomac} die Leitung L12, wie in Tabelle \ref{leitung-netomac-tb} beschrieben, noch einmal im Texteditor von NETOMAC dargestellt.
 
 	\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.75]{img/netomac-l12.png}
 	\caption{Definition der Leitung L12 in NETOMAC}
+	\label{leitung-netomac}
+	\end{figure}
+	
+Da in die Betriebsmittelbezeichnungen in der .net-Datei kryptisch und ohne Bezug sind, hat NETOMAC die Möglichkeit von Aliasnamen eingeführt. Diese sind in der Datei mit der Endung .nzd definiert. PSS Sincal legt automatisch Aliases mit den in Sincal angegebenen Namen an. \\
+Generatoren werden nach dem selben Prinzip beschrieben. Zeile S kennzeichnet eine Synchronmaschine. Da dieses Betriebsmittel keinen Anfangs- und Endknoten hat, bleiben die nachfolgenden zwei Spalten leer. In der dritten Spalte folgt wie üblich die Bezeichnung des Betriebsmittels. Zeile T legt die Transformator-Parameter fest. Da der Generator und der Transformator separat betrachtet werden und nicht als Kraftwerksblock, ist das Übersetzungsverhältnis 1. Die Schaltgruppe des Synchrongenerators ist YY0, was bedeutes, dass die Ständerwicklungen im Stern verschaltet sind. Da das Übersetzungsverhältnis 1 ist, sind die nachfolgenden Angaben für $U_{r,UStrafo}$, $U_{nUStrafo}$ und $U_{nOSnetz}$ jeweils 10kV. Die Bemessungsspannung des Synchrongenerators beträgt allerdings 10,5kV. Die nachfolgende Zeile definiert die Nennwerte der Maschine. Auf die Scheinleistung in MVA folgt die Wirkleistung, die Nennspannung, der Leistungsfaktor, der Wirkungsgrad, die Nenndrehzahl und die Nennfrequenz. In Zeile zwei bis sechs sind die Parameter des Ersatzschaltbildes der Maschine definiert. Die Z-Zeile beinhaltet weitere Parameter, die zur Kurzschlussberechnung nach IEC und ANSI benötigt werden.
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.75]{img/netomac-g1.png}
+	\caption{Definition des Synchrongenerator G1 in NETOMAC}
+	\label{leitung-netomac}
 	\end{figure}
 
 \subsection{.dis-Datei}
+In der .dis-Datei (\glqq disturbance\grqq) werden die Störkriterien und Netzänderungen festgelegt.
+
 \subsection{.plo-Datei}
 \subsection{.res-Datei}
 
