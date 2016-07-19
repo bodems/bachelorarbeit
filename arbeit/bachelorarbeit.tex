@@ -267,6 +267,10 @@ $x_0 = \frac{1}{3} … \frac{1}{6} \cdot x_d'$ auf. Diese ist nur wirksam, wenn 
 
 
 \subsection{Stabilität}
+Die Stabilität eines Drehstromnetzes ist ein wesentliches Kriterium zur Versorgungssicherheit.
+
+- S. 902 \\
+- niederfrequente netzpendelungen
 
 \section{PSS Sincal}
 
@@ -291,6 +295,8 @@ PSS NETOMAC ist eine leistungsfähige Software zur Untersuchung von dynamischen 
 
 
 \subsection{.ctl-Datei}
+In der .ctl-Datei werden allgemeine Einstellungen festgelegt, wie z.B. der Simulationszeitraum oder xy.
+
 \subsection{.net-Datei}
 In der .net-Datei sind alle Betriebsmittel, Knoten und Zweige und die Netztopologie definiert. Jedes Betriebsmittel und jeder Knoten hat eine eindeutige Bezeichnung, aus der nicht direkt ersichtlich ist, um welche Art von Betriebsmittel es sich handelt. In jeder Definition eines Betriebsmittels sind der Anfangsknoten und der Endknoten definiert. Nachfolgend ist in Tabelle \ref{leitung-netomac-tb} die Definition einer Leitung dargestellt, an der die Funktionsweise von NETOMAC demonstriert wird.
 
@@ -307,6 +313,8 @@ M & & X00028 & & 9999 & 9999 & & & & & & \\
 \caption{Definition einer Leitung in PSS NETOMAC}
 \label{leitung-netomac-tb}
 \end{table}
+
+- pi, T
 
 Netomac arbeiten mit einem tabellenartigen Textformat, Spalten sind dabei durch Tabulatoren getrennt. Die Kennzeichnung von Zeilen geschieht durch Buchstaben, wobei jeder Buchstabe eine andere Funktion hat. Die Eigenschaften der Zeile wird anschließend in den Spalten festgelegt.
 
@@ -325,19 +333,66 @@ Generatoren werden nach dem selben Prinzip beschrieben. Zeile S kennzeichnet ein
 
 	\begin{figure}[H]
 	\centering
+	\includegraphics[scale=0.5]{img/esb-synchron.png}
+	\caption{Ersatzschaltbild Synchrongenerator}
+	\label{leitung-netomac}
+	\end{figure}
+
+	\begin{figure}[H]
+	\centering
 	\includegraphics[scale=0.75]{img/netomac-g1.png}
 	\caption{Definition des Synchrongenerator G1 in NETOMAC}
 	\label{leitung-netomac}
 	\end{figure}
 
 \subsection{.dis-Datei}
-In der .dis-Datei (\glqq disturbance\grqq) werden die Störkriterien und Netzänderungen festgelegt.
+In der .dis-Datei (\glqq disturbance\grqq) werden die Störkriterien und Netzänderungen festgelegt. Einzelne Ereignisse können dabei sequenziell oder parallel ablaufen. Jedes Ereignis kann aus mehreren Störkriterien bestehen und beginnt mit einer Einleitungszeile. Die Einleitungszeile dient dazu, NETOMAC kenntlich zu machen, das ein neues Ereignis stattfindet. In ihr wird die Zeit angegeben, nach der das nächste Ereignis ausgeführt werden soll. Nach der Einleitungszeile folgen Fehlerzeilen. Jede Fehlerzeile definiert dabei den Fehlerort, die Art des Fehlers, die Fehlerimpedanz und eventuell eine Fehlerimpedanz gegenüber Erde. Das Ereignisende erfolgt eine \glqq ENDE\grqq -Zeile. Nun kann das nächste Ereignis definiert werden. Soll das Netz in den Ausgangszustand zurückversetzt werden, geschieht dies mit einer \glqq OLD\grqq -Zeile, gefolgt von einer \glqq ENDE\grqq -Zeile. 
 
 \subsection{.plo-Datei}
 \subsection{.res-Datei}
 
 \subsection{Dateistruktur}
 \subsection{Eingabedaten}
+
+\subsection{Berechnungsmethoden}
+PSS NETOMAC bietet drei unterschiedliche Berechnungsmethoden an
+
+\subsubsection{Lastfluss}
+
+
+\subsubsection{Kurzschluss}
+Kurzschlüsse können in NETOMAC wahlweise nach ANSI oder IEC bzw. VDE0102 berechnet werden.
+
+
+\subsubsection{Dynamik}
+Die Dynamikberechnungen bilden die mit Abstand größte Funktionsvielfalt in NETOMAC. Mit ihr lassen sich zum einen die Stabilität eines Netzes und zum anderen elektromagnetische Transienten berechnen und grafisch darstellen.
+
+\subsection{Vierpoldarstellung von Leitungen}
+Bei einfachen Kurzschlussstromberechnungen wird bei elektrischen Leitungen der Querzweig vernachlässigt und nur der Längszweig mit Induktivitäten und Resistanzen betrachtet. Dies führt bei der Auslegung von Betriebsmitteln zu hinreichend genauen Ergebnissen. Werden nun aber dynamische Vorgänge betrachtet, lassen sich die Querzweige nicht mehr vernachlässigen und müssen in die Betrachtungen mit einfließen.
+
+\subsubsection{Vollständiges Ersatzschaltbild}
+
+
+\subsubsection{$\pi$-Ersatzschaltbild}
+Bis zu einer Leitungslänge von ca. 150km (el. Energieversorgung S. 216) liefert das $\pi$-Ersatzschaltbild ein realistisches Übertragungsverhalten. Bei längeren Leitungen müssen mehrere Pi-Glieder hintereinander geschaltet werden. Der Vorteil am $\pi$-Ersatzschaltbild ist, dass es keine inneren Knoten besitzt und dadurch Rechnungen stark vereinfacht (Quelle?).
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/pi-esb.png}
+	\caption{$\pi$-Ersatzschaltbild Leitung}
+	\label{pi-esb}
+	\end{figure}
+
+\subsubsection{T-Ersatzschaltbild}
+Das $\pi$-Ersatzschaltbild hat bei dynamischen Betrachtungen den Nachteil, dass sich an seinen Enden Kapazitäten befinden, die im Kurzschlussfall zusammen mit der Induktivität einen nur schwach gedämpften Schwingkreis bilden. Dies führt bei der grafischen Darstellung zu \glqq Spikes\grqq{}, die in der Realität nicht vorkommen. Tritt dieser Fall auf, so liefert das T-Ersatzschaltbild realistischere Ergebnisse (Netomac-Hilfe).
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/t-esb.png}
+	\caption{T-Ersatzschaltbild Leitung}
+	\label{t-esb}
+	\end{figure}
+
 \subsection{Festlegen der Störkriterien}
 \subsection{Grafische Auswertung}
 
