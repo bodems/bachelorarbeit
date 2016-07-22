@@ -264,15 +264,33 @@ $x_i = \frac{x_d'' + x_q''}{2}$
 Da Synchronmaschinen symmetrisch aufgebaut sind, ist das Nullsystem theoretisch nicht wirksam. In der Praxis tritt die Nullreaktanz allerdings mit einer Größe von \\
 $x_0 = \frac{1}{3} … \frac{1}{6} \cdot x_d'$ auf. Diese ist nur wirksam, wenn der Sternpunkt des Generators geerdet ist.
 
+\subsubsection{Polradwinkel}
+Der Polradwinkel, auch Lastwinkel genannt, gibt die Phasenverschiebung zwischen Polradspannung $U_p$ und Netzspannung an. Mechanisch gesehen ist er die mechanische Verschiebung des Polrads zwischen Leerlauf und Last. Jeder Leistung ist dabei ein Lastwinkel zugeordnet. Befindet sich die Maschine im Generatorbetrieb, eilt das Polrad vor und \glqq zieht\grqq{} das Netz mit. Arbeit die Maschine als Motor, eilt das Polrad nach und wird vom Netz \glqq mitgezogen\grqq.
 
 
 \subsection{Stabilität}
+Das Kriterium der Stabilität eines elektrischen Netzes unterscheidet zwischen der statischen Stabilität und der transienten Stabilität. Die statische Stabilität beschreibt.
+
+Der Polradwinkel eines Generators hat einen entscheidenden Einfluss auf die Stabilität.
+
+Die transiente Stabilität beschreibt das Verhalten des Netzes im Moment eines Fehlereintritts und danach.
+
+Treten in einem Netz Fehler auf, so ändern sich die Lastflussverhältnisse und somit auch die abgegebene Leistung der Generatoren. Ein Spannungseinbruch, beispielsweise als Folge eines Kurzschlusses, führt zu einem schlagartigen Abfall der Last an einem Generator. Da die elektrische Energie nun nicht mehr ins Netz abgeführt werden kann, an der Welle aber immer noch mechanische Energie zugeführt wird, wird diese mechanische Energie in Rotationsenergie umgewandelt (???). Der Generator beschleunigt. Durch die Beschleunigung des Generators vergrößert sich der Polradwinkel. Wird dieser zu groß und überschreitet die Stabilitätsgrenze (wo liegt die?), gerät der Generator \glqq außer Tritt\grqq, wodurch es zu Schäden kommen kann. Diese liegt bei einem Polradwinkel von $\upsilon = 90\degree$ und markiert das Kippmoment $M_k$ der Maschine (S 187 el. Energieversorgung). Umso länger der Fehler andauert und umso näher der Fehler in der Nähe eines Genertors liegt, desto weniger Energie können die Generatoren ins Netz abführen. Die Wahrscheinlichkeit, dass ein Generator \glqq durchtritt\grqq, steigt also mit der Kurzschlussdauer an. Generatornahe Fehler müssen daher besonders schnell abgeschaltet werden. Durch ein schnelles erhöhen der Generatorspannung kann erreicht werden, dass im Fehlerfall mehr Wirkleistung abgeführt werden kann. Kleinere Spannungsänderungen im Netz führen, wie bereits beschrieben, zu Leistungsänderungen an den Generatoren. Diese führen in der Regel nicht zu Instabilitäten, allerdings pendelt nun das Polrad mit einer niedrigen Frequenz von bis zu 2 Hz. Diese Leistungspendelungen sind auch im Netz beobachtbar, vor allem zwischen schwach gekoppelten Netzen (Wide Area Monitoring System UCTE). Sichtbar gemacht werden diese mit Wide Area Monitoring Systems.
+
 Die Stabilität eines Drehstromnetzes ist ein wesentliches Kriterium zur Versorgungssicherheit.
 
-- S. 902 \\
-- niederfrequente netzpendelungen
+%- S. 902 \\
+%- niederfrequente netzpendelungen \\
+%- statisch \\
+%- transient \\
+%- Zeit zum durchgehen \\
+
 
 \section{PSS Sincal}
+
+\subsection{Lizenzen}
+Die Fachhochschule Bielefeld besitzt unterschiedliche Lizenzen für die PSS Sincal Plattform. Mit allen Lizenzen können Kurzschlüsse, Lastflüsse und die Stabilität untersucht werden. Die EduTrans-Lizenz ist hier auf maximal 25 gleichzeitige Nutzer begrenzt. Mit dieser Lizenz können ferner Schutzfunktionalitäten und Oberschwingungen untersucht werden. Elektromagnetische Transienten und zeitliche Verläufe von Momentanwerten können allerdings nicht dargestellt werden. Die Lizenz EleStd ermöglicht dagegen auch die Untersuchung von elektromagnetischen Transienten und Eigenwerten. Hier fehlt allerdings Funktion der Schutzkoordination. EleStd ist auf sechs gleichzeitige Nutzer begrenzt. \\
+Des weiteren verfügt die Fachhochschule über zwei EleKey2-Lizenzen, welche im Gegensatz zu den Netzwerklizenzen auf einen USB-Dongle setzt. Diese Lizenzen enthalten die selben Funktionen wie die EleStd-Lizenz
 
 \subsection{Netz}
 Das Netz, welches im Praktikum verwendet wird, ist im Anhang in Abbildung \ref{praktikum-netz} abgebildet. Es ist ein starr geerdetes 110kV-Freileitungsnetz, welches vermascht ist. Als Einspeisequellen dienen zwei räumlich unterschiedlich angeordnete Synchrongeneratoren mit Leistungen von 100MVA und 80MVA, sowie das überlagerte 380kV-Netz. Die Netzdaten wurden von den Praktikumsunterlagen \glqq ENE 3 Kurzschlussstromberechnung in elektrischen Netzen\grqq{} übernommen. Die Dynamikdaten der Generatoren wurden aus den Praktikumsunterlagen der Otto-von-Guericke-Universität Magdeburg übernommen.
@@ -295,7 +313,7 @@ PSS NETOMAC ist eine leistungsfähige Software zur Untersuchung von dynamischen 
 
 
 \subsection{.ctl-Datei}
-In der .ctl-Datei werden allgemeine Einstellungen festgelegt, wie z.B. der Simulationszeitraum oder xy.
+In der .ctl-Datei werden allgemeine Einstellungen festgelegt, wie z.B. der Simulationszeitraum und der Zeitschritt. Des weiteren werden dort die Suchpfade festgelegt, in denen NETOMAC benötigte Dateien suchen soll.
 
 \subsection{.net-Datei}
 In der .net-Datei sind alle Betriebsmittel, Knoten und Zweige und die Netztopologie definiert. Jedes Betriebsmittel und jeder Knoten hat eine eindeutige Bezeichnung, aus der nicht direkt ersichtlich ist, um welche Art von Betriebsmittel es sich handelt. In jeder Definition eines Betriebsmittels sind der Anfangsknoten und der Endknoten definiert. Nachfolgend ist in Tabelle \ref{leitung-netomac-tb} die Definition einer Leitung dargestellt, an der die Funktionsweise von NETOMAC demonstriert wird.
@@ -313,8 +331,6 @@ M & & X00028 & & 9999 & 9999 & & & & & & \\
 \caption{Definition einer Leitung in PSS NETOMAC}
 \label{leitung-netomac-tb}
 \end{table}
-
-- pi, T
 
 Netomac arbeiten mit einem tabellenartigen Textformat, Spalten sind dabei durch Tabulatoren getrennt. Die Kennzeichnung von Zeilen geschieht durch Buchstaben, wobei jeder Buchstabe eine andere Funktion hat. Die Eigenschaften der Zeile wird anschließend in den Spalten festgelegt.
 
@@ -349,7 +365,9 @@ Generatoren werden nach dem selben Prinzip beschrieben. Zeile S kennzeichnet ein
 In der .dis-Datei (\glqq disturbance\grqq) werden die Störkriterien und Netzänderungen festgelegt. Einzelne Ereignisse können dabei sequenziell oder parallel ablaufen. Jedes Ereignis kann aus mehreren Störkriterien bestehen und beginnt mit einer Einleitungszeile. Die Einleitungszeile dient dazu, NETOMAC kenntlich zu machen, das ein neues Ereignis stattfindet. In ihr wird die Zeit angegeben, nach der das nächste Ereignis ausgeführt werden soll. Nach der Einleitungszeile folgen Fehlerzeilen. Jede Fehlerzeile definiert dabei den Fehlerort, die Art des Fehlers, die Fehlerimpedanz und eventuell eine Fehlerimpedanz gegenüber Erde. Das Ereignisende erfolgt eine \glqq ENDE\grqq -Zeile. Nun kann das nächste Ereignis definiert werden. Soll das Netz in den Ausgangszustand zurückversetzt werden, geschieht dies mit einer \glqq OLD\grqq -Zeile, gefolgt von einer \glqq ENDE\grqq -Zeile. 
 
 \subsection{.plo-Datei}
-\subsection{.res-Datei}
+In der Plotterdatei wird definiert, welche Signale aufgenommen werden sollen. Dies kann auch komplett über ein grafisches Menü geschehen, was wesentlich komfortabler ist als die reine Texteingabe.
+
+%\subsection{.res-Datei}
 
 \subsection{Dateistruktur}
 \subsection{Eingabedaten}
@@ -384,7 +402,7 @@ Bis zu einer Leitungslänge von ca. 150km (el. Energieversorgung S. 216) liefert
 	\end{figure}
 
 \subsubsection{T-Ersatzschaltbild}
-Das $\pi$-Ersatzschaltbild hat bei dynamischen Betrachtungen den Nachteil, dass sich an seinen Enden Kapazitäten befinden, die im Kurzschlussfall zusammen mit der Induktivität einen nur schwach gedämpften Schwingkreis bilden. Dies führt bei der grafischen Darstellung zu \glqq Spikes\grqq{}, die in der Realität nicht vorkommen. Tritt dieser Fall auf, so liefert das T-Ersatzschaltbild realistischere Ergebnisse (Netomac-Hilfe).
+Das $\pi$-Ersatzschaltbild hat bei dynamischen Betrachtungen den Nachteil, dass sich an seinen Enden Kapazitäten befinden, die im Kurzschlussfall zusammen mit der Induktivität einen nur schwach gedämpften Schwingkreis bilden. Dies führt bei der grafischen Darstellung zu \glqq Spikes\grqq{}, die in der Realität nicht vorkommen. Tritt dieser Fall auf, so liefert das T-Ersatzschaltbild realistischere Ergebnisse (Netomac-Hilfe). Sichtbar wird dies bei einem Vergleich der Abbildungen \ref{u-pi} und \ref{u-t}. Diese zeigen den Spannungsverlauf bei einem dreipoligen Kurzschluss auf der Leitung L67 an der Sammelschiene SS6. Wie zu erkennen, sind die \glqq Spikes\grqq{} beim T-Ersatzschaltbild wesentlich kleiner.
 
 	\begin{figure}[H]
 	\centering
@@ -392,12 +410,27 @@ Das $\pi$-Ersatzschaltbild hat bei dynamischen Betrachtungen den Nachteil, dass 
 	\caption{T-Ersatzschaltbild Leitung}
 	\label{t-esb}
 	\end{figure}
+	
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{img/u-pi.png}
+	\caption{Spannung an SS6 mit PI-ESB}
+	\label{u-pi}
+	\end{figure}
+	
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{img/u-t.png}
+	\caption{Spannung an SS6 mit T-ESB}
+	\label{u-t}
+	\end{figure}
 
 \subsection{Festlegen der Störkriterien}
 \subsection{Grafische Auswertung}
 
 \section{Prüfgerät Kocos Artes}
 \subsection{COMTRADE}
+Das COMTRADE-Datenformat ist ein Standard zum Aufzeichnen von transienten Signalen, beispielsweise von Störungen in elektrischen Netzen. Diese können dann mit gängigen Programmen grafisch dargestellt und weiterverarbeitet werden. Eine Anwendungsmöglichkeit ist die Fehleranalyse von Störungen, die durch ein Versagen des Schutzgerätes verursacht werden. Dazu wird mit einem Prüfgerät, z.B. mit einem Kocos Artes oder einer Omicron CMC, die COMTRADE-Datei der Störung \glqq abgespielt\grqq{} und die Spannungen und Ströme auf das vermeintlich defekte Schutzgerät gegeben. So lassen sich die Auslösekennlinien im Labor mit echten Daten überprüfen.
 
 \section{Überarbeitung Laborunterlagen}
 \section{Zusammenfassung}
