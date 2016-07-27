@@ -42,7 +42,17 @@
 	\newpage
 	\listoffigures
 	\listoftables
+	
+	\newpage
 	\section*{Abkürzungsverzeichnis}
+	\begin{tabular}{lll}
+	ASCII & & American Standard Code for Information Interchange \\ \\
+	COMTRADE & & Common format for Transient Data Exchange for power systems \\ \\
+	NOSPE & & \\ \\
+	RESPE & & \\ \\
+	VDE & & \\ \\
+	
+	\end{tabular}
 	
 	\newpage
 	\setcounter{page}{1}
@@ -275,7 +285,7 @@ Der Polradwinkel eines Generators hat einen entscheidenden Einfluss auf die Stab
 
 Die transiente Stabilität beschreibt das Verhalten des Netzes im Moment eines Fehlereintritts und danach.
 
-Treten in einem Netz Fehler auf, so ändern sich die Lastflussverhältnisse und somit auch die abgegebene Leistung der Generatoren. Ein Spannungseinbruch, beispielsweise als Folge eines Kurzschlusses, führt zu einem schlagartigen Abfall der Last an einem Generator. Da die elektrische Energie nun nicht mehr ins Netz abgeführt werden kann, an der Welle aber immer noch mechanische Energie zugeführt wird, wird diese mechanische Energie in Rotationsenergie umgewandelt (???). Der Generator beschleunigt. Durch die Beschleunigung des Generators vergrößert sich der Polradwinkel. Wird dieser zu groß und überschreitet die Stabilitätsgrenze (wo liegt die?), gerät der Generator \glqq außer Tritt\grqq, wodurch es zu Schäden kommen kann. Diese liegt bei einem Polradwinkel von $\upsilon = 90\degree$ und markiert das Kippmoment $M_k$ der Maschine (S 187 el. Energieversorgung). Umso länger der Fehler andauert und umso näher der Fehler in der Nähe eines Genertors liegt, desto weniger Energie können die Generatoren ins Netz abführen. Die Wahrscheinlichkeit, dass ein Generator \glqq durchtritt\grqq, steigt also mit der Kurzschlussdauer an. Generatornahe Fehler müssen daher besonders schnell abgeschaltet werden. Durch ein schnelles erhöhen der Generatorspannung kann erreicht werden, dass im Fehlerfall mehr Wirkleistung abgeführt werden kann. Kleinere Spannungsänderungen im Netz führen, wie bereits beschrieben, zu Leistungsänderungen an den Generatoren. Diese führen in der Regel nicht zu Instabilitäten, allerdings pendelt nun das Polrad mit einer niedrigen Frequenz von bis zu 2 Hz. Diese Leistungspendelungen sind auch im Netz beobachtbar, vor allem zwischen schwach gekoppelten Netzen (Wide Area Monitoring System UCTE). Sichtbar gemacht werden diese mit Wide Area Monitoring Systems.
+Treten in einem Netz Fehler auf, so ändern sich die Lastflussverhältnisse und somit auch die abgegebene Leistung der Generatoren. Ein Spannungseinbruch, beispielsweise als Folge eines Kurzschlusses, führt zu einem schlagartigen Abfall der Last an einem Generator. Da die elektrische Energie nun nicht mehr ins Netz abgeführt werden kann, an der Welle aber immer noch mechanische Energie zugeführt wird, wird diese mechanische Energie in Form von Rotationsenergie gespeichert, der Generator beschleunigt. Durch die Beschleunigung des Generators vergrößert sich der Polradwinkel. Wird dieser zu groß und überschreitet die Stabilitätsgrenze (wo liegt die?), gerät der Generator \glqq außer Tritt\grqq, wodurch es zu Schäden kommen kann. Diese liegt bei einem Polradwinkel von $\upsilon = 90\degree$ und markiert das Kippmoment $M_k$ der Maschine (S 187 el. Energieversorgung). Umso länger der Fehler andauert und umso näher der Fehler in der Nähe eines Genertors liegt, desto weniger Energie können die Generatoren ins Netz abführen. Die Wahrscheinlichkeit, dass ein Generator \glqq durchtritt\grqq, steigt also mit der Kurzschlussdauer an. Generatornahe Fehler müssen daher besonders schnell abgeschaltet werden. Durch ein schnelles erhöhen der Generatorspannung kann erreicht werden, dass im Fehlerfall mehr Wirkleistung abgeführt werden kann. Kleinere Spannungsänderungen im Netz führen, wie bereits beschrieben, zu Leistungsänderungen an den Generatoren. Diese führen in der Regel nicht zu Instabilitäten, allerdings pendelt nun das Polrad mit einer niedrigen Frequenz von bis zu 2 Hz. Diese Leistungspendelungen sind auch im Netz beobachtbar, vor allem zwischen schwach gekoppelten Netzen (Wide Area Monitoring System UCTE). Sichtbar gemacht werden diese mit Wide Area Monitoring Systems.
 
 Die Stabilität eines Drehstromnetzes ist ein wesentliches Kriterium zur Versorgungssicherheit.
 
@@ -389,7 +399,7 @@ Die Dynamikberechnungen bilden die mit Abstand größte Funktionsvielfalt in NET
 Bei einfachen Kurzschlussstromberechnungen wird bei elektrischen Leitungen der Querzweig vernachlässigt und nur der Längszweig mit Induktivitäten und Resistanzen betrachtet. Dies führt bei der Auslegung von Betriebsmitteln zu hinreichend genauen Ergebnissen. Werden nun aber dynamische Vorgänge betrachtet, lassen sich die Querzweige nicht mehr vernachlässigen und müssen in die Betrachtungen mit einfließen.
 
 \subsubsection{Vollständiges Ersatzschaltbild}
-
+Das vollständige Ersatzschaltbild einer Leitung besteht aus v
 
 \subsubsection{$\pi$-Ersatzschaltbild}
 Bis zu einer Leitungslänge von ca. 150km (el. Energieversorgung S. 216) liefert das $\pi$-Ersatzschaltbild ein realistisches Übertragungsverhalten. Bei längeren Leitungen müssen mehrere Pi-Glieder hintereinander geschaltet werden. Der Vorteil am $\pi$-Ersatzschaltbild ist, dass es keine inneren Knoten besitzt und dadurch Rechnungen stark vereinfacht (Quelle?).
@@ -428,11 +438,78 @@ Das $\pi$-Ersatzschaltbild hat bei dynamischen Betrachtungen den Nachteil, dass 
 \subsection{Festlegen der Störkriterien}
 \subsection{Grafische Auswertung}
 
-\section{Prüfgerät Kocos Artes}
-\subsection{COMTRADE}
-Das COMTRADE-Datenformat ist ein Standard zum Aufzeichnen von transienten Signalen, beispielsweise von Störungen in elektrischen Netzen. Diese können dann mit gängigen Programmen grafisch dargestellt und weiterverarbeitet werden. Eine Anwendungsmöglichkeit ist die Fehleranalyse von Störungen, die durch ein Versagen des Schutzgerätes verursacht werden. Dazu wird mit einem Prüfgerät, z.B. mit einem Kocos Artes oder einer Omicron CMC, die COMTRADE-Datei der Störung \glqq abgespielt\grqq{} und die Spannungen und Ströme auf das vermeintlich defekte Schutzgerät gegeben. So lassen sich die Auslösekennlinien im Labor mit echten Daten überprüfen.
+
+\section{COMTRADE}
+Das COMTRADE-Datenformat ist ein Standard zum Aufzeichnen von transienten Signalen, beispielsweise von Störungen in elektrischen Netzen. Diese können dann mit gängigen Programmen grafisch dargestellt und weiterverarbeitet werden. Eine Anwendungsmöglichkeit ist die Fehleranalyse von Störungen, die durch ein Versagen des Schutzgerätes verursacht werden. Dazu wird mit einem Prüfgerät, z.B. mit einem Kocos Artes oder einer Omicron CMC, die COMTRADE-Datei der Störung \glqq abgespielt\grqq{} und die Spannungen und Ströme auf das vermeintlich defekte Schutzgerät gegeben. So lassen sich die Auslösekennlinien im Labor mit echten Daten überprüfen. \\ Es werden drei Dateien erzeugt:
+
+\begin{itemize}
+\item .cfg
+\item .dat
+\item .hdr
+\item .inf
+\end{itemize}
+
+\subsection{.cfg-Datei}
+In .cfg-Datei befindet sich die Konfiguration im ASCII-Format. Dort werden die aufgezeichneten Signale, deren Bezeichnungen und Einheiten definiert. Ein Zeitstempel verrät den Beginn der Aufzeichnung. Als letztes ist das Aufzeichnungsformat, BINARY oder ASCII, definiert. In der .dat-Datei befinden sich die eigentlichen Aufzeichnungsdaten. In der .hdr-Datei können zusätzliche Informationen gespeichert werden. Sie ist optional (Quelle?).
+
+\begin{figure}[H]
+\textit{COMTRADE file written by PSS®NETOMAC,1,1998 \\
+002,002A,000D \\
+1,SS6|U - L1|,,8,kV,0.0026687863,-87.4495010376,0.0000000000,0,065535,1.0,1.0,S \\
+2,L67|I - SS6 - L1,,,kA,0.0000130651,-0.4281093180,0.0000000000,0,065535,1.0,1.0,S \\
+50.0 \\
+1 \\
+10000.0000,10001 \\
+07/27/2016,12:09:43.869999 \\
+07/27/2016,12:09:43.869999 \\
+ASCII \\
+1.000000}
+\caption{Beispiel einer .cfg-Datei}
+\label{bsp-cfg}
+\end{figure}
+
+\subsection{.dat-Datei}
+In der .dat-Datei befinden sich die eigentlichen Daten der Aufzeichnung. Diese können entweder im ASCII-Format oder im Binärformat vorliegen, je nachdem wie dies in der .cfg-Datei definiert ist. \\
+Der Aufbau im ASCII-Format ist relativ simpel. Sofern die Samplerate für alle Kanäle gleich ist, enthält jede Zeile Werte für jeden Kanal. Diese sind durch Kommata getrennt. Der erste Spalte bezeichnet die fortlaufende Samplenummer, die zweite Spalte bezeichnet den Zeitpunkt. In den nachfolgenden Spalten stehen die Werte der analogen Kanäle. Wurden auch Statuskanäle aufgezeichnet, folgen diese nach den analogen Kanälen.
+
+\subsection{Erzeugen von COMTRADE-Dateien mit Sincal und NETOMAC}
+Die Ergebnisse von mit NETOMAC durchgeführten Dynamiksimulationen lassen sich in das COMTRADE-Format exportieren. Dazu wird unter Berechnen $\rightarrow$ Parameter... $\rightarrow$ Ausgabe die Einstellung \glqq COMTRADE Datei erzeugen\grqq{} aktiviert. Diese kann entweder Binär oder im ASCII-Format sein. In Sincal ist die entsprechende Funktion unter Berechnen $\rightarrow$ Parameter... $\rightarrow$ Dynamik zu finden. Bei der nächsten Simulation finden sich die COMTRADE-Dateien nun in einem Unterordner namens COMTRADE.
+
+Die von PSS Sincal erzeugten COMTRADE-Dateien haben leider das Problem, dass in diesen die Einheit des Stroms fehlt und diese in der .cfg Datei manuell ergänzt werden muss. Der Support teilte mit, dass der Grund dafür zu lange Signalbezeichnungen sind, die aus der kompletten Topologie von Sincal generiert werden. Daher müssen die .cfg-Dateien von Hand bearbeitet werden. Eine weitere Möglichkeit wäre, die Signalnamen in der von Sincal generierte .plo-Datei zu ändern und anschließend die Berechnung direkt in NETOMAC auszuführen, was aber deutlich aufwändiger ist.
+
+Ein weiteres Problem ist, dass das NETOMAC ein falsches Zeitstempelformat in der .cfg-Datei verwendet. Im Standard ist dd/mm/yyyy,hh:mm:ss.ssssss vorgesehen, NETOMAC verwendet jedoch mm/dd/yyyy,hh:mm:ss.ssssss. Dies führt bei der Weiterverarbeitung zu Problemen. Während Sigra die Datei akzeptiert und lediglich das Datum falsch angezeigt wird (07.12.2016 anstatt 26.07.2016), verweigert die Software Kocos Artes den Import der Datei und bricht mit einem Fehler ab.
+%Ein weiteres Problem ist, dass die Software von Kocos keine .cfg-Datei öffnen kann, in denen in der ersten Zeile der Parameter \glqq rec\_dev\_id\grqq{} verwendet wird. Dieser muss ebenfalls von Hand gelöscht werden. Die Software von Kocos hat auch Probleme, wenn die Daten im Binärformat vorliegen, daher sollten die COMTRADE-Daten im ASCII-Format erzeugt werden. Die Probleme zeigen sich in falsch dargestellten Signalen. woran dies liegt, konnte nicht geklärt werden.
+
+\subsection{Abspielen von COMTRADE-Dateien mit Prüfgerät Kocos Artes}
+
+
+\subsection{Script zum manuellen Anpassen der fehlerhaften COMTRADE-Datei}
+PSS Sincal bietet die Möglichkeit, Scripte zum Automatisieren von Aufgaben einzubinden. Als Scriptsprachen stehen VBScript und Python zur Verfügung.
 
 \section{Überarbeitung Laborunterlagen}
+
+
+\subsection{Derzeitige Aufgabenstellung}
+Zunächst wird eine dreipolige Kurzschlussstromberechnung durchgeführt
+
+Der Hochlastfall wird dadurch dargestellt, dass die Generatorspannung von G1 auf 105\% bzw. 1,05 p.u. erhöht wird, die Erzeugung der beiden Generatoren beträgt 90\% der Nennleistung mit einem $cos \varphi $ von 0,9. Im Tieflastfall wird G2 vom Netz getrennt, die Spannung von G1 beträgt 100\% bei einer Auslastung von 100\%. \\
+An folgenden Punkten sollen dreipolige Kurzschlüsse berechnet werden:
+\begin{itemize}
+\item Hochlastfall Kurzschluss L16 1km Fehlerort A
+\item Hochlastfall Kurzschluss L16 49km Fehlerort B
+\item Hochlastfall Kurzschluss L67 19km Fehlerort C
+\item Hochlastfall Kurzschluss L25 29km Fehlerort D
+\item Hochlastfall Kurzschluss L23 44km Fehlerort E
+\item Tieflastfall Kurzschluss L23 44km Fehlerort E
+\item Tieflastfall Kurzschluss L16 1km Fehlerort A
+\end{itemize}
+
+
+
+
+\subsection{Zukünftige Aufgabenstellung}
+Die zukünftige Aufgabenstellung orientiert sich stark \\
+- Leitung auftrennen, Fehler an \glqq Fehlersammelschiene\grqq
 \section{Zusammenfassung}
 
 \newpage
