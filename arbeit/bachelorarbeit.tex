@@ -12,6 +12,7 @@
 \usepackage{lscape}
 \usepackage[onehalfspacing]{setspace}
 \usepackage{helvet}
+\usepackage{tocloft}
 \renewcommand{\familydefault}{\sfdefault}
 
 \title{Simulation dynamischer Vorgänge im elektrischen Netz mit PSS Sincal und PSS Netomac}
@@ -41,10 +42,17 @@
 	\tableofcontents
 	\newpage
 	\listoffigures
+	\phantomsection
+	\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+	
 	\listoftables
+	\phantomsection
+	\addcontentsline{toc}{section}{Tabellenverzeichnis}
 	
 	\newpage
 	\section*{Abkürzungsverzeichnis}
+	\phantomsection
+	\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
 	\begin{tabular}{lll}
 	ASCII & & American Standard Code for Information Interchange \\ \\
 	COMTRADE & & Common format for Transient Data Exchange for power systems \\ \\
@@ -440,7 +448,7 @@ Das $\pi$-Ersatzschaltbild hat bei dynamischen Betrachtungen den Nachteil, dass 
 
 
 \section{COMTRADE}
-Das COMTRADE-Datenformat ist ein Standard zum Aufzeichnen von transienten Signalen, beispielsweise von Störungen in elektrischen Netzen. Diese können dann mit gängigen Programmen grafisch dargestellt und weiterverarbeitet werden. Eine Anwendungsmöglichkeit ist die Fehleranalyse von Störungen, die durch ein Versagen des Schutzgerätes verursacht werden. Dazu wird mit einem Prüfgerät, z.B. mit einem Kocos Artes oder einer Omicron CMC, die COMTRADE-Datei der Störung \glqq abgespielt\grqq{} und die Spannungen und Ströme auf das vermeintlich defekte Schutzgerät gegeben. So lassen sich die Auslösekennlinien im Labor mit echten Daten überprüfen. \\ Es werden drei Dateien erzeugt:
+Das COMTRADE-Datenformat ist ein Standard zum Aufzeichnen von transienten Signalen, beispielsweise von Störungen in elektrischen Netzen. Diese können dann mit gängigen Programmen grafisch dargestellt und weiterverarbeitet werden. Eine Anwendungsmöglichkeit ist die Fehleranalyse von Störungen, die durch ein Versagen des Schutzgerätes verursacht werden. Dazu wird mit einem Prüfgerät, z.B. mit einem Kocos Artes oder einer Omicron CMC, die COMTRADE-Datei der Störung \glqq abgespielt\grqq{} und die Spannungen und Ströme auf das vermeintlich defekte Schutzgerät gegeben. So lassen sich die Auslösekennlinien im Labor mit echten Daten überprüfen. \\ Zu einem COMTRADE-Datensatz gehören folgende Dateien:
 
 \begin{itemize}
 \item .cfg
@@ -448,9 +456,14 @@ Das COMTRADE-Datenformat ist ein Standard zum Aufzeichnen von transienten Signal
 \item .hdr
 \item .inf
 \end{itemize}
+Benötigt werden davon laut dem Standard von 1991 die Dateien mit den Endungen .cfg, .dat und .hdr. Im neuen Standard ist die .hdr-Datei optional, genauso wie die .inf-Datei, die erst mit dem neuen Standard eingeführt wurde. Um die zusammengehörenden Dateien eines Datensatzes zu erkennen, muss der Dateiname gleich sein. Zur Datei NETWORK.CFG gehören also NETWORK.DAT, NETWORK.HDR und NETWORK.INF.
+
+In .cfg-Datei befindet sich die Konfiguration im ASCII-Format. Dort werden die aufgezeichneten Signale, deren Bezeichnungen und Einheiten definiert. Ein Zeitstempel verrät (???) den Beginn der Aufzeichnung. In der .dat-Datei befinden sich die eigentlichen Aufzeichnungsdaten. Diese können entweder im ASCII-Format oder im Binärformat vorliegen. In der .hdr-Datei können zusätzliche Informationen gespeichert werden. Sie ist optional (Quelle?). .inf
 
 \subsection{.cfg-Datei}
-In .cfg-Datei befindet sich die Konfiguration im ASCII-Format. Dort werden die aufgezeichneten Signale, deren Bezeichnungen und Einheiten definiert. Ein Zeitstempel verrät den Beginn der Aufzeichnung. Als letztes ist das Aufzeichnungsformat, BINARY oder ASCII, definiert. In der .dat-Datei befinden sich die eigentlichen Aufzeichnungsdaten. In der .hdr-Datei können zusätzliche Informationen gespeichert werden. Sie ist optional (Quelle?).
+(Bezug auf neues Format) \\
+Die Angaben in der .cfg-Datei sind aufgeteilt in \glqq kritisch\grqq{} und \glqq nicht kritisch\grqq. \glqq Kritisch\grqq{} bedeutet, dass eine Angabe vorhanden sein muss, \glqq nicht kritisch\grqq{} bedeutet, dass die Angabe optional ist. Sämtliche Parameter werden durch Kommata getrennt. Die Parameter müssen in der richtigen Reihenfolge angegeben werden und es dürfen auch keine Zeilen vertauscht werden. \\
+In der ersten Zeile befindet sich der Stationsname des Umspannwerks von dem die Aufzeichnung stammt. Der zweite Parameter, die rec\_dev\_id ist die Bezeichnung des aufzeichnenden Gerätes im Umspannwerk, damit identifiziert werden kann, um welchen Leitungsabgang es sich handelt. Der dritte Parameter ist Version des COMTRADE-Standards, der verwendet wird. Fehlt dieser Parameter, wird dies automatisch als Standard von 1991 interpretiert. In der zweiten Zeile gibt die erste Zahl die Gesamtanzahl der Kanäle an. Anschließend werden die Anzahl der analogen Signale und die Anzahl der binären Signale (Statussignale) angegeben. Im Beispiel in Abbildung \ref{bsp-cfg} sind dies zwei analoge Signale. Anschließend folgt für jedes Signal eine Zeile mit Parametern, in denen unter anderem der Signalname, Messeinheit und Messwandlerwerte angegeben sind. Nachdem alle analogen Kanäle definiert sind, folgen die Statuskanäle, die in dem Beispiel in Abbilduing \ref{bsp-cfg} fehlen. In Statuskanälen können binäre Signale dargestellt werden, beispielsweise die Auslösung eines Schutzrelais. Als nächstes wird die Nominalfrequenz, in der Regel also 50Hz, festgelegt. Die Definition der Samplingrate besteht aus mindestens zwei Zeilen. In der ersten Zeile wird die Anzahl der verschiedenen eingesetzten Samplingraten angegeben, anschließend folgen in den anderen Zeilen die Samplingrate in Hertz und als zweiter Parameter die Nummer des letzten Samples, die diese Samplerate benutzt. Die folgenden zwei Zeitstempel legen den Start- und Endpunkt der Aufzeichnung fest. Als letztes ist angegeben, in welchem Datenformat die Daten abgespeichert wurde. Die Angabe lautet entsprechend \glqq ASCII\grqq{} oder \glqq BINARY\grqq.
 
 \begin{figure}[H]
 \textit{COMTRADE file written by PSS®NETOMAC,1,1998 \\
@@ -460,8 +473,8 @@ In .cfg-Datei befindet sich die Konfiguration im ASCII-Format. Dort werden die a
 50.0 \\
 1 \\
 10000.0000,10001 \\
-07/27/2016,12:09:43.869999 \\
-07/27/2016,12:09:43.869999 \\
+29/07/2016,10:34:17.900000 \\
+29/07/2016,10:34:17.900000 \\
 ASCII \\
 1.000000}
 \caption{Beispiel einer .cfg-Datei}
@@ -470,30 +483,41 @@ ASCII \\
 
 \subsection{.dat-Datei}
 In der .dat-Datei befinden sich die eigentlichen Daten der Aufzeichnung. Diese können entweder im ASCII-Format oder im Binärformat vorliegen, je nachdem wie dies in der .cfg-Datei definiert ist. \\
-Der Aufbau im ASCII-Format ist relativ simpel. Sofern die Samplerate für alle Kanäle gleich ist, enthält jede Zeile Werte für jeden Kanal. Diese sind durch Kommata getrennt. Der erste Spalte bezeichnet die fortlaufende Samplenummer, die zweite Spalte bezeichnet den Zeitpunkt. In den nachfolgenden Spalten stehen die Werte der analogen Kanäle. Wurden auch Statuskanäle aufgezeichnet, folgen diese nach den analogen Kanälen.
+Der Aufbau im ASCII-Format ist relativ simpel. Sofern die Samplerate für alle Kanäle gleich ist, enthält jede Zeile Werte für jeden Kanal. Diese sind durch Kommata getrennt. Der erste Spalte bezeichnet die fortlaufende Samplenummer, die zweite Spalte bezeichnet den relativen Zeitpunkt. In den nachfolgenden Spalten stehen die Werte der analogen Kanäle. Wurden auch Statuskanäle aufgezeichnet, folgen diese nach den analogen Kanälen.
+
+\begin{figure}[H]
+\textit{0000000001,0000000000,065433,065282 \\
+0000000002,0000000100,065487,065387 \\
+0000000003,0000000200,065502,065454}
+\caption{Beispiel einer .dat-Datei mit zwei Signalen}
+\end{figure}
 
 \subsection{Erzeugen von COMTRADE-Dateien mit Sincal und NETOMAC}
 Die Ergebnisse von mit NETOMAC durchgeführten Dynamiksimulationen lassen sich in das COMTRADE-Format exportieren. Dazu wird unter Berechnen $\rightarrow$ Parameter... $\rightarrow$ Ausgabe die Einstellung \glqq COMTRADE Datei erzeugen\grqq{} aktiviert. Diese kann entweder Binär oder im ASCII-Format sein. In Sincal ist die entsprechende Funktion unter Berechnen $\rightarrow$ Parameter... $\rightarrow$ Dynamik zu finden. Bei der nächsten Simulation finden sich die COMTRADE-Dateien nun in einem Unterordner namens COMTRADE.
 
-Die von PSS Sincal erzeugten COMTRADE-Dateien haben leider das Problem, dass in diesen die Einheit des Stroms fehlt und diese in der .cfg Datei manuell ergänzt werden muss. Der Support teilte mit, dass der Grund dafür zu lange Signalbezeichnungen sind, die aus der kompletten Topologie von Sincal generiert werden. Daher müssen die .cfg-Dateien von Hand bearbeitet werden. Eine weitere Möglichkeit wäre, die Signalnamen in der von Sincal generierte .plo-Datei zu ändern und anschließend die Berechnung direkt in NETOMAC auszuführen, was aber deutlich aufwändiger ist.
+Die von PSS Sincal erzeugten COMTRADE-Dateien haben leider das Problem, dass in diesen Angaben zur Einheit des Stroms fehlen und diese in der .cfg Datei manuell ergänzt werden müssen. Der Support teilte mit, dass der Grund dafür zu lange Signalbezeichnungen sind, die aus der kompletten Topologie von Sincal generiert werden. Daher müssen die .cfg-Dateien von Hand bearbeitet werden. Eine weitere Möglichkeit wäre, die Signalnamen in der von Sincal generierte .plo-Datei zu ändern und anschließend die Berechnung direkt in NETOMAC auszuführen, was aber deutlich aufwändiger ist.
 
 Ein weiteres Problem ist, dass das NETOMAC ein falsches Zeitstempelformat in der .cfg-Datei verwendet. Im Standard ist dd/mm/yyyy,hh:mm:ss.ssssss vorgesehen, NETOMAC verwendet jedoch mm/dd/yyyy,hh:mm:ss.ssssss. Dies führt bei der Weiterverarbeitung zu Problemen. Während Sigra die Datei akzeptiert und lediglich das Datum falsch angezeigt wird (07.12.2016 anstatt 26.07.2016), verweigert die Software Kocos Artes den Import der Datei und bricht mit einem Fehler ab.
 %Ein weiteres Problem ist, dass die Software von Kocos keine .cfg-Datei öffnen kann, in denen in der ersten Zeile der Parameter \glqq rec\_dev\_id\grqq{} verwendet wird. Dieser muss ebenfalls von Hand gelöscht werden. Die Software von Kocos hat auch Probleme, wenn die Daten im Binärformat vorliegen, daher sollten die COMTRADE-Daten im ASCII-Format erzeugt werden. Die Probleme zeigen sich in falsch dargestellten Signalen. woran dies liegt, konnte nicht geklärt werden.
 
-\subsection{Abspielen von COMTRADE-Dateien mit Prüfgerät Kocos Artes}
-
-
 \subsection{Script zum manuellen Anpassen der fehlerhaften COMTRADE-Datei}
 PSS Sincal bietet die Möglichkeit, Scripte zum Automatisieren von Aufgaben einzubinden. Als Scriptsprachen stehen VBScript und Python zur Verfügung.
+
+Da der Support von Sincal und NETOMAC keine Lösung für diese Probleme anbieten konnte und eine Behebung dieser wahrscheinlich erst in späteren Versionen erfolgt, wurde mit VBScript ein Script geschrieben, dass die Einheit für den Strom ergänzt und das Datum korrigiert. Der Quellcode befindet sich auf der DVD und im Internet unter [Github-Link]. Das Script initialisiert als erstes das aktuell geöffnete Sincalprojekt, liest daraus den absoluten Pfad der Datenbankdatei und speichert diesen in einer Variablen. Als nächstes muss dieser absolute Pfad angepasst werden damit er auf die .cfg-Datei von NETOMAC zeigt. Dazu wird der immer gleichbleibende Datenbankdateiname im Pfad abgeschnitten und an diesen \glqq NETO\textbackslash COMTRADE\textbackslash NETWORK.CFG \grqq{} angehangen. Nun zeigt die Pfadvariable auf die von Sincal erzeugte .cfg-Datei. Diese wird nun eingelesen und anschließend gelöscht. Anschließend liest das Script aus der zweiten Zeile die Anzahl der Signale aus und überprüft nun in den nachfolgenden Signalzeilen, ob dort eine Einheit nach dem fünften Komma definiert ist. Ist das Zeichen nach dem fünften Komma ebenfalls ein Komma, so wird dazwischen die Einheit \glqq kA\grqq{} gesetzt. Sind alle Signalzeilen gesetzt, so sucht das Script nach einem \glqq /\grqq, welches als Formatierungszeichen für das Datum verwendet wird. Im Datum werden nun der Tag und der Monat vertauscht, dies geschieht in der nachfolgenden Zeile ein weiteres mal (Zeitstempel Anfang, Zeitstempel Ende). Als letztes wird nun der korrigierte Inhalt zurück in die NETWORK.CFG geschrieben. \\
+Über den Menüpunkt Extras $\rightarrow$ Optionen $\rightarrow$ Makros kann in Sincal das Verzeichnis konfiguriert werden, in dem sich die Scripte befinden. Anschließend kann dieses über Extras $\rightarrow$ Makro $\rightarrow$ Makros… bequem nach jeder Dynamiksimulation ausgeführt werden.
+
+\subsection{Abspielen von COMTRADE-Dateien mit Prüfgerät Kocos Artes}
+Nachdem die COMTRADE-Datei korrigiert wurde, kann diese nun mit der Software TRANSIG, die Teil der Prüfsoftware Kocos ARTES ist, geöffnet werden. In TRANSIG werden den Signalen anschließend Spannungs- und Stromausgänge zugewiesen und der in Sincal simulierte und aufgezeichnete Kurzschluss kann z.B. auf ein Schutzrelais ausgegeben werden. Mit einem integrierten Signaleditor lässt sich die COMTRADE-Datei in TRANSIG auch noch nachträglich bearbeiten. \\
+Es zeigte sich, dass TRANSIG Probleme mit COMTRADE-Daten im Binärformat hat. Signale werden verfälscht dargestellt, der Grund dafür ist nicht bekannt. Liegen die Daten im ASCII-Format vor, werden die Signale richtig dargestellt.
+
 
 \section{Überarbeitung Laborunterlagen}
 
 
 \subsection{Derzeitige Aufgabenstellung}
-Zunächst wird eine dreipolige Kurzschlussstromberechnung durchgeführt
+Zunächst wird eine dreipolige Kurzschlussstromberechnung an allen Knoten durchgeführt. Es soll dabei einmal der Hochlastfall und einmal der Tieflastfall betrachtet werden. Der Hochlastfall wird dadurch dargestellt, dass die Generatorspannung von G1 auf 105\% bzw. 1,05 p.u. erhöht wird, die Erzeugung der beiden Generatoren beträgt 90\% der Nennleistung mit einem $cos \varphi $ von 0,9. Im Tieflastfall wird G2 vom Netz getrennt, die Spannung von G1 beträgt 100\% bei einer Auslastung von 100\%. Dabei soll an den Knoten $S_k''$, $I_k''$, $I_a$ und $i_p$ aufgenommen werden. \\
+Anschließend sollen an insgesamt fünf verschiedenen Punkten Fehleruntersuchungen in verschiedenen Lastfällen durchgeführt werden. Hier soll nur $I_k''$ aufgenommen werden.
 
-Der Hochlastfall wird dadurch dargestellt, dass die Generatorspannung von G1 auf 105\% bzw. 1,05 p.u. erhöht wird, die Erzeugung der beiden Generatoren beträgt 90\% der Nennleistung mit einem $cos \varphi $ von 0,9. Im Tieflastfall wird G2 vom Netz getrennt, die Spannung von G1 beträgt 100\% bei einer Auslastung von 100\%. \\
-An folgenden Punkten sollen dreipolige Kurzschlüsse berechnet werden:
 \begin{itemize}
 \item Hochlastfall Kurzschluss L16 1km Fehlerort A
 \item Hochlastfall Kurzschluss L16 49km Fehlerort B
@@ -504,10 +528,12 @@ An folgenden Punkten sollen dreipolige Kurzschlüsse berechnet werden:
 \item Tieflastfall Kurzschluss L16 1km Fehlerort A
 \end{itemize}
 
-
+Nach dem selben Muster werden nun einpolige Erdkurzschlüsse berechnet. Zuerst erfolgt wieder eine gemeinsame Kurzschlussstromberechnung an allen Knoten, anschließend erfolgen die verschiedenen Fehleruntersuchungen.
 
 
 \subsection{Zukünftige Aufgabenstellung}
+An Stelle der Betrachtung der Effektivwerte soll nun in der neuen Aufgabenstellung die Betrachtung des dynamischen Verlaufs der Spannungen und Ströme im Vordergrund stehen. Dazu wird jeweils der Aufgabenteil mit den Fehleruntersuchungen angepasst. Um die Kurzschlussstromverläufe darzustellen, müssen in Sincal unter dem Punkt Daten $\rightarrow$ Dynamik $\rightarrow$ Plottdefinition… jeweils die aufzuzeichnenden Signale definiert werden. Dabei stellt sich die Frage, an welchen Punkten diese definiert werden, da eine Aufzeichnung des Stromes direkt an der Fehlerstelle nicht möglich ist. Wie in realen Netzen sitzen die Messpunkte jeweils in den Umspannwerken an der Sammelschiene, wodurch bei einem mehrseitig gespeisten Fehler immer nur ein Teilstrom erfasst werden kann.
+
 Die zukünftige Aufgabenstellung orientiert sich stark \\
 - Leitung auftrennen, Fehler an \glqq Fehlersammelschiene\grqq
 \section{Zusammenfassung}
