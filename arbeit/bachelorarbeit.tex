@@ -55,7 +55,9 @@
 	\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
 	\begin{tabular}{lll}
 	ASCII & & American Standard Code for Information Interchange \\ \\
+	AWE & & Automatische Wiedereinschaltung \\ \\
 	COMTRADE & & Common format for Transient Data Exchange for power systems \\ \\
+	KU & & Kurzunterbrechung \\ \\
 	NOSPE & & \\ \\
 	RESPE & & \\ \\
 	VDE & & \\ \\
@@ -113,44 +115,61 @@ Die nachfolgenden Abschnitte beziehen sich auf symmetrische dreipolige Kurzschl�
 Bei der Berechnung der Kurzschlussströme unterscheidet man zwischen verschiedenen Kurzschlussgrößen. Gemeinsam haben sie alle, dass sie aus dem Anfangskurzschlusswechselstrom $I_k''$ abgeleitet werden. Die folgenden Abschnitte beziehen sich auf den generatornahen symmetrischen dreipoligen Kurzschluss. Die Berechnung der Kurzschlussströme ist in VDE 0102 beschrieben.
 
 \subsubsection{Anfangskurzschlusswechselstrom}
-Der Anfangskurzschlusswechselstrom ist laut VDE 0102 der \glqq Effektivwert zum Zeitpunkt des Kurzschlussbeginns\grqq{} und wird wie folgt berechnet: \\
-$I_k'' = \frac{U_n}{\sqrt{3} \cdot X_d''} $ \\
+Der Anfangskurzschlusswechselstrom ist laut VDE 0102 der \glqq Effektivwert zum Zeitpunkt des Kurzschlussbeginns\grqq{} und wird wie folgt berechnet:
+
+\begin{equation}
+I_k'' = \frac{U_n}{\sqrt{3} \cdot X_d''}
+\end{equation}
+
 Dieser steht für den subtransienten Anteil des Kurzschlussstromes, der während der ersten Halbwellen auftritt.
 
 \subsubsection{Transienter Kurzschlusswechselstrom}
-Nach dem Abklingen des subtransienten Anteils fließt der transiente Anteil des Kurzschlussstromes. Seinen Effektivwert berechnet sich wie folgt: \\
-$I_k' = \frac{U_n}{\sqrt{3} \cdot X_d'}$
+Nach dem Abklingen des subtransienten Anteils fließt der transiente Anteil des Kurzschlussstromes. Seinen Effektivwert berechnet sich wie folgt:
+
+\begin{equation}
+I_k' = \frac{U_n}{\sqrt{3} \cdot X_d'}
+\end{equation}
 
 \subsubsection{Stoßkurzschlussstrom}
 Der Stoßkurzschlussstrom $I_p$ ist der Strom mit der höchsten Amplitude, der bei einem Kurzschluss auftritt. Dieser setzt sich aus einem Gleichstromglied und einem Wechselstromglied zusammen. Die Höhe des Stoßkurzschlussstromes hängt vom Einschaltwinkel $\psi$ und dem Netzimpedanzwinkel $\varphi_k$ ab. \\
 Mathematisch lässt sich der Stoßkurzschlussstrom aus folgender Gleichung herleiten: \\
 
-$i_{(t)} = \frac{\sqrt{2} \cdot E}{Z} \cdot sin(\omega \cdot t + \psi - \varphi) + I_g \cdot e^{-t/\tau}$ 
-mit $I_g = \frac{\sqrt{2} \cdot E}{Z} \cdot sin( \psi -  \varphi)$ und $\tau = \frac{L}{R}$ \\ \\
+\begin{equation}
+i_{(t)} = \frac{\sqrt{2} \cdot E}{Z} \cdot sin(\omega \cdot t + \psi - \varphi) + I_g \cdot e^{-t/\tau} 
+mit I_g = \frac{\sqrt{2} \cdot E}{Z} \cdot sin( \psi -  \varphi) und \tau = \frac{L}{R}
+\end{equation}
+
 (S.20 Kurzschlussstr. in Dreh…)\\
 Daraus wird ersichtlich, dass der zeitliche Verlauf aus einem Wechselstromanteil und einem abklingenden Gleichstromanteil besteht. Um jetzt den Spitzenwert zu finden, muss diese Gleichung nach der Zeit t abgeleitet werden. Danach wird $i = 0$ gesetzt und nach t umgestellt. Daraus erhält man den Zeitpunkt des Spitzenwertes, welcher bei einem Einschaltwinkel von $\psi = 0$ am größten ist. Der Zeitpunkt ist nicht exakt $\omega t = \pi/2 + \varphi$, der Unterschied ist aber so gering, dass er vernachlässigt werden kann. Mit diesen Angaben läst sich nun der Strom zum Zeitpunkt $\omega t = 2/\pi + \varphi$ berechnen, welcher dem Stoßkurzschlussstrom entspricht.\\
 In der Praxis wird ein Stroßfaktor $\kappa$ verwendet, was hinreichend genau ist und die Rechnung vereinfacht.
 Der Stoßkurzschlussstrom berechnet sich dann aus dem Spitzenwert des Anfangskurzschlusswechselstromes multipliziert mit dem Stoßfaktor. Dieser liegt zwischen 1,0 und 2,0 und hängt vom R/X-Verhältnis des Netzes ab. (der Kurzschluss... S. 246).
  % und ist beim Einschaltwinkel $\psi = 0$, also im Spannungsnulldurchgang, am größten (Der Kurz. S. 245).
  Da der Einschaltwinkel zufällig ist, muss bei der Planung immer der größte Stoßkurzschlussstrom berechnet werden, also $\psi = 0$. Dies ist in der Formel mit dem Stoßfaktor $\kappa$ bereits berücksichtigt: \\
- 
- $I_p = \kappa \cdot \sqrt{2} \cdot I_k''$ mit $\kappa = 1,02 + 0,98 \cdot e^{-3 \frac{R}{X}}$
+
+\begin{equation}
+I_p = \kappa \cdot \sqrt{2} \cdot I_k'' mit \kappa = 1,02 + 0,98 \cdot e^{-3 \frac{R}{X}}
+\end{equation}
 
 \subsubsection{Dauerkurzschlussstrom}
-Der Dauerkurzschlussstrom $I_k$ beschreibt den Effektivwert des Stromes, der nach dem Abklingen aller Ausgleichsvorgänge fließt. Beim generatornahen Kurzschluss ist dieser kleiner als der Anfangskurzschlusswechselstrom $I_k''$. Er berechnet sich wie folgt: \\
+Der Dauerkurzschlussstrom $I_k$ beschreibt den Effektivwert des Stromes, der nach dem Abklingen aller Ausgleichsvorgänge fließt. Beim generatornahen Kurzschluss ist dieser kleiner als der Anfangskurzschlusswechselstrom $I_k''$. Er berechnet sich wie folgt:
 
-$I_k = \frac{U_n}{\sqrt{3} \cdot X_d}$ \\
+\begin{equation}
+I_k = \frac{U_n}{\sqrt{3} \cdot X_d}
+\end{equation}
 
  Beim generatorfernen Kurzschluss ist $I_k = I_k''$. Die Ausgleichsvorgänge haben nur einen geringen Einfluss und werden vernachlässigt.
 
 \subsubsection{Ausschaltwechselstrom}
-Der Ausschaltwechselstrom $I_b$ beschreibt den Strom, der beim Ausschaltvorgang über einen Schalter fließt und bestimmt das Schaltvermögen. Da in der Regel die Ausgleichsvorgänge noch nicht abgeschlossen sind, fließen in die Berechnung von $I_b$ die Zeit und die  subtransiente und transiente Zeitkonstante mit ein: \\
+Der Ausschaltwechselstrom $I_b$ beschreibt den Strom, der beim Ausschaltvorgang über einen Schalter fließt und bestimmt das Schaltvermögen. Da in der Regel die Ausgleichsvorgänge noch nicht abgeschlossen sind, fließen in die Berechnung von $I_b$ die Zeit und die  subtransiente und transiente Zeitkonstante mit ein:
 
-$I_b = (I_k'' - I_k') \cdot e ^{-t/T_d''} +  (I_k' - I_k) \cdot e ^{-t/T_d'} + I_k$ \\
+\begin{equation}
+I_b = (I_k'' - I_k') \cdot e ^{-t/T_d''} +  (I_k' - I_k) \cdot e ^{-t/T_d'} + I_k
+\end{equation}
+In der Praxis wird auch hier vereinfacht. Statt aufwendig zu rechnen, wird der Anfangskurzschlusswechselstrom $I_k''$ mit einem Faktor $\mu$ multipliziert, der abhängig von der Zeit und vom Strom durch den Generator ist. Damit reduziert sich die Formel auf:
 
-In der Praxis wird auch hier vereinfacht. Statt aufwendig zu rechnen, wird der Anfangskurzschlusswechselstrom $I_k''$ mit einem Faktor $\mu$ multipliziert, der abhängig von der Zeit und vom Strom durch den Generator ist. Damit reduziert sich die Formel auf: \\
-
-$I_b =  \mu \cdot I_k''$ \\
+\begin{equation}
+I_b =  \mu \cdot I_k''
+\end{equation}
 
 Sind die benötigten Daten laut VDE 0102 Abs. 4.5.2.1 für den Faktor $\mu$ nicht bekannt, so beträgt dieser 1. Bei generatorfernen Kurzschlüssen ist $I_b = I_k''$.
 %Ia == alt Ib == neu
@@ -176,18 +195,24 @@ Der Verlauf eines Kurzschlussstromes kann aufgeteilt werden in einen Daueranteil
 
 Beim Eintritt des Kurzschlusses wird als erstes der subtransiente Anteil sichtbar. Er klingt bereits nach ein einigen Halbwellen exponentiell mit der Zeitkonstanten $T_d''$ ab und geht in den transienten Kurzschlussstrom über, welcher wesentlich langsamer abklingt. Überlagert wird der Kurzschlussstrom noch durch einen Gleichstromanteil. Dieser kommt dadurch zustande, dass durch die überwiegend induktive Kurzschlussreaktanz der Strom nicht \glqq springen\grqq{} kann. Aus diesem Grund wird ein Ausgleichsstrom $i_g$ erzwungen, welcher mit der Gleichstromzeitkonstanten $T_g$ abklingt. Die Höhe des Gleichstromgliedes ist abhängig vom Einschaltwinkel, also vom Einschaltzeitpunkt des Kurzschlusses, $\psi$ und ist bei $\psi = 0$ am größten.
 %\\- Gleichstromglied \\
+\begin{equation}
+i_k(t) = \sqrt{2} \cdot [(I_k'' - I_k') \cdot e^{-t/T_d''} + (I_k' - I_k) \cdot e^{-t/T_d'} + I_k] \cdot sin(\omega t + \psi - \varphi_k) + \sqrt{2} \cdot I_k'' \cdot e^{-t/T_g} \cdot sin( \varphi_k - \psi)  \\
+\end{equation}
 
-$i_k(t) = \sqrt{2} \cdot [(I_k'' - I_k') \cdot e^{-t/T_d''} + (I_k' - I_k) \cdot e^{-t/T_d'} + I_k] \cdot sin(\omega t + \psi - \varphi_k) + \sqrt{2} \cdot I_k'' \cdot e^{-t/T_g} \cdot sin( \varphi_k - \psi) $ \\
 
+Vernachlässigt man die Resistanzen, ersetzt die Ströme und setzt $\psi = 0$, so gelangt man zu folgender Formel für den zeitlichen Verlauf:
 
-Vernachlässigt man die Resistanzen, ersetzt die Ströme und setzt $\psi = 0$, so gelangt man zu folgender Formel für den zeitlichen Verlauf: \\ \\
-$i_k = \sqrt{2} \frac{U_n}{\sqrt{3}} [(\frac{1}{X_d''} - \frac{1}{X_d'}) e^{-t/T_d''} + (\frac{1}{X_d'} - \frac{1}{X_d}) e^{-t/T_d'} + \frac{1}{X_d}] \cdot cos(\omega t) + \sqrt{2} \frac{U_n}{\sqrt{3} X_d''} e^{-t/T_g}$ \\
+\begin{equation}
+i_k = \sqrt{2} \frac{U_n}{\sqrt{3}} [(\frac{1}{X_d''} - \frac{1}{X_d'}) e^{-t/T_d''} + (\frac{1}{X_d'} - \frac{1}{X_d}) e^{-t/T_d'} + \frac{1}{X_d}] \cdot cos(\omega t) + \sqrt{2} \frac{U_n}{\sqrt{3} X_d''} e^{-t/T_g}
+\end{equation}
 
 Aus dieser Formel werden die drei überlagerten Anteile des Kurzschlussstromes deutlich. Auf die einzelnen Reaktanzen und Zeitkonstanten wird später genauer eingegangen. \\
 
-Für den generatorfernen Kurzschluss gilt ähnliches. Da hier die Netzimpedanz allerdings einen wesentlich höheren Einfluss hat als beim generatorfernen Kurzschluss, kann noch weiter vereinfacht werden. Es wird $I_k'' = I_k' = I_k$ angenommen. Daraus ergibt sich nun folgende Formel: \\
+Für den generatorfernen Kurzschluss gilt ähnliches. Da hier die Netzimpedanz allerdings einen wesentlich höheren Einfluss hat als beim generatorfernen Kurzschluss, kann noch weiter vereinfacht werden. Es wird $I_k'' = I_k' = I_k$ angenommen. Daraus ergibt sich nun folgende Formel:
 
-$i_k(t) = \sqrt{2} \cdot I_k'' \cdot sin(\omega t + \psi - \varphi) + \sqrt{2} \cdot I_k'' \cdot e^{-t/T_g} \cdot sin(\varphi - \psi) $ \\
+\begin{equation}
+i_k(t) = \sqrt{2} \cdot I_k'' \cdot sin(\omega t + \psi - \varphi) + \sqrt{2} \cdot I_k'' \cdot e^{-t/T_g} \cdot sin(\varphi - \psi)
+\end{equation}
 
 An dem Verlauf, der in Abbildung \ref{kss-verlauf-fern} dargestellt ist, erkennt man, dass der Kurzschlussstrom, insbesondere der Gleichanteil, wesentlich schneller abklingt als der generatornahe Kurzschluss. Die Zeitkonstanten $T_d''$ und $T_d'$ entfallen, es bleibt nur die Gleichstromzeitkonstante $T_g$.
 
@@ -233,6 +258,18 @@ Zur Charakterisierung der Sternpunktbehandlung von elektrischen Netzen wird der 
 
 \subsection{Weitere Fehlerarten}
 Neben dem dreipoligen und einpoligen Kurzschluss gibt es, wie bereits erwähnt, weitere Kurzschlussarten. Diese Fehler sind sogenannte \glqq Querfehler\grqq{}. Analog dazu werden Fehler, die durch Unterbrechung eines oder mehrerer Leiter entstehen, als \glqq Längsfehler\grqq{} bezeichnet. (Quelle?)
+
+\subsection{Übergangswiderstand und Störlichtbogen}
+Die wenigsten Fehler in elektrischen Netzen sind sogenannte \glqq metallische Fehler\grqq, also Fehler ohne Übergangswiderstand. In Freileitungsnetzen entstehen die meisten Fehler durch Überschläge an Isolatoren, die beispielsweise durch Vogelnester oder Blitzeinschläge verursacht werden (Quelle?). Dadurch entsteht an der Fehlerstelle ein Störlichtbogen, dessen Impedanz nichtlinear ist. Diese ist stromabhängig und kann durch die Warrington-Formel beschrieben werden: \\
+
+\begin{equation}
+R_{LB} = \frac{28700 \cdot l_{LB}}{I_{LB}^{1,4}}
+\end{equation}
+Quelle: digitaler distsch. S.143
+
+\subsection{Automatische Wiedereinschaltung}
+Da der Großteil der Fehler in Freileitungsnetzen auf Störlichtbögen zurückzuführen sind, hat sich dort das Konzept der automatischen Wiedereinschaltung, auch Kurzunterbrechung genannt, durchgesetzt. Dabei wird nach Erkennung eines Fehlers die Leitung abgeschaltet und nach einigen hundert Millisekunden bis Sekunden diese wieder eingeschaltet. Im Großteil der Fehlerfälle erlöscht dadurch der Lichtbogen und der Fehler wird dadurch beseitigt. Die Leitung kann wieder normal betrieben werden und man spricht von einer \glqq AWE mit Erfolg\grqq. Tritt nach dem Wiedereinschalten erneut ein Kurzschluss auf, wird die Leitung endgültig abgeschaltet. Man spricht dann von einer \glqq AWE ohne Erfolg\grqq. (Quelle?) \\
+Grundsätzlich wird zwischen einer dreipoligen und einpoligen Kurzunterbrechung unterschieden, wobei diese sich durch ihre Unterbrechungsdauer deutlich unterscheiden. Vor allem in den USA wird die AWE dreipolig durchgeführt, in Europa dagegen überwiegend einpolig. Da bei einer einpoligen Kurzunterbrechung des fehlerbehafteten Leiters die fehlerfreien Leiter weiter Ströme und somit Energie in den Lichtbogen induzieren, muss diese länger sein als eine dreipolige Kurzunterbrechung.
 
 \subsection{Größen der Synchronmaschine}
 Wie bereits dargestellt, ist die Kurzschlussimpedanz nicht konstant. Die Ursache dafür ist vor allem das Verhalten der Synchronmaschine. Da in konventionellen Kraftwerken ausschließlich Synchrongeneratoren zum Einsatz kommen, bestimmen diese maßgeblich den Verlauf des Kurzschlussstromes. Daher wird im folgenden Abschnitt näher auf die Synchronmaschine und ihre Größen eingegangen.
@@ -312,6 +349,27 @@ Des weiteren verfügt die Fachhochschule über zwei EleKey2-Lizenzen, welche im 
 
 \subsection{Netz}
 Das Netz, welches im Praktikum verwendet wird, ist im Anhang in Abbildung \ref{praktikum-netz} abgebildet. Es ist ein starr geerdetes 110kV-Freileitungsnetz, welches vermascht ist. Als Einspeisequellen dienen zwei räumlich unterschiedlich angeordnete Synchrongeneratoren mit Leistungen von 100MVA und 80MVA, sowie das überlagerte 380kV-Netz. Die Netzdaten wurden von den Praktikumsunterlagen \glqq ENE 3 Kurzschlussstromberechnung in elektrischen Netzen\grqq{} übernommen. Die Dynamikdaten der Generatoren wurden aus den Praktikumsunterlagen der Otto-von-Guericke-Universität Magdeburg übernommen.
+
+\subsection{Berechnungsparameter}
+In dem Menü \glqq Berechnungsparameter\grqq{} lassen sich unter dem Reiter \glqq Dynamik\grqq{} verschiedene globale Parameter einstellen. So wird dort die Anfangs- und Endzeitpunkt der Berechnungen festgelegt, sowie die Größe des Zeitschritts. Bei kleineren Zeitschritten ist das Ergebnis zwar genauer, die Berechnungen dauern aber entsprechend länger. Außerdem kann angegeben werden, ob eine COMTRADE-Datei erzeugt werden soll, worauf später noch mehr eingegangen wird.
+
+\subsection{Fehleruntersuchungen}
+Soll an einer Leitung eine Fehleruntersuchung durchgeführt werden, so kann mit einem Rechtsklick unter dem Punkt Einfügen eine solche eingefügt werden. Es stehen sämtliche Fehlerszenarien zur Verfügung. Unter dem Punkt Dynamik können Fehlerbedingungen festgelegt werden, bei denen der Fehler ein- und ausgeschaltet werden soll. Diese können Zeit-, Strom oder Spannungsabhängig sein.
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{img/fehleruntersuchung-basis.png}
+	\includegraphics[scale=0.4]{img/fehleruntersuchung-dyn.png}
+	\caption{Eingabedaten Fehleruntersuchung}
+	\end{figure}
+
+Um einen Fehler realistisch darzustellen, muss anschließend die vom Fehler betroffene Leitung vom Netz getrennt werden. Dies geschieht über die Funktion \glqq Elementschaltzeiten\grqq. Dort können, ähnlich wie beim Punkt Fehleruntersuchung, Bedingungen vorgegeben werden, wann eine Leitungsverbindungen aufgetrennt werden soll. Da auch ein Zuschalten möglich ist, lässt sich dadurch auch eine AWE simulieren.
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{img/elementschaltzeiten.png}
+	\caption{Eingabedaten Elementschaltzeiten}
+	\end{figure}
 
 \section{Simulation mit NETOMAC}
 PSS NETOMAC ist eine leistungsfähige Software zur Untersuchung von dynamischen Vorgängen in elektrischen Netzen. Es wird von der Firma Siemens entwickelt und vertrieben.
@@ -532,10 +590,43 @@ Nach dem selben Muster werden nun einpolige Erdkurzschlüsse berechnet. Zuerst e
 
 
 \subsection{Zukünftige Aufgabenstellung}
-An Stelle der Betrachtung der Effektivwerte soll nun in der neuen Aufgabenstellung die Betrachtung des dynamischen Verlaufs der Spannungen und Ströme im Vordergrund stehen. Dazu wird jeweils der Aufgabenteil mit den Fehleruntersuchungen angepasst. Um die Kurzschlussstromverläufe darzustellen, müssen in Sincal unter dem Punkt Daten $\rightarrow$ Dynamik $\rightarrow$ Plottdefinition… jeweils die aufzuzeichnenden Signale definiert werden. Dabei stellt sich die Frage, an welchen Punkten diese definiert werden, da eine Aufzeichnung des Stromes direkt an der Fehlerstelle nicht möglich ist. Wie in realen Netzen sitzen die Messpunkte jeweils in den Umspannwerken an der Sammelschiene, wodurch bei einem mehrseitig gespeisten Fehler immer nur ein Teilstrom erfasst werden kann.
+An Stelle der Betrachtung der Effektivwerte soll nun in der neuen Aufgabenstellung die Betrachtung des dynamischen Verlaufs der Spannungen und Ströme im Vordergrund stehen. Dazu wird jeweils der Aufgabenteil mit den Fehleruntersuchungen angepasst. Der Aufgabenteil mit den Kurzschlussberechnungen an den Sammelschienen kann komplett übernommen werden.
+
+\subsubsection{Festlegen der Messpunkte/Plottdefinition}
+Um die Kurzschlussstromverläufe darzustellen, müssen in Sincal unter dem Punkt Daten $\rightarrow$ Dynamik $\rightarrow$ Plottdefinition… jeweils die aufzuzeichnenden Signale definiert werden. Dabei stellt sich die Frage, an welchen Punkten diese definiert werden, da eine Aufzeichnung des Stromes direkt an der Fehlerstelle nicht möglich ist. Wie in realen Netzen sitzen die Messpunkte jeweils in den Umspannwerken an der Sammelschiene, wodurch bei einem mehrseitig gespeisten Fehler immer nur ein Teilstrom erfasst werden kann. Dies ist, mit Ausnahme von der nur einseitig gespeisten Fehlerstelle C, immer der Fall. Die Messpunkte sollten daher so gewählt werden, dass man \glqq am meisten sieht\grqq:
+
+\begin{itemize}
+\item Fehlerstelle A: Spannung: SS1, Strom: SS1 nach L16
+\item Fehlerstelle B: Spannung: SS1, Strom: SS1 nach L16
+\item Fehlerstelle C: Spannung: SS6, Strom: SS6 nach L67
+\item Fehlerstelle D: Spannung: SS5, Strom: SS5 nach L25
+\item Fehlerstelle E: Spannung: SS3, Strom: SS3 nach L23
+\end{itemize}
+
+Die Messpunkte wurden zum einen so gewählt, dass diese möglichst nahe am Fehlerort liegen (Fehlerorte A, C, D und E) und zum anderen nahe an einem Generator liegen, damit der Abklingvorgang des Kurzschlussstromes sichtbar ist (Fehlerorte A und E). Der Messpunkt für den Fehlerort B wurde ebenfalls auf die Sammelschiene SS1 gelegt, um den Einfluss der Leitungsimpedanz zwischen Fehlerort A und B zu verdeutlichen.
+
+- sinnvolle Zeiteinstellungen
+
+\subsubsection{Fehlerbedingungen}
+Der Aufgabenteil \glqq Variation des Kurzschlussortes bei einem dreipoligen Fehler\grqq{} kann ebenfalls komplett übernommen werden. Mit der dynamischen Betrachtung der Kurzschlussströme lassen sich nun aber auch die anderen Untersuchungen aus den Praktikumsunterlagen aus Magdeburg durchführen. Diese beinhalten die Betrachtungen bei unterschiedlichen Fehlereinschaltzeiten, Kurzunterbrechungen und einpolige Fehler. Diese sind:
+
+\begin{itemize}
+\item Kurzschlusseintritt bei Spannungsmaximum
+\item Kurzschlusseintritt bei Spannungsnulldurchgang
+\item Kurzschlusseintritt bei U = 0.5 p.u.
+\item Kurzschlussabschaltung nach 120ms
+\item Kurzschlussabschaltung nach 120ms mit Kurzunterbrechung (100ms) (AWE mit Erfolg)
+\item Kurzunterbrechung nach 100ms ohne Kurzsschlussabschaltung (AWE ohne Erfolg)
+\item Erdkurzschluss AWE mit Erfolg
+\item Erdkurzschluss AWE ohne Erfolg
+\end{itemize}
+
+Alle Fehleruntersuchungen können mit Hilfe der Dynamikberechnungen von PSS Sincal durchgeführt werden. Allerdings sind in den Praktikumsunterlagen aus Magdeburg für diese Fehleruntersuchungen keine Fehlerorte gegeben. Der Einfachheit halber und besseren Vergleichbarkeit der Lösungen sollen diese nun für Bielefeld vorgegeben werden.
 
 Die zukünftige Aufgabenstellung orientiert sich stark \\
 - Leitung auftrennen, Fehler an \glqq Fehlersammelschiene\grqq
+
+
 \section{Zusammenfassung}
 
 \newpage
