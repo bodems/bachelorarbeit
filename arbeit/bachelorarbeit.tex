@@ -58,8 +58,8 @@
 	AWE & & Automatische Wiedereinschaltung \\ \\
 	COMTRADE & & Common format for Transient Data Exchange for power systems \\ \\
 	KU & & Kurzunterbrechung \\ \\
-	NOSPE & & \\ \\
-	RESPE & & \\ \\
+	NOSPE & & Niederohmige Sternpunkterdung\\ \\
+	RESPE & & Resonanzsternpunkterdung\\ \\
 	VDE & & \\ \\
 	
 	\end{tabular}
@@ -71,7 +71,7 @@
 
 \section{Einleitung}
 \subsection{Problemstellung}
-Der Bereich der elektrischen Energietechnik wurde in der Lehre an der Fachhochschule Bielefeld in den letzten Jahren vernachlässigt. So gibt es derzeit zu den meisten Modulen in diesem Bereich keine Laborpraktika, was die gesamte Thematik zur reinen Theorie ohne jeden Praxisbezug macht. Gerade eine Fachhochschule, die sich selbst praxisorientiert nennt, sollte hier mehr bieten. Im Modul \glqq Elektrische Netze\grqq{} im Studiengang Regenerative Energien wurden bereits erste Praktika eingeführt. So müssen die Studierenden im ersten Praktikum ein Netz mit Hilfe der Software PSS Sincal aufbauen, im zweiten an diesem Lastflussberechnungen durchführen und im dritten Kurzschlüsse in diesem berechnen. Sincal bietet allerdings keine Möglichkeiten zur Darstellung der dynamischen Vorgänge von Kurzschlüssen, was zum Verständnis der Vorgänge bei Kurzschlüssen allerdings unerlässlich ist. Daher wird derzeit die Betrachtung des dynamischen Verlaufs der Kurzschlussströme komplett weggelassen, was sich in Zukunft aber ändern soll.
+Der Bereich der elektrischen Netze wurde in der Lehre an der Fachhochschule Bielefeld in den letzten Jahren vernachlässigt. So gibt es derzeit zu den meisten Modulen in diesem Bereich keine Laborpraktika, was die gesamte Thematik zur reinen Theorie ohne jeden Praxisbezug macht. Gerade eine Fachhochschule, die sich selbst praxisorientiert nennt, sollte hier mehr bieten. Im Modul \glqq Elektrische Netze\grqq{} im Studiengang Regenerative Energien wurden bereits erste Praktika eingeführt. So müssen die Studierenden im ersten Praktikum ein Netz mit Hilfe der Software PSS Sincal aufbauen, im zweiten an diesem Lastflussberechnungen durchführen und im dritten Kurzschlüsse in diesem berechnen. Sincal bietet allerdings keine Möglichkeiten zur Darstellung der dynamischen Vorgänge von Kurzschlüssen, was zum Verständnis der Vorgänge bei Kurzschlüssen allerdings unerlässlich ist. Daher wird derzeit die Betrachtung des dynamischen Verlaufs der Kurzschlussströme komplett weggelassen, was sich in Zukunft aber ändern soll.
 
 \subsection{aktueller Stand}
 Vor dem breiten Einzug von Computern in die Lehre wurden Drehstromnetzmodelle eingesetzt, an denen das Verhalten von Netzen anschaulich dargestellt werden konnte. In diesen waren angetriebene Synchronmaschinen als Generator, Transformatoren, Leitungen und Lasten enthalten. Das Verhalten des Netzes konnte direkt mit einem Oszilloskop oder Leistungsmessern gemessen werden. Auch die FH Bielefeld besaß ein solches Modell, welches allerdings nicht mehr existiert.
@@ -96,7 +96,7 @@ Eine weitere interessante Möglichkeit zur Visualisierung von Kurzschlüssen ste
 
 
 \subsection{Fehlerarten in elektrischen Netzen}
-Als Fehler bezeichnet man eine Abweichung vom ungestörten Betriebszustand eines Netzes (Qualle?). Der bekannteste Fehler ist der Kurzschluss, bei dem mindestens zwei Potentialpunkte niederohmig miteinander verbunden sind und ein wesentlich größerer Strom als der Nennstrom fließt (KS bei PV?). Diese hohen Ströme verusachen einen Spannungseinbruch an der Fehlerstelle und, bei entsprechender Zeit, Beschädigungen an Betriebsmitteln. In Energieversorgungsnetzen entstehen Fehler meistens durch Bäume, bei Kabeln meistens durch Bauarbeiten (Quelle?). Gespeist werden diese Kurzschlussströme vor allem durch Synchrongeneratoren, in kleinerem Umfang auch durch Asynchrongeneratoren. Synchronmotoren können im ersten Moment wie Synchrongeneratoren betrachtet werden, das selbe gilt für Asynchrongeneratoren und Asynchronmaschinen. Kategorisiert werden können Kurzschlüsse einmal durch die Anzahl und die Verbindungen der am Kurzschluss beteiligten Pole und durch die elektrische Entfernung zu Generatoren. Bei ersteren unterscheidet man zwischen:
+Als Fehler bezeichnet man eine Abweichung vom ungestörten Betriebszustand eines Netzes (Qualle?). Der bekannteste Fehler ist der Kurzschluss, bei dem mindestens zwei Potentialpunkte niederohmig miteinander verbunden sind und ein wesentlich größerer Strom als der Nennstrom fließt. Diese hohen Ströme verusachen einen Spannungseinbruch an der Fehlerstelle und, bei entsprechender Zeit, Beschädigungen an Betriebsmitteln. In Freileitungsnetzen entstehen Fehler meistens durch Bäume und Blitzeinschläge, in Kabelnetzen meistens durch mechanische Beschädigungen, z.B. durch Bauarbeiten \cite[S. 57]{Pistora2013}. Gespeist werden diese Kurzschlussströme vor allem durch Synchrongeneratoren, in kleinerem Umfang auch durch Asynchrongeneratoren. Synchronmotoren können im ersten Moment wie Synchrongeneratoren betrachtet werden, das selbe gilt für Asynchrongeneratoren und Asynchronmaschinen. Kategorisiert werden können Kurzschlüsse einmal durch die Anzahl und die Verbindungen der am Kurzschluss beteiligten Pole und durch die elektrische Entfernung zu den speisenden Generatoren. Bei ersteren unterscheidet man zwischen:
 
 \begin{itemize}
 \item Dreipoliger Kurzschluss
@@ -106,13 +106,14 @@ Als Fehler bezeichnet man eine Abweichung vom ungestörten Betriebszustand eines
 \item Doppelerdschluss
 \end{itemize}
 
-Eine Besonderheit in Netzen der Mittel- und Hochspannung bis 110kV ist, dass diese oftmals gelöscht betrieben werden. Das heißt, dass einige Transformatorsternpunkte mit einer Erdschlusslöschspule geerdet sind, die parallel zur Leitungskapazität wirkt. Der Fehlerstrom eines einpoligen Fehlers wird durch die Kompensation wesentlich geringer, sodass die Chance steigt, dass sich der dazugehörige Lichtbogen von selbst löscht. Der Erdkurzschluss wird zu einem Erdschluss.
+Eine Besonderheit in Netzen der Mittel- und Hochspannung bis 110kV ist, dass diese oftmals gelöscht betrieben werden. Das heißt, dass einige Transformatorsternpunkte mit einer Erdschlusslöschspule geerdet sind, die parallel zur Leitungskapazität wirkt. Der Fehlerstrom eines einpoligen Fehlers wird durch die Kompensation wesentlich geringer, sodass die Chance steigt, dass sich der dazugehörige Lichtbogen von selbst löscht. Der Erdkurzschluss wird zu einem Erdschluss. (Quelle)
 
-Das zweite Unterscheidungsmerkmal ist, ob der Fehler \glqq generatornah\grqq{} oder \glqq generatorfern\grqq{} auftritt. Dazu werden die Teilkurzschlussströme der einzelnen Zweige betrachtet, zu denen die Generatoren beitragen. Übersteigt mindestens einer dieser Teilkurzschlussströme, die durch einen Generatoren fließen, den doppelt Wert des Nennstromes des Generators, so gilt der Kurzschluss als generatornah. Das Kriterium \glqq generatornah oder generatorfern\grqq{} ist also ein Merkmal für die Größe der Netzimpedanz zwischen Generatoren und Fehlerstelle. \\
-Die nachfolgenden Abschnitte beziehen sich auf symmetrische dreipolige Kurzschlüsse. Auf den einpoligen Fehler wird später eingegangen.
+Das zweite Unterscheidungsmerkmal ist, ob der Fehler \glqq generatornah\grqq{} oder \glqq generatorfern\grqq{} auftritt. Dazu werden die Teilkurzschlussströme der einzelnen Zweige betrachtet, zu denen die Generatoren beitragen. Übersteigt mindestens einer dieser Teilkurzschlussströme, die durch einen Generatoren fließen, den doppelt Wert des Nennstromes des Generators, so gilt der Kurzschluss als generatornah \cite[S. 56]{Schlabbach2003}. Das Kriterium \glqq generatornah oder generatorfern\grqq{} ist also ein Merkmal für die Größe der Netzimpedanz zwischen Generatoren und Fehlerstelle. \\
+%Die nachfolgenden Abschnitte beziehen sich auf symmetrische dreipolige Kurzschlüsse. Auf den einpoligen Fehler wird später eingegangen.
 
 \subsection{Dreipoliger Kurzschluss}
-Bei der Berechnung der Kurzschlussströme unterscheidet man zwischen verschiedenen Kurzschlussgrößen. Gemeinsam haben sie alle, dass sie aus dem Anfangskurzschlusswechselstrom $I_k''$ abgeleitet werden. Die folgenden Abschnitte beziehen sich auf den generatornahen symmetrischen dreipoligen Kurzschluss. Die Berechnung der Kurzschlussströme ist in VDE 0102 beschrieben.
+Bei der Berechnung der Kurzschlussströme unterscheidet man zwischen verschiedenen Kurzschlussgrößen. Gemeinsam haben sie alle, dass sie aus dem Anfangskurzschlusswechselstrom $I_k''$ abgeleitet werden. %Die folgenden Abschnitte beziehen sich auf den generatornahen symmetrischen dreipoligen Kurzschluss.
+Die Berechnung der Kurzschlussströme ist in VDE 0102 beschrieben.
 
 \subsubsection{Anfangskurzschlusswechselstrom}
 Der Anfangskurzschlusswechselstrom ist laut VDE 0102 der \glqq Effektivwert zum Zeitpunkt des Kurzschlussbeginns\grqq{} und wird wie folgt berechnet:
@@ -130,25 +131,31 @@ Nach dem Abklingen des subtransienten Anteils fließt der transiente Anteil des 
 I_k' = \frac{U_n}{\sqrt{3} \cdot X_d'}
 \end{equation}
 
+Diese Gleichung gilt für den generatornahen Kurzschluss. Für den generatorfernen Kurzschluss kann vereinfacht $I_k' = I_k''$ angenommen werden.
+
 \subsubsection{Stoßkurzschlussstrom}
-Der Stoßkurzschlussstrom $I_p$ ist der Strom mit der höchsten Amplitude, der bei einem Kurzschluss auftritt. Dieser setzt sich aus einem Gleichstromglied und einem Wechselstromglied zusammen. Die Höhe des Stoßkurzschlussstromes hängt vom Einschaltwinkel $\psi$ und dem Netzimpedanzwinkel $\varphi_k$ ab. \\
-Mathematisch lässt sich der Stoßkurzschlussstrom aus folgender Gleichung herleiten: \\
+Der Stoßkurzschlussstrom $i_p$ ist der Strom mit der höchsten Amplitude, der bei einem Kurzschluss auftritt. Dieser setzt sich aus einem Gleichstromglied und einem Wechselstromglied zusammen. Die Höhe des Stoßkurzschlussstromes hängt vom Einschaltwinkel $\psi$ und dem Netzimpedanzwinkel $\varphi_k$ ab. \\
+Mathematisch lässt sich der Stoßkurzschlussstrom aus der Gleichung des zeitlichen Verlaufs herleiten \cite[S. 20]{Roeper1964}: \\
 
 \begin{equation}
 i_{(t)} = \frac{\sqrt{2} \cdot E}{Z} \cdot sin(\omega \cdot t + \psi - \varphi) + I_g \cdot e^{-t/\tau} 
-mit I_g = \frac{\sqrt{2} \cdot E}{Z} \cdot sin( \psi -  \varphi) und \tau = \frac{L}{R}
+\hspace{2pt} mit \hspace{2pt} I_g = \frac{\sqrt{2} \cdot E}{Z} \cdot sin( \psi -  \varphi) \hspace{2pt} und \hspace{2pt} \tau = \frac{L}{R}
 \end{equation}
 
 (S.20 Kurzschlussstr. in Dreh…)\\
 Daraus wird ersichtlich, dass der zeitliche Verlauf aus einem Wechselstromanteil und einem abklingenden Gleichstromanteil besteht. Um jetzt den Spitzenwert zu finden, muss diese Gleichung nach der Zeit t abgeleitet werden. Danach wird $i = 0$ gesetzt und nach t umgestellt. Daraus erhält man den Zeitpunkt des Spitzenwertes, welcher bei einem Einschaltwinkel von $\psi = 0$ am größten ist. Der Zeitpunkt ist nicht exakt $\omega t = \pi/2 + \varphi$, der Unterschied ist aber so gering, dass er vernachlässigt werden kann. Mit diesen Angaben läst sich nun der Strom zum Zeitpunkt $\omega t = 2/\pi + \varphi$ berechnen, welcher dem Stoßkurzschlussstrom entspricht.\\
 In der Praxis wird ein Stroßfaktor $\kappa$ verwendet, was hinreichend genau ist und die Rechnung vereinfacht.
-Der Stoßkurzschlussstrom berechnet sich dann aus dem Spitzenwert des Anfangskurzschlusswechselstromes multipliziert mit dem Stoßfaktor. Dieser liegt zwischen 1,0 und 2,0 und hängt vom R/X-Verhältnis des Netzes ab. (der Kurzschluss... S. 246).
- % und ist beim Einschaltwinkel $\psi = 0$, also im Spannungsnulldurchgang, am größten (Der Kurz. S. 245).
- Da der Einschaltwinkel zufällig ist, muss bei der Planung immer der größte Stoßkurzschlussstrom berechnet werden, also $\psi = 0$. Dies ist in der Formel mit dem Stoßfaktor $\kappa$ bereits berücksichtigt: \\
+Der Stoßkurzschlussstrom berechnet sich dann aus dem Spitzenwert des Anfangskurzschlusswechselstromes multipliziert mit dem Stoßfaktor. Dieser liegt zwischen 1,0 und 2,0 und hängt vom R/X-Verhältnis des Netzes ab \cite[S. 246]{Funk1962}.
+% und ist beim Einschaltwinkel $\psi = 0$, also im Spannungsnulldurchgang, am größten (Der Kurz. S. 245).
+Da der Einschaltwinkel zufällig ist, muss bei der Planung immer der größte Stoßkurzschlussstrom berechnet werden, also $\psi = 0$. Dies ist in der Formel mit dem Stoßfaktor $\kappa$ bereits berücksichtigt: \\
 
 \begin{equation}
-I_p = \kappa \cdot \sqrt{2} \cdot I_k'' mit \kappa = 1,02 + 0,98 \cdot e^{-3 \frac{R}{X}}
+i_p = \kappa \cdot \sqrt{2} \cdot I_k'' \hspace{5pt} mit \hspace{2pt} \kappa = 1,02 + 0,98 \cdot e^{-3 \frac{R}{X}}
 \end{equation}
+
+Die Höhe des Stoßkurzschlussstromes legt die mechanische Beanspruchung einer Anlage fest, auf die diese ausgelegt werden muss. Außerdem bestimmt er das Einschaltvermögen der Leistungsschalter. \\
+
+- el. kraftwerke u. netze S. 521
 
 \subsubsection{Dauerkurzschlussstrom}
 Der Dauerkurzschlussstrom $I_k$ beschreibt den Effektivwert des Stromes, der nach dem Abklingen aller Ausgleichsvorgänge fließt. Beim generatornahen Kurzschluss ist dieser kleiner als der Anfangskurzschlusswechselstrom $I_k''$. Er berechnet sich wie folgt:
@@ -181,7 +188,7 @@ Sind die benötigten Daten laut VDE 0102 Abs. 4.5.2.1 für den Faktor $\mu$ nich
 %Ith \\
 
 \subsubsection{Spannungsfaktor c}
-Da bei der händischen Berechnung der Kurzschlussströme Leitungskapazitäten vernachlässigt werden und die Betriebsspannung in der Regel über der Nennspannung liegt, wird dort mit einem Spannungsfaktor c dies kompensiert. Bei Hoch- und Mittelspannungsnetzen beträgt er 1,1, in Niederspannungsnetzen 1,0.
+Da bei der händischen Berechnung der Kurzschlusswechselströme Leitungskapazitäten vernachlässigt werden und die Betriebsspannung in der Regel über der Nennspannung liegt, werden diese Faktoren mit einem Spannungsfaktor c kompensiert. Zur Berechnung der größten Kurzschlussströme beträgt er bei Hoch- und Mittelspannungsnetzen 1,1, in Niederspannungsnetzen 1,05. Sollen die kleinsten auftretenden Kurzschlussströme berechnet werden, beträgt c 1,0 in Hoch- und Mittelspannungsnetzen und 0,95 in Niederspannungsnetzen \cite[S. 537]{Oeding2011}.
 
 \subsubsection{Dynamischer Verlauf des Kurzschlussstroms}
 Der Verlauf eines Kurzschlussstromes kann aufgeteilt werden in einen Daueranteil, einen transienten Anteil und einen subtransienten Anteil. Diese ergeben überlagert den in Abbildung \ref{kss-verlauf-nah} dargestellten Verlauf.
@@ -189,11 +196,11 @@ Der Verlauf eines Kurzschlussstromes kann aufgeteilt werden in einen Daueranteil
 	\begin{figure}[H]
 	\centering
 	\includegraphics[scale=1.2]{img/kurzschlussstromverlauf-nah.jpg}
-	\caption{Verlauf des generatornahen Kurzschlussstroms (Quelle: el. Kraftw. und Netze)}
+	\caption{Verlauf des generatornahen Kurzschlussstroms \cite[S. 522]{Oeding2011}}
 	\label{kss-verlauf-nah}
 	\end{figure}
 
-Beim Eintritt des Kurzschlusses wird als erstes der subtransiente Anteil sichtbar. Er klingt bereits nach ein einigen Halbwellen exponentiell mit der Zeitkonstanten $T_d''$ ab und geht in den transienten Kurzschlussstrom über, welcher wesentlich langsamer abklingt. Überlagert wird der Kurzschlussstrom noch durch einen Gleichstromanteil. Dieser kommt dadurch zustande, dass durch die überwiegend induktive Kurzschlussreaktanz der Strom nicht \glqq springen\grqq{} kann. Aus diesem Grund wird ein Ausgleichsstrom $i_g$ erzwungen, welcher mit der Gleichstromzeitkonstanten $T_g$ abklingt. Die Höhe des Gleichstromgliedes ist abhängig vom Einschaltwinkel, also vom Einschaltzeitpunkt des Kurzschlusses, $\psi$ und ist bei $\psi = 0$ am größten.
+Beim Eintritt des generatornahen Kurzschlusses wird als erstes der subtransiente Anteil sichtbar. Er klingt bereits nach ein einigen Halbwellen exponentiell mit der Zeitkonstanten $T_d''$ ab und geht in den transienten Kurzschlussstrom über, welcher wesentlich langsamer abklingt. Überlagert wird der Kurzschlussstrom noch durch einen Gleichstromanteil. Dieser kommt dadurch zustande, dass durch die überwiegend induktive Kurzschlussreaktanz der Strom bei Kurzschlusseintritt nicht \glqq springen\grqq{} kann. Aus diesem Grund wird ein Ausgleichsstrom $i_g$ erzwungen, welcher mit der Gleichstromzeitkonstanten $T_g$ abklingt. Die Höhe des Gleichstromgliedes ist abhängig vom Einschaltwinkel, also vom Einschaltzeitpunkt des Kurzschlusses, $\psi$ und ist bei $\psi = 0$ am größten.
 %\\- Gleichstromglied \\
 \begin{equation}
 i_k(t) = \sqrt{2} \cdot [(I_k'' - I_k') \cdot e^{-t/T_d''} + (I_k' - I_k) \cdot e^{-t/T_d'} + I_k] \cdot sin(\omega t + \psi - \varphi_k) + \sqrt{2} \cdot I_k'' \cdot e^{-t/T_g} \cdot sin( \varphi_k - \psi)  \\
@@ -203,12 +210,12 @@ i_k(t) = \sqrt{2} \cdot [(I_k'' - I_k') \cdot e^{-t/T_d''} + (I_k' - I_k) \cdot 
 Vernachlässigt man die Resistanzen, ersetzt die Ströme und setzt $\psi = 0$, so gelangt man zu folgender Formel für den zeitlichen Verlauf:
 
 \begin{equation}
-i_k = \sqrt{2} \frac{U_n}{\sqrt{3}} [(\frac{1}{X_d''} - \frac{1}{X_d'}) e^{-t/T_d''} + (\frac{1}{X_d'} - \frac{1}{X_d}) e^{-t/T_d'} + \frac{1}{X_d}] \cdot cos(\omega t) + \sqrt{2} \frac{U_n}{\sqrt{3} X_d''} e^{-t/T_g}
+i_k(t) = \sqrt{2} \frac{U_n}{\sqrt{3}} [(\frac{1}{X_d''} - \frac{1}{X_d'}) e^{-t/T_d''} + (\frac{1}{X_d'} - \frac{1}{X_d}) e^{-t/T_d'} + \frac{1}{X_d}] \cdot cos(\omega t) + \sqrt{2} \frac{U_n}{\sqrt{3} X_d''} e^{-t/T_g}
 \end{equation}
 
 Aus dieser Formel werden die drei überlagerten Anteile des Kurzschlussstromes deutlich. Auf die einzelnen Reaktanzen und Zeitkonstanten wird später genauer eingegangen. \\
 
-Für den generatorfernen Kurzschluss gilt ähnliches. Da hier die Netzimpedanz allerdings einen wesentlich höheren Einfluss hat als beim generatorfernen Kurzschluss, kann noch weiter vereinfacht werden. Es wird $I_k'' = I_k' = I_k$ angenommen. Daraus ergibt sich nun folgende Formel:
+Für den generatorfernen Kurzschluss gilt ähnliches. Da hier die Netzimpedanz allerdings einen wesentlich höheren Einfluss hat als beim generatorfernen Kurzschluss, kann noch weiter vereinfacht werden. Es wird, wie bereits beschrieben, $I_k'' = I_k' = I_k$ angenommen. Daraus ergibt sich nun folgende Formel:
 
 \begin{equation}
 i_k(t) = \sqrt{2} \cdot I_k'' \cdot sin(\omega t + \psi - \varphi) + \sqrt{2} \cdot I_k'' \cdot e^{-t/T_g} \cdot sin(\varphi - \psi)
@@ -219,12 +226,12 @@ An dem Verlauf, der in Abbildung \ref{kss-verlauf-fern} dargestellt ist, erkennt
 	\begin{figure}[H]
 	\centering
 	\includegraphics[scale=1]{img/kurzschlussstromverlauf-fern.jpg}
-	\caption{Verlauf des generatorfernen Kurzschlussstroms (Quelle: el. Kraftw. und Netze)}
+	\caption{Verlauf des generatorfernen Kurzschlussstroms \cite[S. 522]{Oeding2011}}
 	\label{kss-verlauf-fern}
 	\end{figure}
 	
 \subsection{Einpoliger Kurzschluss}
-Einpolige Fehler mit Erdberührung sind die am häufigsten auftretenden Fehler in elektrischen Netzen (Quelle?). Sie entstehen beispielsweise durch herabfallende Äste oder durchhängende Vogelnester. Üblicherweise werden Netze bis 110kV kompensiert betrieben. Dabei wird der kapazitive Anteil des Stromes an der Fehlerstelle durch eine Petersenspule kompensiert, die zwischen dem Sternpunkt des Transformators und dem Erdreich angeschlossen wird. Kleinere Mittelspannungsnetze, beispielsweise in Industrieanlagen, werden auch mit isoliertem Sternpunkt betrieben. Netze mit höheren Spannungen werden starr geerdet. Man nennt dies \glqq Niederohmige Sternpunkterdung\grqq{} (NOSPE). Der Erdschlussstrom wird dann zu einem Erdkurzschlussstrom. Grundsätzlich wird unter folgenden Sternpunktbehandlungen unterschieden:
+Einpolige Fehler mit Erdberührung sind die am häufigsten auftretenden Fehler in elektrischen Netzen ab einer Nennspannung von 110kV \cite[S. 64]{Schlabbach2002}. Sie entstehen beispielsweise durch herabfallende Äste oder durchhängende Vogelnester. Üblicherweise werden Netze bis 110kV kompensiert betrieben. Dabei wird der kapazitive Anteil des Stromes an der Fehlerstelle durch eine Petersenspule kompensiert, die zwischen dem Sternpunkt des Transformators und dem Erdreich angeschlossen wird. Kleinere Mittelspannungsnetze, beispielsweise in Industrieanlagen, werden auch mit isoliertem Sternpunkt betrieben. Netze mit höheren Spannungen werden starr geerdet. Man nennt dies \glqq Niederohmige Sternpunkterdung\grqq{} (NOSPE). Der Erdschlussstrom wird dann zu einem Erdkurzschlussstrom. Grundsätzlich wird unter folgenden Sternpunktbehandlungen unterschieden:
 
 \begin{itemize}
 \item Niederohmige Sternpunkterdung (NOSPE): Abbildung \ref{sternpunktbehandlung}a
@@ -253,14 +260,14 @@ Da einpolige Fehler unsymmetrisch sind, müssen zur Berechnung symmetrische Komp
 	\end{figure}
 	
 \subsubsection{Spannungserhöhung und Erdfehlerfaktor}
-Zur Charakterisierung der Sternpunktbehandlung von elektrischen Netzen wird der Erdfehlerfaktor verwendet. Der Erdfehlerfaktor $\delta$ gibt dabei an, wie wirksam die Erdung ist. Eine Folge von einpoligen Fehlern ist die Erhöhung der Leiter-Erdspannung in den nicht fehlerbehafteten Leitern. Der Erdfehlerfaktor beschreibt dabei das Verhältnis zwischen der maximal auftretenden Leiter-Erdspannung $U_{LEmax}$ und der vor Fehlereintritt vorherrschenden Betriebsfrequenten Spannung $U^b$ geteilt durch $\sqrt{3}$. Ein Netz gilt dann als \glqq starr geerdet\grqq, wenn der Erdfehlerfaktor unter 1,4 bleibt. Gleichzeitig muss das Verhältnis von $X_0$ zu $X_1$ zwischen zwei und vier liegen (Sterpunktbehandlung S. 39). Bei der strombegrenzenden Sternpunkterdung ist die Nullimpedanz wesentlich größer, der Erdfehlerfaktor liegt zwischen 1,4 und $\sqrt{3}$.
+Zur Charakterisierung der Sternpunktbehandlung von elektrischen Netzen wird der Erdfehlerfaktor verwendet. Der Erdfehlerfaktor $\delta$ gibt dabei an, wie wirksam die Erdung der Sternpunkte ist. Eine Folge von einpoligen Fehlern ist die Erhöhung der Leiter-Erdspannung in den nicht fehlerbehafteten Leitern. Der Erdfehlerfaktor beschreibt dabei das Verhältnis zwischen der maximal auftretenden Leiter-Erdspannung $U_{LEmax}$ und der vor Fehlereintritt vorherrschenden Betriebsfrequenten Spannung $U^b$ geteilt durch $\sqrt{3}$. Ein Netz gilt dann als \glqq starr geerdet\grqq, wenn der Erdfehlerfaktor unter 1,4 bleibt. Gleichzeitig muss das Verhältnis von $X_0$ zu $X_1$ zwischen zwei und vier liegen (Sterpunktbehandlung S. 39). Bei der strombegrenzenden Sternpunkterdung ist die Nullimpedanz wesentlich größer, der Erdfehlerfaktor liegt zwischen 1,4 und $\sqrt{3}$ \cite[S. 33 ff]{Schlabbach2002}.
 % Das heißt, dass die Spannungsanhebung der fehlerfreien Leiter auf maximal das 1,4fache der vor Fehlereintritt auftretenden Spannung ansteigen darf. Dies wird vor allem bei Höchstspannungsnetzen angestrebt. Daraus lässt sich folgern, dass der Fehlerstrom umso höher ist, desto kleiner der Erdungswiderstand ist. Erhöht sich nun der Widerstand des Nullsystems, so lässt sich der Fehlerstrom verkleinern.
 
 \subsection{Weitere Fehlerarten}
 Neben dem dreipoligen und einpoligen Kurzschluss gibt es, wie bereits erwähnt, weitere Kurzschlussarten. Diese Fehler sind sogenannte \glqq Querfehler\grqq{}. Analog dazu werden Fehler, die durch Unterbrechung eines oder mehrerer Leiter entstehen, als \glqq Längsfehler\grqq{} bezeichnet. (Quelle?)
 
 \subsection{Übergangswiderstand und Störlichtbogen}
-Die wenigsten Fehler in elektrischen Netzen sind sogenannte \glqq metallische Fehler\grqq, also Fehler ohne Übergangswiderstand. In Freileitungsnetzen entstehen die meisten Fehler durch Überschläge an Isolatoren, die beispielsweise durch Vogelnester oder Blitzeinschläge verursacht werden (Quelle?). Dadurch entsteht an der Fehlerstelle ein Störlichtbogen, dessen Impedanz nichtlinear ist. Diese ist stromabhängig und kann durch die Warrington-Formel beschrieben werden: \\
+Die wenigsten Fehler in elektrischen Netzen sind sogenannte \glqq metallische Fehler\grqq, also Fehler ohne Übergangswiderstand. In Freileitungsnetzen entstehen die meisten Fehler durch Überschläge an Isolatoren, die beispielsweise durch Vogelnester oder Blitzeinschläge verursacht werden (Quelle?). Dadurch entsteht an der Fehlerstelle ein Störlichtbogen, dessen Impedanz nichtlinear ist. Diese ist stromabhängig und kann durch die Warrington-Formel beschrieben werden \cite[S. 163]{Ziegler2008}: \\
 
 \begin{equation}
 R_{LB} = \frac{28700 \cdot l_{LB}}{I_{LB}^{1,4}}
@@ -268,24 +275,27 @@ R_{LB} = \frac{28700 \cdot l_{LB}}{I_{LB}^{1,4}}
 Quelle: digitaler distsch. S.143
 
 \subsection{Automatische Wiedereinschaltung}
-Da der Großteil der Fehler in Freileitungsnetzen auf Störlichtbögen zurückzuführen sind, hat sich dort das Konzept der automatischen Wiedereinschaltung, auch Kurzunterbrechung genannt, durchgesetzt. Dabei wird nach Erkennung eines Fehlers die Leitung abgeschaltet und nach einigen hundert Millisekunden bis Sekunden diese wieder eingeschaltet. Im Großteil der Fehlerfälle erlöscht dadurch der Lichtbogen und der Fehler wird dadurch beseitigt. Die Leitung kann wieder normal betrieben werden und man spricht von einer \glqq AWE mit Erfolg\grqq. Tritt nach dem Wiedereinschalten erneut ein Kurzschluss auf, wird die Leitung endgültig abgeschaltet. Man spricht dann von einer \glqq AWE ohne Erfolg\grqq. (Quelle?) \\
-Grundsätzlich wird zwischen einer dreipoligen und einpoligen Kurzunterbrechung unterschieden, wobei diese sich durch ihre Unterbrechungsdauer deutlich unterscheiden. Vor allem in den USA wird die AWE dreipolig durchgeführt, in Europa dagegen überwiegend einpolig. Da bei einer einpoligen Kurzunterbrechung des fehlerbehafteten Leiters die fehlerfreien Leiter weiter Ströme und somit Energie in den Lichtbogen induzieren, muss diese länger sein als eine dreipolige Kurzunterbrechung.
+Da der Großteil der Fehler in Freileitungsnetzen auf Störlichtbögen zurückzuführen sind, hat sich dort das Konzept der automatischen Wiedereinschaltung, auch Kurzunterbrechung genannt, durchgesetzt. Dabei wird nach Erkennung eines Fehlers die Leitung abgeschaltet und nach einigen hundert Millisekunden bis Sekunden diese wieder eingeschaltet. Im Großteil der Fehlerfälle erlöscht dadurch der Lichtbogen und der Fehler wird dadurch beseitigt. Die Leitung kann wieder normal betrieben werden und man spricht von einer \glqq AWE mit Erfolg\grqq. Tritt nach dem Wiedereinschalten erneut ein Kurzschluss auf, wird die Leitung endgültig abgeschaltet. Man spricht dann von einer \glqq AWE ohne Erfolg\grqq. \\
+Grundsätzlich wird zwischen einer dreipoligen und einpoligen Kurzunterbrechung unterschieden, wobei diese sich durch ihre Unterbrechungsdauer deutlich unterscheiden. Vor allem in den USA wird die AWE bei allen Fehlerarten dreipolig durchgeführt, in Europa dagegen, außer bei selten auftretenden dreipoligen Fehlern, überwiegend einpolig. Da bei einer einpoligen Kurzunterbrechung des fehlerbehafteten Leiters die fehlerfreien Leiter weiter Ströme und somit Energie in den benachbarten Leiter induzieren, muss diese länger sein als eine dreipolige Kurzunterbrechung. In der Regel beträgt die Unterbrechungsdauer einer dreipoligen AWE im Bereich von 0,3 bis 0,5 Sekunden. Bei der einpoligen AWE beträgt diese dagegen ca. eine Sekunde\cite[S. 66]{Ziegler2008}. Bei Kabelfehlern wird grundsätzlich keine AWE durchgeführt, da Kabelfehler in der Regel nicht von selbst wieder verschwinden. Bei hybriden Leitungen, also Leitungen mit Freileitungs- und Kabelabschnitten, wie z.B. die sich im Bau befindliche 380kV-Leitung Wesel-Meppen, kann durch die Analyse der Störschriebe beurteilt werden, ob sich der Fehler auf einem Freileitungs- oder Kabelabschnitt befindet. Befindet sich der Fehler auf einem Kabelabschnitt, so wird die AWE blockiert, da diese keinen Erfolg haben würde \cite{hybrid-ltg}.
+
+
+- Kabel
 
 \subsection{Größen der Synchronmaschine}
 Wie bereits dargestellt, ist die Kurzschlussimpedanz nicht konstant. Die Ursache dafür ist vor allem das Verhalten der Synchronmaschine. Da in konventionellen Kraftwerken ausschließlich Synchrongeneratoren zum Einsatz kommen, bestimmen diese maßgeblich den Verlauf des Kurzschlussstromes. Daher wird im folgenden Abschnitt näher auf die Synchronmaschine und ihre Größen eingegangen.
 
 \subsubsection{Aufbau der Synchronmaschine}
-Eine Synchronmaschine besteht, wie eine Asynchronmaschine, aus einem Ständer und einem Läufer. Der Aufbau des Ständers ist analog zur Asynchronmaschine. Bei einer Polpaarzahl von Eins sind in einem räumlichen Abstand von 120\degree{} um den Läufer drei Wicklungen angeordnet. Bei höheren Polpaarzahlen entsprechend sechs, neun, usw. Beim Aufbau des Läufers wird zwischen Schenkelpol- und Vollpolläufern unterschieden. Kleine und langsam laufende Generatoren (Laufwasserkraftwerke) bis ca. 300MVA besitzen meist einen Schenkelpolläufer. In großen schnell drehenden Kraftwerksgeneratoren sind Vollpolläufer verbaut, da Schenkelpolläufer nicht die enormen Fliehkräfte aushalten können. 
-\\ (el. netze u. kraftwerke: S. 126 ff)
+Eine Synchronmaschine besteht, wie eine Asynchronmaschine, aus einem Ständer und einem Läufer. Der Aufbau des Ständers ist analog zur Asynchronmaschine. Bei einer Polpaarzahl von Eins sind in einem räumlichen Abstand von 120\degree{} um den Läufer drei Wicklungen angeordnet. Bei höheren Polpaarzahlen entsprechend sechs, neun, usw. Beim Aufbau des Läufers wird zwischen Schenkelpol- und Vollpolläufern unterschieden. Kleine und langsam laufende Generatoren (Laufwasserkraftwerke) besitzen meist einen Schenkelpolläufer. In großen schnell drehenden Kraftwerksgeneratoren sind Vollpolläufer verbaut, da Schenkelpolläufer nicht die enormen Fliehkräfte aushalten können \cite[S. 508 ff]{Binder2012}
+%\\ (el. netze u. kraftwerke: S. 126 ff)
 
 \subsubsection{d-q-Achse}
-Die Reaktanz einer Synchronmaschine setzt sich aus einem Anteil der Längsachse (d-Achse) und einem Anteil der Querachse (q-Achse) zusammen. Bei der Schenkelpolmaschine ist die magnetische Leitfähigkeit der d-Achse größer als die der q-Achse, was zur Folge hat, dass Xd größer ist als Xq. Die ideale Vollpolmaschine ist mathematisch gesehen ein Sonderfall der Schenkelpolmaschine, bei der Xd = Xq ist. Für eine einfache Kurzschlussstromberechnung sind die Reaktanzen der d-Achse ausreichend. Will man jedoch dynamische Vorgänge simulieren, so werden die Reaktanzen der q-Achse ebenfalls benötigt. \\
+Die Reaktanz einer Synchronmaschine setzt sich aus einem Anteil der Längsachse (d-Achse) und einem Anteil der Querachse (q-Achse) zusammen. Bei der Schenkelpolmaschine ist die magnetische Leitfähigkeit der d-Achse größer als die der q-Achse, was zur Folge hat, dass $X_d$ größer ist als $X_q$. Die ideale Vollpolmaschine ist mathematisch gesehen ein Sonderfall der Schenkelpolmaschine, bei der $X_d = X_q$ ist. Für eine einfache Kurzschlussstromberechnung sind die Reaktanzen der d-Achse ausreichend. Will man jedoch dynamische Vorgänge simulieren, so werden die Reaktanzen der q-Achse ebenfalls benötigt \cite[S. 184]{Heuck2007}. \\
 
 	\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.85]{img/schenkelpol.jpg}
 	\includegraphics[scale=0.85]{img/vollpol.jpg}
-	\caption{Querschnitt Schenkelpol- und Vollpolläufer (Quelle: el. Kraftw. und Netze)}
+	\caption{Querschnitt Schenkelpol- und Vollpolläufer \cite[S. 125]{Oeding2011} }
 	\end{figure}
 
 %	\begin{figure}[H]
@@ -301,26 +311,26 @@ Um ersten Moment eines Kurzschlusses ist die subtransiente Reaktanz $X_d''$ wirk
 
 $T_d'' = \frac{X_d'' + X_V}{X_d' + X_V} \cdot T_{d0}''$ \\
 
-Dabei ist $T_{d0}''$ die Subtransient-Leerlaufzeitkonstante und liegt bei etwa 50ms.
+Dabei ist $T_{d0}''$ die Subtransient-Leerlaufzeitkonstante und liegt bei etwa 50ms. $X_V$ steht für die Netzimpedanz. Je höher die Netzimpedanz, desto größer ist auch die subtransiente Zeitkonstante \cite[S. 41]{Roeper1964}.
 
 
 
 \subsubsection{Synchrone Reaktanz}
-Die synchronen Reaktanz $X_d$ gibt die wirksame Reaktanz während des stationären Betriebs an. Sie ist auch nach dem Abschluss aller Ausgleichvorgänge wirksam, daher kann mit ihr der Dauerkurzschlussstrom ermittelt werden. Die Reaktanz der q-Achse wird entsprechend mit $X_q$ bezeichnet.
+Die synchronen Reaktanz $X_d$ gibt die wirksame Reaktanz während des stationären Betriebs wieder. Sie ist auch nach dem Abschluss aller Ausgleichvorgänge wirksam, daher kann mit ihr der Dauerkurzschlussstrom ermittelt werden. Die Reaktanz der q-Achse wird entsprechend mit $X_q$ bezeichnet.
 
 \subsubsection{Transiente Reaktanz}
 Während des transienten Vorgangs, der wesentlich langsamer Abklingt als der subtransiente Vorgang, ist die transiente Reaktanz $X_d'$ wirksam.
 
 \subsubsection{Gegensystem}
-Die Gegenreaktanz der Synchronmaschine kann ungefähr aus dem Mittelwert von $x_d''$ und $x_q''$ bestimmt werden: \\ \\
+Die Gegenreaktanz der Synchronmaschine kann ungefähr aus dem Mittelwert von $x_d''$ und $x_q''$ bestimmt werden \cite[S. 165]{Funk1962} \\ \\
 $x_i = \frac{x_d'' + x_q''}{2}$
 
 \subsubsection{Nullsystem}
 Da Synchronmaschinen symmetrisch aufgebaut sind, ist das Nullsystem theoretisch nicht wirksam. In der Praxis tritt die Nullreaktanz allerdings mit einer Größe von \\
-$x_0 = \frac{1}{3} … \frac{1}{6} \cdot x_d'$ auf. Diese ist nur wirksam, wenn der Sternpunkt des Generators geerdet ist.
+$x_0 = \frac{1}{3} … \frac{1}{6} \cdot x_d'$ auf. Diese ist nur wirksam, wenn der Sternpunkt des Generators geerdet ist \cite[S. 166]{Funk1962}.
 
 \subsubsection{Polradwinkel}
-Der Polradwinkel, auch Lastwinkel genannt, gibt die Phasenverschiebung zwischen Polradspannung $U_p$ und Netzspannung an. Mechanisch gesehen ist er die mechanische Verschiebung des Polrads zwischen Leerlauf und Last. Jeder Leistung ist dabei ein Lastwinkel zugeordnet. Befindet sich die Maschine im Generatorbetrieb, eilt das Polrad vor und \glqq zieht\grqq{} das Netz mit. Arbeit die Maschine als Motor, eilt das Polrad nach und wird vom Netz \glqq mitgezogen\grqq.
+Der Polradwinkel, auch Lastwinkel genannt, gibt die Phasenverschiebung zwischen Polradspannung $U_p$ und Netzspannung an. Mechanisch gesehen ist er die mechanische Verschiebung des Polrads zwischen Leerlauf und Last. Jeder Leistung ist dabei ein Lastwinkel zugeordnet. Befindet sich die Maschine im Generatorbetrieb, eilt das Polrad vor und \glqq zieht\grqq{} das Netz mit. Arbeit die Maschine als Motor, eilt das Polrad nach und wird vom Netz \glqq mitgezogen\grqq \cite[S. 187]{Heuck2007}.
 
 
 \subsection{Stabilität}
@@ -330,7 +340,7 @@ Der Polradwinkel eines Generators hat einen entscheidenden Einfluss auf die Stab
 
 Die transiente Stabilität beschreibt das Verhalten des Netzes im Moment eines Fehlereintritts und danach.
 
-Treten in einem Netz Fehler auf, so ändern sich die Lastflussverhältnisse und somit auch die abgegebene Leistung der Generatoren. Ein Spannungseinbruch, beispielsweise als Folge eines Kurzschlusses, führt zu einem schlagartigen Abfall der Last an einem Generator. Da die elektrische Energie nun nicht mehr ins Netz abgeführt werden kann, an der Welle aber immer noch mechanische Energie zugeführt wird, wird diese mechanische Energie in Form von Rotationsenergie gespeichert, der Generator beschleunigt. Durch die Beschleunigung des Generators vergrößert sich der Polradwinkel. Wird dieser zu groß und überschreitet die Stabilitätsgrenze (wo liegt die?), gerät der Generator \glqq außer Tritt\grqq, wodurch es zu Schäden kommen kann. Diese liegt bei einem Polradwinkel von $\upsilon = 90\degree$ und markiert das Kippmoment $M_k$ der Maschine (S 187 el. Energieversorgung). Umso länger der Fehler andauert und umso näher der Fehler in der Nähe eines Genertors liegt, desto weniger Energie können die Generatoren ins Netz abführen. Die Wahrscheinlichkeit, dass ein Generator \glqq durchtritt\grqq, steigt also mit der Kurzschlussdauer an. Generatornahe Fehler müssen daher besonders schnell abgeschaltet werden. Durch ein schnelles erhöhen der Generatorspannung kann erreicht werden, dass im Fehlerfall mehr Wirkleistung abgeführt werden kann. Kleinere Spannungsänderungen im Netz führen, wie bereits beschrieben, zu Leistungsänderungen an den Generatoren. Diese führen in der Regel nicht zu Instabilitäten, allerdings pendelt nun das Polrad mit einer niedrigen Frequenz von bis zu 2 Hz. Diese Leistungspendelungen sind auch im Netz beobachtbar, vor allem zwischen schwach gekoppelten Netzen (Wide Area Monitoring System UCTE). Sichtbar gemacht werden diese mit Wide Area Monitoring Systems.
+Treten in einem Netz Fehler auf, so ändern sich die Lastflussverhältnisse und somit auch die abgegebene Leistung der Generatoren. Ein Spannungseinbruch, beispielsweise als Folge eines Kurzschlusses, führt zu einem schlagartigen Abfall der Last an einem Generator. Da die elektrische Energie nun nicht mehr ins Netz abgeführt werden kann, an der Welle aber immer noch mechanische Energie zugeführt wird, wird diese mechanische Energie in Form von Rotationsenergie gespeichert, der Generator beschleunigt. Durch die Beschleunigung des Generators vergrößert sich der Polradwinkel. Wird dieser zu groß und überschreitet die Stabilitätsgrenze, gerät der Generator \glqq außer Tritt\grqq, wodurch es zu Schäden kommen kann. Diese liegt bei einem Polradwinkel von $\upsilon = 90\degree$ und markiert das Kippmoment $M_k$ der Maschine \cite[S.187]{Heuck2007}. Umso länger der Fehler andauert und umso näher der Fehler in der Nähe eines Genertors liegt, desto weniger Energie können die Generatoren ins Netz abführen. Die Wahrscheinlichkeit, dass ein Generator \glqq durchtritt\grqq, steigt also mit der Kurzschlussdauer an \cite[S. 56]{Nelles2009}. Generatornahe Fehler müssen daher besonders schnell abgeschaltet werden. Durch ein schnelles erhöhen der Generatorspannung kann erreicht werden, dass im Fehlerfall mehr Wirkleistung abgeführt werden kann. Kleinere Spannungsänderungen im Netz führen, wie bereits beschrieben, zu Leistungsänderungen an den Generatoren. Diese führen in der Regel nicht zu Instabilitäten, allerdings pendelt nun das Polrad mit einer niedrigen Frequenz von bis zu 2 Hz. Diese Leistungspendelungen sind auch im Netz beobachtbar, vor allem zwischen schwach gekoppelten Netzen. Sichtbar gemacht werden diese mit Wide Area Monitoring Systems \cite{wams-swissgrid}.
 
 Die Stabilität eines Drehstromnetzes ist ein wesentliches Kriterium zur Versorgungssicherheit.
 
@@ -352,6 +362,9 @@ Das Netz, welches im Praktikum verwendet wird, ist im Anhang in Abbildung \ref{p
 
 \subsection{Berechnungsparameter}
 In dem Menü \glqq Berechnungsparameter\grqq{} lassen sich unter dem Reiter \glqq Dynamik\grqq{} verschiedene globale Parameter einstellen. So wird dort die Anfangs- und Endzeitpunkt der Berechnungen festgelegt, sowie die Größe des Zeitschritts. Bei kleineren Zeitschritten ist das Ergebnis zwar genauer, die Berechnungen dauern aber entsprechend länger. Außerdem kann angegeben werden, ob eine COMTRADE-Datei erzeugt werden soll, worauf später noch mehr eingegangen wird.
+
+\subsection{Arbeitsbereich}
+Änderungen in Berechnungsparametern oder in Beschriftungsfiltern werden für jedes Projekt separat als \glqq Arbeitsbereich\grqq{} gespeichert. Dieser kann exportiert und in anderen Projekten wiederverwendet werden. Das hat den Vorteil, dass in allen Projekten die gewünschte Ansicht sofort zur Verfügung steht. Als Beispiel sei hier die Anzeige von Berechnungsergebnissen von Kurzschlussberechnungen genannt. Es kann für jeden Netzelementtyp individuell festgelegt werden, welche Ergebnisse im Netzplan angezeigt werden sollen.
 
 \subsection{Fehleruntersuchungen}
 Soll an einer Leitung eine Fehleruntersuchung durchgeführt werden, so kann mit einem Rechtsklick unter dem Punkt Einfügen eine solche eingefügt werden. Es stehen sämtliche Fehlerszenarien zur Verfügung. Unter dem Punkt Dynamik können Fehlerbedingungen festgelegt werden, bei denen der Fehler ein- und ausgeschaltet werden soll. Diese können Zeit-, Strom oder Spannungsabhängig sein.
@@ -561,7 +574,7 @@ Ein weiteres Problem ist, dass das NETOMAC ein falsches Zeitstempelformat in der
 \subsection{Script zum manuellen Anpassen der fehlerhaften COMTRADE-Datei}
 PSS Sincal bietet die Möglichkeit, Scripte zum Automatisieren von Aufgaben einzubinden. Als Scriptsprachen stehen VBScript und Python zur Verfügung.
 
-Da der Support von Sincal und NETOMAC keine Lösung für diese Probleme anbieten konnte und eine Behebung dieser wahrscheinlich erst in späteren Versionen erfolgt, wurde mit VBScript ein Script geschrieben, dass die Einheit für den Strom ergänzt und das Datum korrigiert. Der Quellcode befindet sich auf der DVD und im Internet unter [Github-Link]. Das Script initialisiert als erstes das aktuell geöffnete Sincalprojekt, liest daraus den absoluten Pfad der Datenbankdatei und speichert diesen in einer Variablen. Als nächstes muss dieser absolute Pfad angepasst werden damit er auf die .cfg-Datei von NETOMAC zeigt. Dazu wird der immer gleichbleibende Datenbankdateiname im Pfad abgeschnitten und an diesen \glqq NETO\textbackslash COMTRADE\textbackslash NETWORK.CFG \grqq{} angehangen. Nun zeigt die Pfadvariable auf die von Sincal erzeugte .cfg-Datei. Diese wird nun eingelesen und anschließend gelöscht. Anschließend liest das Script aus der zweiten Zeile die Anzahl der Signale aus und überprüft nun in den nachfolgenden Signalzeilen, ob dort eine Einheit nach dem fünften Komma definiert ist. Ist das Zeichen nach dem fünften Komma ebenfalls ein Komma, so wird dazwischen die Einheit \glqq kA\grqq{} gesetzt. Sind alle Signalzeilen gesetzt, so sucht das Script nach einem \glqq /\grqq, welches als Formatierungszeichen für das Datum verwendet wird. Im Datum werden nun der Tag und der Monat vertauscht, dies geschieht in der nachfolgenden Zeile ein weiteres mal (Zeitstempel Anfang, Zeitstempel Ende). Als letztes wird nun der korrigierte Inhalt zurück in die NETWORK.CFG geschrieben. \\
+Da der Support von Sincal und NETOMAC keine Lösung für diese Probleme anbieten konnte und eine Behebung dieser wahrscheinlich erst in späteren Versionen erfolgt, wurde mit VBScript ein Script geschrieben, dass die Einheit für den Strom ergänzt und das Datum korrigiert. Der Quellcode befindet sich auf der DVD und im Internet unter \url{https://github.com/bodems/comtrade-adjust}. Das Script initialisiert als erstes das aktuell geöffnete Sincalprojekt, liest daraus den absoluten Pfad der Datenbankdatei und speichert diesen in einer Variablen. Als nächstes muss dieser absolute Pfad angepasst werden damit er auf die .cfg-Datei von NETOMAC zeigt. Dazu wird der immer gleichbleibende Datenbankdateiname im Pfad abgeschnitten und an diesen \glqq NETO\textbackslash COMTRADE\textbackslash NETWORK.CFG \grqq{} angehangen. Nun zeigt die Pfadvariable auf die von Sincal erzeugte .cfg-Datei. Diese wird nun eingelesen und anschließend gelöscht. Anschließend liest das Script aus der zweiten Zeile die Anzahl der Signale aus und überprüft nun in den nachfolgenden Signalzeilen, ob dort eine Einheit nach dem fünften Komma definiert ist. Ist das Zeichen nach dem fünften Komma ebenfalls ein Komma, so wird dazwischen die Einheit \glqq kA\grqq{} gesetzt. Sind alle Signalzeilen gesetzt, so sucht das Script nach einem \glqq /\grqq, welches als Formatierungszeichen für das Datum verwendet wird. Im Datum werden nun der Tag und der Monat vertauscht, dies geschieht in der nachfolgenden Zeile ein weiteres mal (Zeitstempel Anfang, Zeitstempel Ende). Als letztes wird nun der korrigierte Inhalt zurück in die NETWORK.CFG geschrieben. \\
 Über den Menüpunkt Extras $\rightarrow$ Optionen $\rightarrow$ Makros kann in Sincal das Verzeichnis konfiguriert werden, in dem sich die Scripte befinden. Anschließend kann dieses über Extras $\rightarrow$ Makro $\rightarrow$ Makros… bequem nach jeder Dynamiksimulation ausgeführt werden.
 
 \subsection{Abspielen von COMTRADE-Dateien mit Prüfgerät Kocos Artes}
@@ -586,11 +599,19 @@ Anschließend sollen an insgesamt fünf verschiedenen Punkten Fehleruntersuchung
 \item Tieflastfall Kurzschluss L16 1km Fehlerort A
 \end{itemize}
 
-Nach dem selben Muster werden nun einpolige Erdkurzschlüsse berechnet. Zuerst erfolgt wieder eine gemeinsame Kurzschlussstromberechnung an allen Knoten, anschließend erfolgen die verschiedenen Fehleruntersuchungen.
+Nach der selben Vorgehensweise werden nun einpolige Erdkurzschlüsse berechnet. Zuerst erfolgt wieder eine gemeinsame Kurzschlussstromberechnung an allen Knoten, anschließend erfolgen die verschiedenen Fehleruntersuchungen.
 
 
 \subsection{Zukünftige Aufgabenstellung}
-An Stelle der Betrachtung der Effektivwerte soll nun in der neuen Aufgabenstellung die Betrachtung des dynamischen Verlaufs der Spannungen und Ströme im Vordergrund stehen. Dazu wird jeweils der Aufgabenteil mit den Fehleruntersuchungen angepasst. Der Aufgabenteil mit den Kurzschlussberechnungen an den Sammelschienen kann komplett übernommen werden.
+An Stelle der Betrachtung der Effektivwerte soll nun in der neuen Aufgabenstellung die Betrachtung des dynamischen Verlaufs der Spannungen und Ströme im Vordergrund stehen. Dazu wird jeweils der Aufgabenteil mit den Fehleruntersuchungen angepasst. Der Aufgabenteil mit den Kurzschlussberechnungen an den Sammelschienen kann komplett übernommen werden. \\
+Der erste Aufgabenpunkt, in dem die Studierenden von Hand rechnen und die Ergebnisse mit PSS Sincal vergleichen sollen, muss allerdings abgeändert werden. Da beim Umstellen der verwendeten Lizenz von Sincal die Funktion der Schutzkoordination verloren geht und ein manuelles Umstellen zu mühsam ist, soll die Simulation anders durchgeführt werden. Dies geschieht durch Aufteilen der Leitung L23 in zwei Teilstücke und Verbinden dieser mit einem Knoten. Anschließend kann eine dreipolige Kurzschlussberechnung über den Menüpunkt \textit{Berechnen $\rightarrow$ Kurzschluss…} durchgeführt werden. Diese führt an allen Knoten Kurzschlussberechnungen durch, also auch am eingefügten \glqq Fehlerknoten\grqq.
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{img/ks-versuch_l23.png}
+	\caption{Fehlerknoten an L23}
+	\label{fehlerknoten_l23}
+	\end{figure}
 
 \subsubsection{Festlegen der Messpunkte/Plottdefinition}
 Um die Kurzschlussstromverläufe darzustellen, müssen in Sincal unter dem Punkt Daten $\rightarrow$ Dynamik $\rightarrow$ Plottdefinition… jeweils die aufzuzeichnenden Signale definiert werden. Dabei stellt sich die Frage, an welchen Punkten diese definiert werden, da eine Aufzeichnung des Stromes direkt an der Fehlerstelle nicht möglich ist. Wie in realen Netzen sitzen die Messpunkte jeweils in den Umspannwerken an der Sammelschiene, wodurch bei einem mehrseitig gespeisten Fehler immer nur ein Teilstrom erfasst werden kann. Dies ist, mit Ausnahme von der nur einseitig gespeisten Fehlerstelle C, immer der Fall. Die Messpunkte sollten daher so gewählt werden, dass man \glqq am meisten sieht\grqq:
@@ -603,9 +624,11 @@ Um die Kurzschlussstromverläufe darzustellen, müssen in Sincal unter dem Punkt
 \item Fehlerstelle E: Spannung: SS3, Strom: SS3 nach L23
 \end{itemize}
 
-Die Messpunkte wurden zum einen so gewählt, dass diese möglichst nahe am Fehlerort liegen (Fehlerorte A, C, D und E) und zum anderen nahe an einem Generator liegen, damit der Abklingvorgang des Kurzschlussstromes sichtbar ist (Fehlerorte A und E). Der Messpunkt für den Fehlerort B wurde ebenfalls auf die Sammelschiene SS1 gelegt, um den Einfluss der Leitungsimpedanz zwischen Fehlerort A und B zu verdeutlichen.
+Die Messpunkte wurden zum einen so gewählt, dass diese möglichst nahe am Fehlerort liegen (Fehlerorte A, C, D und E) und zum anderen nahe an einem Generator liegen, damit der Abklingvorgang des Kurzschlussstromes sichtbar ist (Fehlerorte A und E). Der Messpunkt für den Fehlerort B wurde ebenfalls auf die Sammelschiene SS1 gelegt, um den Einfluss der Leitungsimpedanz zwischen Fehlerort A und B zu verdeutlichen. \\
+Die Spannung soll als Leiter-Erdspannung gemessen werden, damit insbesondere beim einpoligen Erdkurzschluss die Spannungserhöhung der fehlerfreien Leiter sichtbar wird. \\
+In den Berechnungsparametern sollten zudem für die Aufgabenstellung sinnvolle Zeiteinstellungen vorgenommen werden. Eine Endzeitpunkt von 0,5s und ein Zeitschritt von 0,001s erwiesen sich als sinnvoll.
+\\ Lösung und Anleitung dann noch falsch (Fehlerort B)!!!
 
-- sinnvolle Zeiteinstellungen
 
 \subsubsection{Fehlerbedingungen}
 Der Aufgabenteil \glqq Variation des Kurzschlussortes bei einem dreipoligen Fehler\grqq{} kann ebenfalls komplett übernommen werden. Mit der dynamischen Betrachtung der Kurzschlussströme lassen sich nun aber auch die anderen Untersuchungen aus den Praktikumsunterlagen aus Magdeburg durchführen. Diese beinhalten die Betrachtungen bei unterschiedlichen Fehlereinschaltzeiten, Kurzunterbrechungen und einpolige Fehler. Diese sind:
@@ -616,16 +639,47 @@ Der Aufgabenteil \glqq Variation des Kurzschlussortes bei einem dreipoligen Fehl
 \item Kurzschlusseintritt bei U = 0.5 p.u.
 \item Kurzschlussabschaltung nach 120ms
 \item Kurzschlussabschaltung nach 120ms mit Kurzunterbrechung (100ms) (AWE mit Erfolg)
-\item Kurzunterbrechung nach 100ms ohne Kurzsschlussabschaltung (AWE ohne Erfolg)
+\item Kurzunterbrechung nach 100ms ohne Kurzschlussabschaltung (AWE ohne Erfolg)
 \item Erdkurzschluss AWE mit Erfolg
 \item Erdkurzschluss AWE ohne Erfolg
 \end{itemize}
 
-Alle Fehleruntersuchungen können mit Hilfe der Dynamikberechnungen von PSS Sincal durchgeführt werden. Allerdings sind in den Praktikumsunterlagen aus Magdeburg für diese Fehleruntersuchungen keine Fehlerorte gegeben. Der Einfachheit halber und besseren Vergleichbarkeit der Lösungen sollen diese nun für Bielefeld vorgegeben werden.
+Alle Fehleruntersuchungen können mit Hilfe der Dynamikberechnungen von PSS Sincal durchgeführt werden. Allerdings sind in den Praktikumsunterlagen aus Magdeburg für diese Fehleruntersuchungen keine Fehlerorte gegeben. Der Einfachheit wegen und besseren Vergleichbarkeit der Lösungen sollen diese nun für Bielefeld vorgegeben werden. Dafür wurde der Fehlerort A ausgewählt (warum?). Für jede Fehleruntersuchung soll von allen Phasen jeweils der Strom aufgenommen werden, für die Fehleruntersuchungen mit Kurzschlussabschaltung oder Kurzunterbrechung auch die Spannung.
 
-Die zukünftige Aufgabenstellung orientiert sich stark \\
-- Leitung auftrennen, Fehler an \glqq Fehlersammelschiene\grqq
+Für die insgesamt vier Fehleruntersuchungen mit AWE müssen Elementschaltzeiten mit einbezogen werden. Diese sind in den Abbildungen \ref{awe-me} und \ref{awe-oe} dargestellt. Der Fehler tritt zum Zeitpunkt Null auf. 100ms nach Fehlereintritt löst der Schutz zum ersten mal aus und schaltet den Fehler ab. Geschieht dies von zwei Seiten, so müssen die Elementschaltzeiten unterschiedlich sein, da Sincal ansonsten die Berechnung mit einem Fehler abbricht. So kann eine Seite bei 100ms abgeschaltet werden, die andere bei 101ms.
 
+Insgesamt
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{img/awe-me.png}
+	\caption{AWE mit Erfolg}
+	\label{awe-me}
+	\end{figure}
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{img/awe-oe.png}
+	\caption{AWE ohne Erfolg}
+	\label{awe-oe}
+	\end{figure}
+
+
+Bei den beiden letzten Berechnungen, die eine einpolige AWE beinhalten, traten Probleme auf, die nicht direkt lösbar waren. Zunächst wurde die Fehleruntersuchung zu einem einpoligen Erdkurzschluss auf L1 geändert, anschließend die Elementschaltzeiten so, dass diese nur L1 schalten sollen. Sincal beendete darauf hin die Berechnungen, da anscheinend für solche Berechnungen keine Lizenz vorliegt. Das Lizenzproblem liegt anscheinend an den Elementschaltzeiten, da ein Berechnen von einpoligen Fehlern bei dreipoligen Elementschaltzeiten möglich ist.
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1]{img/keine-lizenz.png}
+	\caption{Lizenzfehlermeldung}
+	\label{awe-oe}
+	\end{figure}
+
+Daher sollen im Praktikumsversuch die Erdkurzschlüsse ebenfalls mit einer dreipoligen Kurzunterbrechung simuliert werden, auch wenn dies nicht unbedingt der Realität in Europa entspricht.
+
+
+\subsubsection{Anleitung und Musterlösungen}
+Um die Studierenden besser zu unterstützen, wurden für die Praktikumsanleitung Hinweise ausgearbeitet, die den Umgang mit PSS Sincal vereinfachen sollen. Dort ist unter anderem mit Screenshots erkärt, wie Fehleruntersuchungen eingefügt und Signale in Diagrammen grafisch dargestellt werden können. Diese Hinweise finden sich im Anhang der überarbeiteten Praktikumsanleitung.\\
+Des weiteren wurden für sämtliche Fehleruntersuchungen Musterlösungen in Form von Screenshots erstellt.
 
 \section{Zusammenfassung}
 
